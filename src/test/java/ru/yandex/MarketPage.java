@@ -8,8 +8,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
-
 public class MarketPage extends WebDriverSetting {
     private WebDriver driver;
     private WebDriverWait waitDriver;
@@ -137,33 +135,21 @@ public class MarketPage extends WebDriverSetting {
     }
 
     public void selectFilterByBrand(String brandName){
-        //WebElement selectBrand = driver.findElement(By.name("Производитель "+brandName));
-        //selectBrand.click();
-
-        //WebElement selectBrand = driver.findElement(By.partialLinkText("HP"));
-        //selectBrand.click();
-
-        List<WebElement> allAnchors = driver.findElements(By.cssSelector("#search-prepack > div > div > div:nth-child(3) > div > div > div._178jz2CyDL > div:nth-child(3) > div > fieldset > ul"));
-        for (WebElement eachAnchorElem : allAnchors) {
-            WebElement linkBrand = eachAnchorElem.findElement(By.linkText("HP"));
-            linkBrand.click();
-        }
-
-
-
+        WebElement selectBrand = driver.findElement(By.name("Производитель "+brandName));
+        selectBrand.click();
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+        //sdfshgns
+    }
 
 
+    public void selectFilterByColor(){
 
 
     }
+
 }
-
-
-
-
