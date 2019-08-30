@@ -13,6 +13,7 @@ public abstract class WebDriverSetting {
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
         driver = new ChromeDriver();
+
         driver.manage().window().maximize();
         System.out.println("Start...");
     }
@@ -20,7 +21,8 @@ public abstract class WebDriverSetting {
     @After
     public void close() {
         //driver.close();
-
+        driver.getSessionStorage().clear();
+        driver.getLocalStorage().clear();
         System.out.println("Close...");
     }
 
