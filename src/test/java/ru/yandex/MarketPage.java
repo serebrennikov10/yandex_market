@@ -163,6 +163,20 @@ public class MarketPage extends WebDriverSetting {
     }
 
 
-    //public void selectFilterByColor(){}
+    public void selectFilterByColor(String color){
+        List<WebElement> colorsNames = driver.findElements(By.xpath("//*[@id=\"search-prepack\"]/div/div/div[3]/div/div/div[2]/div[22]/div/fieldset"));
+        for (WebElement colorList:colorsNames){
+            //System.out.println(colorList.getText());
+            colorList.findElement(By.xpath(".//*[text()='Цвет "+color+"']/..")).click();
+            System.out.println("Выбран цвет: "+color);
+        }
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }
