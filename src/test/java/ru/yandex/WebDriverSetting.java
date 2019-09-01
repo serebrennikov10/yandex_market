@@ -15,7 +15,7 @@ public abstract class WebDriverSetting {
         driver = new ChromeDriver();
 
         driver.manage().window().maximize();
-        System.out.println("Start...");
+        System.out.println("Start driver...");
     }
 
     @After
@@ -23,7 +23,7 @@ public abstract class WebDriverSetting {
         //driver.close();
         driver.getSessionStorage().clear();
         driver.getLocalStorage().clear();
-        System.out.println("Close...");
+        System.out.println("Close driver...");
     }
 
 }

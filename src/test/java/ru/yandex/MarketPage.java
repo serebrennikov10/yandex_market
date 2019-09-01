@@ -129,40 +129,36 @@ public class MarketPage extends WebDriverSetting {
         selectCostTo.click();
         selectCostTo.sendKeys(To);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
     }
 
-    public void selectFilterByBrand(String brandName){
-        //WebElement selectBrand = driver.findElement(By.name("Производитель "+brandName));
-        //selectBrand.click();
-
-
-        List<WebElement> anchors = driver.findElements(By.xpath("//*[@id=\"search-prepack\"]/div/div/div[3]/div/div/div[2]/div[4]/div/fieldset"));
-        for  (WebElement ele:anchors) {
-            System.out.println(ele.getText());
-           ele.findElement(By.partialLinkText("HP")).click();
+    public void selectFilterByBrand(String brand){
+        List<WebElement> brandsNames = driver.findElements(By.xpath("//*[@id=\"search-prepack\"]/div/div/div[3]/div/div/div[2]/div[4]/div/fieldset"));
+        for  (WebElement brandsList:brandsNames) {
+            //System.out.println(brandsList.getText());
+            brandsList.findElement(By.xpath(".//*[text()='"+brand+"']/..")).click();
+            System.out.println("Выбран бренд "+ brand);
+            //brandsList.findElement(By.xpath(".//*[text()='HP']/..")).click();   -- по тексту, рабочий вариант
+            //brandsList.findElement(By.partialLinkText("HP")).click();
+            //brandsList.findElement(By.tagName("span")).findElement(By.linkText("HP")).click();
 
         }
 
-            //WebElement brand = ele.findElement(By.linkText("HP")
-                    //System.out.println()}
-            //System.out.println(ele.getAttribute("innerHTML"));
-
+        //WebElement selectBrand = driver.findElement(By.name("Производитель "+brandName));
+        //selectBrand.click();
+        //WebElement zsddf = driver.findElement(By.className().By)
+        //WebElement brand = brandsList.findElement(By.linkText("HP")
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-
-        //sdfshgns
-        //test
-        //test 2
 
     }
 

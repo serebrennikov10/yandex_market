@@ -24,18 +24,18 @@ public class FirstTest extends WebDriverSetting {
        // Actions MoveToElement = new Actions(driver);
 
         marketPage.openPage();
-       // marketPage.getTitle();
+        marketPage.getTitle();
         marketPage.openAllCategories();
         marketPage.openCompCategory();
         marketPage.openNotebookCategory();
-        //marketPage.sortByPrice();
-        //marketPage.sortPriceByDesc();
-        //marketPage.sortPriceByAsc();
-        //marketPage.selectFilterByCost("0", "30000");
+        marketPage.sortByPrice();
+        marketPage.sortPriceByDesc();
+        marketPage.sortPriceByAsc();
+        marketPage.selectFilterByCost("0", "30000");
         marketPage.selectFilterByBrand("HP");
-        //marketPage.selectFilterByBrand("Lenovo");
+        marketPage.selectFilterByBrand("Lenovo");
 
-        System.out.println("test finished");
+        System.out.println("Test completed!");
 
 
     }
