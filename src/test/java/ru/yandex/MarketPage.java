@@ -179,4 +179,14 @@ public class MarketPage extends WebDriverSetting {
 
     }
 
+    public void outInfo(){
+        WebElement infoName = driver.findElement(By.xpath(""));
+
+
+
+
+
+
+    }
+
 }
