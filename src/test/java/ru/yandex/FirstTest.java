@@ -29,13 +29,13 @@ public class FirstTest extends WebDriverSetting {
         marketPage.openCompCategory();
         marketPage.openNotebookCategory();
         //marketPage.selectFilterByCost("0", "30000");
-        //marketPage.selectFilterByBrand("HP");
+        marketPage.selectFilterByBrand("HP");
         //marketPage.selectFilterByBrand("Lenovo");
-        //marketPage.selectFilterByColor("черный");
+        marketPage.selectFilterByColor("черный");
         //marketPage.selectFilterByColor("белый");
-        //marketPage.sortByPrice();
-        //marketPage.sortPriceByDesc();
-        //marketPage.sortPriceByAsc();
+        marketPage.sortByPrice();
+        //marketPage.sortPriceByDesc();  //по убыванию
+        marketPage.sortPriceByAsc(); //по возрастанию
 
 
         System.out.println("Test completed!");

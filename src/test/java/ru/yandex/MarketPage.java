@@ -32,7 +32,7 @@ public class MarketPage extends WebDriverSetting {
 
         String title = driver.getTitle();
         Assert.assertTrue(title.equals("Яндекс.Маркет — выбор и покупка товаров из проверенных интернет-магазинов"));
-        System.out.println(title);
+        System.out.println("Title: "+title);
         //System.out.println("О да, яндекс-маркет открылся");
     }
 
@@ -74,20 +74,30 @@ public class MarketPage extends WebDriverSetting {
 
     }
 
-    public void sortPriceByDesc() {
+    public void getPriceAttribute(){
+        WebElement divNameSortPrice = driver.findElement(By.xpath("/html/body/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[3]"));
+        String classNameSortPrice = divNameSortPrice.getAttribute("class");
+        String desc = "n-filter-sorter i-bem n-filter-sorter_js_inited n-filter-sorter_sort_desc n-filter-sorter_state_select";
+    }
+
+    public void sortPriceByAsc() {
+        //по возрастанию
+
         WebElement divNameSortPrice = driver.findElement(By.xpath("/html/body/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[3]"));
         String classNameSortPrice = divNameSortPrice.getAttribute("class");
         String asc = "n-filter-sorter i-bem n-filter-sorter_js_inited n-filter-sorter_sort_asc n-filter-sorter_state_select";
+        System.out.println("Сейчас: " + classNameSortPrice);
         if (classNameSortPrice == asc) {
             System.out.println("Сейчас стоит сортировка по ВОЗРАСТАНИЮ!" + classNameSortPrice);
-
         } else {
-
-            System.out.println("Устанавливаю сортировку по убыванию...");
+            System.out.println("Устанавливаю сортировку по возрастанию...");
             WebElement sortPrice = driver.findElement(By.linkText("по цене"));
             sortPrice.click();
             //waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("/html/body/div[1]/div[5]/div[2]/div[1]")));
-            System.out.println("Установлена сортировка по УБЫВАНИЮ" + classNameSortPrice);
+            System.out.println("Установлена сортировка по возрастанию");
+
+
+
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
@@ -97,20 +107,21 @@ public class MarketPage extends WebDriverSetting {
 
     }
 
-    public void sortPriceByAsc() {
+    public void sortPriceByDesc() {
+        //по убыванию
         WebElement divNameSortPrice = driver.findElement(By.xpath("/html/body/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[3]"));
         String classNameSortPrice = divNameSortPrice.getAttribute("class");
         String desc = "n-filter-sorter i-bem n-filter-sorter_js_inited n-filter-sorter_sort_desc n-filter-sorter_state_select";
-
+        System.out.println("Сейчас: " + classNameSortPrice);
         if (classNameSortPrice == desc) {
             System.out.println("Сейчас стоит сортировка по УБЫВАНИЮ!" + classNameSortPrice);
         } else {
-
-            System.out.println("Устанавливаю сортировку по возрастанию...");
+            System.out.println("Устанавливаю сортировку по убывнию...");
             WebElement sortPrice = driver.findElement(By.linkText("по цене"));
             sortPrice.click();
             //waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("/html/body/div[1]/div[5]/div[2]/div[1]")));
-            System.out.println("Установлена сортировка по ВОЗРАСТАНИЮ" + classNameSortPrice);
+            System.out.println("Установлена сортировка по УБЫВАНИЮ");
+
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
@@ -137,7 +148,7 @@ public class MarketPage extends WebDriverSetting {
     }
 
     public void selectFilterByBrand(String brand){
-        List<WebElement> brandsNames = driver.findElements(By.xpath("//*[@id=\"search-prepack\"]/div/div/div[3]/div/div/div[2]/div[4]/div/fieldset"));
+        List<WebElement> brandsNames = driver.findElements(By.xpath("//*[@id=\"search-prepack\"]/div/div/div[3]/div/div/div[2]/div[4]/div/div/fieldset"));
         for  (WebElement brandsList:brandsNames) {
             //System.out.println(brandsList.getText());
             brandsList.findElement(By.xpath(".//*[text()='"+brand+"']/..")).click();
@@ -164,7 +175,7 @@ public class MarketPage extends WebDriverSetting {
 
 
     public void selectFilterByColor(String color){
-        List<WebElement> colorsNames = driver.findElements(By.xpath("//*[@id=\"search-prepack\"]/div/div/div[3]/div/div/div[2]/div[22]/div/fieldset"));
+        List<WebElement> colorsNames = driver.findElements(By.xpath("//*[@id=\"search-prepack\"]/div/div/div[3]/div/div/div[2]/div[22]/div/div/fieldset"));
         for (WebElement colorList:colorsNames){
             //System.out.println(colorList.getText());
             colorList.findElement(By.xpath(".//*[text()='Цвет "+color+"']/..")).click();
