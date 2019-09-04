@@ -33,7 +33,7 @@ public class MarketPage extends WebDriverSetting {
         String title = driver.getTitle();
         Assert.assertTrue(title.equals("Яндекс.Маркет — выбор и покупка товаров из проверенных интернет-магазинов"));
         System.out.println(title);
-        System.out.println("О да, яндекс-маркет открылся");
+        //System.out.println("О да, яндекс-маркет открылся");
     }
 
     public void openAllCategories() {

@@ -11,7 +11,8 @@ public abstract class WebDriverSetting {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "./src/test/drivers/chromedriver76.exe");
+        //System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
         driver = new ChromeDriver();
 
         driver.manage().window().maximize();
