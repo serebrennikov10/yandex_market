@@ -193,13 +193,29 @@ public class MarketPage extends WebDriverSetting {
     }
 
     public void outInfo(){
-        WebElement infoName = driver.findElement(By.xpath(""));
+        List<WebElement> elementsInfoNote = driver.findElements(By.className("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
+
+        //int elementsize = elementsInfoNote.size();
+        //System.out.println("Size: "+elementsize);
+        for (WebElement elementNote:elementsInfoNote) {
+            System.out.println(elementNote.getText());
+
+            List<WebElement> elements = elementNote.findElements(By.className("n-snippet-card2__title"));
+            for (WebElement element:elements) {
+                System.out.println(element.getText());
+                //elementNote.findElements(By.className("n-snippet-card2__title"));
+
+            }
 
 
-
-
+        }
 
 
     }
+
+
+
+
+
 
 }

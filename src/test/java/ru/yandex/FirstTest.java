@@ -32,10 +32,10 @@ public class FirstTest extends WebDriverSetting {
         //marketPage.selectFilterByBrand("Lenovo");
         //marketPage.selectFilterByColor("черный");
         //marketPage.selectFilterByColor("белый");
-        //marketPage.sortByPrice();
+        marketPage.sortByPrice();
         //marketPage.sortPriceByDesc();  //по убыванию
         //marketPage.sortPriceByAsc(); //по возрастанию
-
+        marketPage.outInfo();
 
         System.out.println("Test completed!");
 
