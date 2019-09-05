@@ -86,16 +86,17 @@ public class MarketPage extends WebDriverSetting {
         WebElement divNameSortPrice = driver.findElement(By.xpath("/html/body/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[3]"));
         String classNameSortPrice = divNameSortPrice.getAttribute("class");
         String asc = "n-filter-sorter i-bem n-filter-sorter_js_inited n-filter-sorter_sort_asc n-filter-sorter_state_select";
-        System.out.println("Сейчас: " + classNameSortPrice);
-        if (classNameSortPrice == asc) {
+        //System.out.println("Сейчас: " + classNameSortPrice);
+        if (classNameSortPrice.equals(asc)) {
             System.out.println("Сейчас стоит сортировка по ВОЗРАСТАНИЮ!" + classNameSortPrice);
-        } else {
-            System.out.println("Устанавливаю сортировку по возрастанию...");
+        }
+         else {
+            System.out.println("Сортировка установлена по убыванию. Делаю по возрастанию...");
             WebElement sortPrice = driver.findElement(By.linkText("по цене"));
             sortPrice.click();
             //waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("/html/body/div[1]/div[5]/div[2]/div[1]")));
             System.out.println("Установлена сортировка по возрастанию");
-
+        }
 
 
             try {
@@ -103,7 +104,7 @@ public class MarketPage extends WebDriverSetting {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+
 
     }
 
@@ -112,11 +113,12 @@ public class MarketPage extends WebDriverSetting {
         WebElement divNameSortPrice = driver.findElement(By.xpath("/html/body/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[3]"));
         String classNameSortPrice = divNameSortPrice.getAttribute("class");
         String desc = "n-filter-sorter i-bem n-filter-sorter_js_inited n-filter-sorter_sort_desc n-filter-sorter_state_select";
-        System.out.println("Сейчас: " + classNameSortPrice);
-        if (classNameSortPrice == desc) {
+        //System.out.println("Сейчас: " + classNameSortPrice);
+        if (classNameSortPrice.equals(desc)) {
             System.out.println("Сейчас стоит сортировка по УБЫВАНИЮ!" + classNameSortPrice);
-        } else {
-            System.out.println("Устанавливаю сортировку по убывнию...");
+        }
+         else {
+            System.out.println("Сортировка установлена по возрастанию. Делаю по убыванию...");
             WebElement sortPrice = driver.findElement(By.linkText("по цене"));
             sortPrice.click();
             //waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("/html/body/div[1]/div[5]/div[2]/div[1]")));
@@ -127,8 +129,8 @@ public class MarketPage extends WebDriverSetting {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+          }
 
-        }
 
     }
 

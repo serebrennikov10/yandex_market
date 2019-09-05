@@ -22,20 +22,19 @@ public class FirstTest extends WebDriverSetting {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         //WebDriverWait waitForDriver = new WebDriverWait(driver, 10);
        // Actions MoveToElement = new Actions(driver);
-
         marketPage.openPage();
         marketPage.getTitle();
         marketPage.openAllCategories();
         marketPage.openCompCategory();
         marketPage.openNotebookCategory();
         //marketPage.selectFilterByCost("0", "30000");
-        marketPage.selectFilterByBrand("HP");
+        //marketPage.selectFilterByBrand("HP");
         //marketPage.selectFilterByBrand("Lenovo");
-        marketPage.selectFilterByColor("черный");
+        //marketPage.selectFilterByColor("черный");
         //marketPage.selectFilterByColor("белый");
-        marketPage.sortByPrice();
+        //marketPage.sortByPrice();
         //marketPage.sortPriceByDesc();  //по убыванию
-        marketPage.sortPriceByAsc(); //по возрастанию
+        //marketPage.sortPriceByAsc(); //по возрастанию
 
 
         System.out.println("Test completed!");
