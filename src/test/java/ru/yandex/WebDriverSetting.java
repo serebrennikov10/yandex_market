@@ -14,17 +14,16 @@ public abstract class WebDriverSetting {
         System.setProperty("webdriver.chrome.driver", "./src/test/drivers/chromedriver76.exe");
         //System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
         driver = new ChromeDriver();
-
         driver.manage().window().maximize();
         System.out.println("Start driver...");
     }
 
     @After
     public void close() {
-        //driver.close();
+        System.out.println("Close driver...");
         driver.getSessionStorage().clear();
         driver.getLocalStorage().clear();
-        System.out.println("Close driver...");
+        //driver.close();
     }
 
 }
