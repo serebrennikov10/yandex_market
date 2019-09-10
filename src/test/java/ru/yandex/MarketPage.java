@@ -28,7 +28,7 @@ public class MarketPage extends WebDriverSetting {
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("n-adaptive-layout")));
 
     }
-    //@Step(value = "Проверка тайтла")
+    @Step(value = "Проверка тайтла")
     public void getTitle() {
 
         String title = driver.getTitle();

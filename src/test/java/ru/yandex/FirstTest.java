@@ -9,7 +9,7 @@ public class FirstTest extends WebDriverSetting {
 
 
     @Test
-
+    @Step(value = "Проверка тайтла")
         public void oneTest(){
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         //WebDriverWait waitForDriver = new WebDriverWait(driver, 10);
@@ -19,8 +19,8 @@ public class FirstTest extends WebDriverSetting {
         marketPage.getTitle();
 
         marketPage.openAllCategories();
-        marketPage.openCompCategory();
-        marketPage.openNotebookCategory();
+        //marketPage.openCompCategory();
+        //marketPage.openNotebookCategory();
 
         //marketPage.selectFilterByCost("0", "30000");
         //marketPage.selectFilterByBrand("HP");
