@@ -3,6 +3,8 @@ package ru.yandex;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 
 public abstract class WebDriverSetting {
 
@@ -23,7 +25,7 @@ public abstract class WebDriverSetting {
         System.out.println("Close driver...");
         driver.getSessionStorage().clear();
         driver.getLocalStorage().clear();
-        //driver.close();
+        driver.close();
     }
 
 }

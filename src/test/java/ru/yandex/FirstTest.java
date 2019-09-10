@@ -1,15 +1,8 @@
 package ru.yandex;
 
 import io.qameta.allure.Step;
-import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FirstTest extends WebDriverSetting {
 
@@ -17,13 +10,14 @@ public class FirstTest extends WebDriverSetting {
 
     @Test
 
-    public void oneTest(){
-
+        public void oneTest(){
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         //WebDriverWait waitForDriver = new WebDriverWait(driver, 10);
        // Actions MoveToElement = new Actions(driver);
         marketPage.openPage();
+
         marketPage.getTitle();
+
         marketPage.openAllCategories();
         marketPage.openCompCategory();
         marketPage.openNotebookCategory();
@@ -51,8 +45,17 @@ public class FirstTest extends WebDriverSetting {
 
     }
 
+/*    @Test
 
+    public void twoTest() {
+        MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
+        marketPage.openPage();
+        marketPage.getTitle();
+        marketPage.openAllCategories();
+        marketPage.openCompCategory();
+        marketPage.openNotebookCategory();
 
+    }*/
 
 
 

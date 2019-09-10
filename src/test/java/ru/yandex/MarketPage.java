@@ -1,5 +1,6 @@
 package ru.yandex;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +16,7 @@ public class MarketPage extends WebDriverSetting {
     private WebDriverWait waitDriver;
     private Actions MoveToElement;
 
-    public MarketPage(WebDriver driver) {
+   public MarketPage(WebDriver driver) {
         this.driver = driver;
         this.waitDriver = new WebDriverWait(driver, 10);
         this.MoveToElement = new Actions(driver);
@@ -27,11 +28,11 @@ public class MarketPage extends WebDriverSetting {
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("n-adaptive-layout")));
 
     }
-
+    //@Step(value = "Проверка тайтла")
     public void getTitle() {
 
         String title = driver.getTitle();
-        Assert.assertTrue(title.equals("Яндекс.Маркет — выбор и покупка товаров из проверенных интернет-магазинов"));
+        Assert.assertEquals("Яндекс.Маркет — выбор и покупка товаров из проверенных интернет-магазинов", title);
         System.out.println("Title: "+title);
         //System.out.println("О да, яндекс-маркет открылся");
     }
