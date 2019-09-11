@@ -1,17 +1,19 @@
 package ru.yandex;
 
-import org.junit.After;
-import org.junit.Before;
+
+
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
 public abstract class WebDriverSetting {
 
 
     public ChromeDriver driver;
 
-    @Before
+
+
+
+    @BeforeMethod
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "./src/test/drivers/chromedriver76.exe");
         //System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
@@ -20,7 +22,7 @@ public abstract class WebDriverSetting {
         System.out.println("Start driver...");
     }
 
-    @After
+    @AfterMethod
     public void close() {
         System.out.println("Close driver...");
         driver.getSessionStorage().clear();

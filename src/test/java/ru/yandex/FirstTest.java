@@ -1,23 +1,21 @@
 package ru.yandex;
 
-import io.qameta.allure.Step;
-import org.junit.Test;
+import io.qameta.allure.Description;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.Test;
 
 public class FirstTest extends WebDriverSetting {
 
 
 
-    @Test
-    @Step(value = "Проверка тайтла")
+    @Test(description = "мой тест, да он тут")
+    //@Description(value = "Тест проверяет открытие страницы")
         public void oneTest(){
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         //WebDriverWait waitForDriver = new WebDriverWait(driver, 10);
        // Actions MoveToElement = new Actions(driver);
         marketPage.openPage();
-
         marketPage.getTitle();
-
         marketPage.openAllCategories();
         //marketPage.openCompCategory();
         //marketPage.openNotebookCategory();
