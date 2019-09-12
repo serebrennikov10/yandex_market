@@ -53,15 +53,26 @@ public class MarketPage extends WebDriverSetting {
             //WebElement frameInputRegion = driver.findElement(By.className("header2-region-popup"));
             WebElement inputRegion = driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[1]/form/div/div/div/div[1]/span/input"));
             inputRegion.sendKeys(newRegion);
-            inputRegion.sendKeys(Keys.ENTER);
             try {
-                Thread.sleep(3000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            WebElement buttonSelectRegion = driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[1]/form/div/button"));
+            inputRegion.sendKeys(Keys.ENTER);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            WebElement buttonSelectRegion = driver.findElement(By.cssSelector("button[class*='button region-select-form']"));
+            MoveToElement.moveToElement(buttonSelectRegion).perform();
             buttonSelectRegion.click();
             System.out.println("Установлен новый регион "+newRegion);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
 
@@ -69,6 +80,7 @@ public class MarketPage extends WebDriverSetting {
     }
 
     public void openAllCategories() {
+        waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class*='n-w-tab__control-hamburger']")));
         WebElement allCategory = driver.findElement(By.xpath("/html/body/div[1]/div/span/div[2]/noindex/div[2]/div/div/div/div[1]"));
         MoveToElement.moveToElement(allCategory).perform();
         allCategory.click();
@@ -324,6 +336,22 @@ public class MarketPage extends WebDriverSetting {
         System.out.println("Разница в цене составляет "+differencePrice+" р.");
 
     }
+
+
+    public void outputInfoAllNotebook(){
+        List<WebElement> elementsAboutInfoNote = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
+        for (WebElement elementInfoAboutNote:elementsAboutInfoNote) {
+            List<WebElement> elements = new ArrayList<>(elementInfoAboutNote.findElements(By.className("n-snippet-card2__title")));
+            elements.sort(new WebElementComparator());
+            for (WebElement element:elements) {
+                System.out.println(element.getText());
+            }
+        }
+    }
+
+
+
+
 
 }
 
