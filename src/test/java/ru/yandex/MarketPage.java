@@ -256,14 +256,14 @@ public class MarketPage extends WebDriverSetting {
     }
 
     public void outInfoTwo(){
-        sortPriceByAsc();
         List<WebElement> elementsAboutInfoNote = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
         for (WebElement elementInfoAboutNote:elementsAboutInfoNote) {
 
-            //System.out.println(elementInfoAboutNote.getText());
+            //System.out.println(elementInfoAboutNote.getText());    //вывод всего текста по всем элементам
             String firstElementNoteName = elementInfoAboutNote.findElement(By.className("n-snippet-card2__title")).getText();
             String firstElementNotePrice = elementInfoAboutNote.findElement(By.className("n-snippet-card2__price")).getText();
             String firstElementNoteInfo = elementInfoAboutNote.findElement(By.className("n-snippet-card2__content")).getText();
+            firstElementNotePrice = firstElementNotePrice.replaceAll("\\D+","");
             //System.out.println(elementInfoAboutNote.findElement(By.className("n-snippet-card2__title")).getText());   //называние первого элемента
             System.out.println("Информация о ноутбуке:");
             System.out.println("Название: ");
