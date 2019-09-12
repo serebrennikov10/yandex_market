@@ -9,14 +9,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.util.List;
+import java.util.*;
 
 public class MarketPage extends WebDriverSetting {
     private WebDriver driver;
     private WebDriverWait waitDriver;
     private Actions MoveToElement;
 
-   public MarketPage(WebDriver driver) {
+    public MarketPage(WebDriver driver) {
         this.driver = driver;
         this.waitDriver = new WebDriverWait(driver, 10);
         this.MoveToElement = new Actions(driver);
@@ -52,13 +52,6 @@ public class MarketPage extends WebDriverSetting {
             WebElement inputRegion = driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[1]/form/div/div/div/div[1]/span/input"));
             inputRegion.sendKeys(newRegion);
             inputRegion.sendKeys(Keys.ENTER);
-            //frameInputRegion.click();
-       /*     List <WebElement> regionSuggestList = driver.findElements(By.xpath("/html/body/div[6]/div/div/div[1]/div[1]/form/div/div/div/div[2]/div"));
-                    for (WebElement regionList:regionSuggestList) {
-                        WebElement firstElementList = regionList.findElement(By.className("region-suggest__list-item suggestick-list__item suggest2-item suggest2-item_type_text"));
-                        MoveToElement.moveToElement(firstElementList).perform();
-                        firstElementList.click();
-                    }*/
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
@@ -127,7 +120,7 @@ public class MarketPage extends WebDriverSetting {
         if (classNameSortPrice.equals(asc)) {
             System.out.println("Сейчас стоит сортировка по ВОЗРАСТАНИЮ!" + classNameSortPrice);
         }
-         else {
+        else {
             System.out.println("Сортировка установлена по убыванию. Делаю по возрастанию...");
             WebElement sortPrice = driver.findElement(By.linkText("по цене"));
             sortPrice.click();
@@ -136,11 +129,11 @@ public class MarketPage extends WebDriverSetting {
         }
 
 
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -154,7 +147,7 @@ public class MarketPage extends WebDriverSetting {
         if (classNameSortPrice.equals(desc)) {
             System.out.println("Сейчас стоит сортировка по УБЫВАНИЮ!" + classNameSortPrice);
         }
-         else {
+        else {
             System.out.println("Сортировка установлена по возрастанию. Делаю по убыванию...");
             WebElement sortPrice = driver.findElement(By.linkText("по цене"));
             sortPrice.click();
@@ -166,7 +159,7 @@ public class MarketPage extends WebDriverSetting {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-          }
+        }
 
 
     }
@@ -249,10 +242,45 @@ public class MarketPage extends WebDriverSetting {
             //List<WebElement> elements = elementInfoAboutNote.findElements(By.className("n-snippet-card2__title"));
             //for (WebElement element:elements) {
             //System.out.println(element.getText());
+        }
+
+
+    }
+
+    class WebElementComparator implements Comparator<WebElement> {
+        @Override
+        public int compare(WebElement o1, WebElement o2) {
+            if (o1 == o2) return 0;
+            return o1.getText().compareTo(o2.getText());
+        }
+    }
+
+    public void outInfoTwo(){
+        sortPriceByAsc();
+        List<WebElement> elementsAboutInfoNote = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
+        for (WebElement elementInfoAboutNote:elementsAboutInfoNote) {
+
+            //System.out.println(elementInfoAboutNote.getText());
+            String firstElementNoteName = elementInfoAboutNote.findElement(By.className("n-snippet-card2__title")).getText();
+            String firstElementNotePrice = elementInfoAboutNote.findElement(By.className("n-snippet-card2__price")).getText();
+            String firstElementNoteInfo = elementInfoAboutNote.findElement(By.className("n-snippet-card2__content")).getText();
+            //System.out.println(elementInfoAboutNote.findElement(By.className("n-snippet-card2__title")).getText());
+ /*         System.out.println("Информация о ноутбуке:");
+            System.out.println("Название: ");
+            System.out.println(firstElementNoteName);
+            System.out.println("Цена: ");
+            System.out.println(firstElementNotePrice);
+            System.out.println("Характеристики: ");
+            System.out.println(firstElementNoteInfo);*/
+            List<WebElement> elements = new ArrayList<>(elementInfoAboutNote.findElements(By.className("n-snippet-card2__title")));
+            for (WebElement element:elements) {
+                //elements.sort(new WebElementComparator());
+                System.out.println(element.getText());
             }
 
 
         }
+    }
 
 
 }

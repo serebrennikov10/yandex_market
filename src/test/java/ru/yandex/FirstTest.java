@@ -8,7 +8,7 @@ public class FirstTest extends WebDriverSetting {
 
 
 
-    @Test(description = "мой тест, да он тут")
+    @Test(description = "мой тест - один")
     //@Description(value = "Тест проверяет открытие страницы")
         public void oneTest(){
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
@@ -16,10 +16,10 @@ public class FirstTest extends WebDriverSetting {
        // Actions MoveToElement = new Actions(driver);
         marketPage.openPage();
         marketPage.getTitle();
-        marketPage.selectNewRegionOnPage();
-        //marketPage.openAllCategories();
-        //marketPage.openCompCategory();
-        //marketPage.openNotebookCategory();
+        //marketPage.selectNewRegionOnPage();
+        marketPage.openAllCategories();
+        marketPage.openCompCategory();
+        marketPage.openNotebookCategory();
 
         //marketPage.selectFilterByCost("0", "30000");
         //marketPage.selectFilterByBrand("HP");
@@ -33,9 +33,10 @@ public class FirstTest extends WebDriverSetting {
 
 
 
-        //marketPage.sortByPrice();
-        //marketPage.sortPriceByDesc();  //по убыванию
+        marketPage.sortByPrice();
+        marketPage.sortPriceByDesc();  //по убыванию
         //marketPage.outInfo();
+        marketPage.outInfoTwo();
         //marketPage.sortByPrice();
         //marketPage.sortPriceByAsc();
         //marketPage.outInfo();
@@ -44,7 +45,7 @@ public class FirstTest extends WebDriverSetting {
 
     }
 
-/*    @Test
+/*    @Test(description = "мой тест - два")
 
     public void twoTest() {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
