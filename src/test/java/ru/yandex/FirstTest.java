@@ -34,9 +34,10 @@ public class FirstTest extends WebDriverSetting {
 
 
         marketPage.sortByPrice();
+        marketPage.sravnenie();
         //marketPage.sortPriceByDesc();  //по убыванию
         //marketPage.outInfo();
-        marketPage.outInfoTwo();
+        //marketPage.outInfoTwo();
         //marketPage.sortByPrice();
         //marketPage.sortPriceByAsc();
         //marketPage.outInfo();

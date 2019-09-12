@@ -15,6 +15,8 @@ public class MarketPage extends WebDriverSetting {
     private WebDriver driver;
     private WebDriverWait waitDriver;
     private Actions MoveToElement;
+    private Integer firstElementByPriceMax;
+    private Integer firstElementByPriceMin;
 
     public MarketPage(WebDriver driver) {
         this.driver = driver;
@@ -273,19 +275,55 @@ public class MarketPage extends WebDriverSetting {
             System.out.println("Характеристики: ");
             System.out.println(firstElementNoteInfo);
 
-            List<WebElement> elements = new ArrayList<>(elementInfoAboutNote.findElements(By.className("n-snippet-card2__title")));
-            for (WebElement element:elements) {
-
+            //List<WebElement> elements = new ArrayList<>(elementInfoAboutNote.findElements(By.className("n-snippet-card2__title")));
+            //for (WebElement element:elements) {
                    // elements.sort(new WebElementComparator());
-
-
                 //System.out.println(element.getText());
-            }
+            //}
 
 
         }
     }
 
+    public void findNoteElements(){
+
+    }
+
+
+
+    public void sravnenie(){
+        sortPriceByAsc();
+        List<WebElement> elementsAboutInfoNoteMin = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
+        for (WebElement elementInfoAboutNoteMin : elementsAboutInfoNoteMin) {
+            //System.out.println(elementInfoAboutNoteMin.getText());    //вывод всего текста по всем элементам
+            String firstElementNoteNameMin = elementInfoAboutNoteMin.findElement(By.className("n-snippet-card2__title")).getText();
+            String firstElementNotePriceMin = elementInfoAboutNoteMin.findElement(By.className("n-snippet-card2__price")).getText();
+            //String firstElementNoteInfo = elementInfoAboutNoteMin.findElement(By.className("n-snippet-card2__content")).getText();
+            //String firstElementByPriceMin = firstElementNotePriceMin.replaceAll("\\D+", "");
+            firstElementByPriceMin = Integer.parseInt(firstElementNotePriceMin.replaceAll("\\D+", ""));
+            //System.out.println(elementInfoAboutNoteMin.findElement(By.className("n-snippet-card2__title")).getText());   //называние первого элемента
+            System.out.println("Дешевый Ноутбук:");
+            System.out.println("Название: "+firstElementNoteNameMin);
+            System.out.println("Цена: "+firstElementByPriceMin+" р.");
+        }
+        sortPriceByDesc();
+        List<WebElement> elementsAboutInfoNoteMax = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
+        for (WebElement elementInfoAboutNoteMax : elementsAboutInfoNoteMax) {
+            //System.out.println(elementInfoAboutNoteMax.getText());    //вывод всего текста по всем элементам
+            String firstElementNoteNameMax = elementInfoAboutNoteMax.findElement(By.className("n-snippet-card2__title")).getText();
+            String firstElementNotePriceMax = elementInfoAboutNoteMax.findElement(By.className("n-snippet-card2__price")).getText();
+            //String firstElementNoteInfo = elementInfoAboutNoteMax.findElement(By.className("n-snippet-card2__content")).getText();
+            //String firstElementByPriceMax = firstElementNotePriceMax.replaceAll("\\D+", "");
+            firstElementByPriceMax = Integer.parseInt(firstElementNotePriceMax.replaceAll("\\D+", ""));
+            //System.out.println(elementInfoAboutNoteMax.findElement(By.className("n-snippet-card2__title")).getText());   //называние первого элемента
+            System.out.println("Дорогой Ноутбук:");
+            System.out.println("Название: " + firstElementNoteNameMax);
+            System.out.println("Цена: " + firstElementByPriceMax+" р.");
+        }
+        Integer differencePrice = firstElementByPriceMax - firstElementByPriceMin;
+        System.out.println("Разница в цене составляет "+differencePrice+" р.");
+
+    }
 
 }
 
