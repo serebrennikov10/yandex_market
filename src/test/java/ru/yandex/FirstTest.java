@@ -16,7 +16,8 @@ public class FirstTest extends WebDriverSetting {
        // Actions MoveToElement = new Actions(driver);
         marketPage.openPage();
         marketPage.getTitle();
-        marketPage.openAllCategories();
+        marketPage.selectNewRegionOnPage();
+        //marketPage.openAllCategories();
         //marketPage.openCompCategory();
         //marketPage.openNotebookCategory();
 

@@ -36,6 +36,43 @@ public class MarketPage extends WebDriverSetting {
         //System.out.println("О да, яндекс-маркет открылся");
     }
 
+    public void selectNewRegionOnPage(){
+        WebElement changeRegion = driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/noindex/div/div/div[2]/div/div[2]/div[1]/span"));
+        String nowRegion = changeRegion.getText();
+        System.out.println(nowRegion);
+
+        String newRegion = "Воронеж";
+        if (nowRegion.equals(newRegion)) {
+            System.out.println("Текущий регион: "+nowRegion+". Смена региона не происходит.");
+        }
+        else {
+            System.out.println("Запускаю смену региона..");
+            changeRegion.click();
+            waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("header2-region-popup")));
+            //WebElement frameInputRegion = driver.findElement(By.className("header2-region-popup"));
+            WebElement inputRegion = driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[1]/form/div/div/div/div[1]/span/input"));
+            inputRegion.sendKeys(newRegion);
+            //frameInputRegion.click();
+            List <WebElement> regionSuggestList = driver.findElements(By.xpath("/html/body/div[6]/div/div/div[1]/div[1]/form/div/div/div/div[2]/div"));
+                    for (WebElement regionList:regionSuggestList) {
+                        WebElement firstElementList = regionList.findElement(By.className("region-suggest__list-item suggestick-list__item suggest2-item suggest2-item_type_text"));
+                        MoveToElement.moveToElement(firstElementList).perform();
+                        firstElementList.click();
+                    }
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            WebElement buttonSelectRegion = driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[1]/form/div/button"));
+            buttonSelectRegion.click();
+            System.out.println("Установлен новый регион "+newRegion);
+        }
+
+
+
+    }
+
     public void openAllCategories() {
         WebElement allCategory = driver.findElement(By.xpath("/html/body/div[1]/div/span/div[2]/noindex/div[2]/div/div/div/div[1]"));
         MoveToElement.moveToElement(allCategory).perform();
