@@ -264,18 +264,22 @@ public class MarketPage extends WebDriverSetting {
             String firstElementNoteName = elementInfoAboutNote.findElement(By.className("n-snippet-card2__title")).getText();
             String firstElementNotePrice = elementInfoAboutNote.findElement(By.className("n-snippet-card2__price")).getText();
             String firstElementNoteInfo = elementInfoAboutNote.findElement(By.className("n-snippet-card2__content")).getText();
-            //System.out.println(elementInfoAboutNote.findElement(By.className("n-snippet-card2__title")).getText());
- /*         System.out.println("Информация о ноутбуке:");
+            //System.out.println(elementInfoAboutNote.findElement(By.className("n-snippet-card2__title")).getText());   //называние первого элемента
+            System.out.println("Информация о ноутбуке:");
             System.out.println("Название: ");
             System.out.println(firstElementNoteName);
             System.out.println("Цена: ");
             System.out.println(firstElementNotePrice);
             System.out.println("Характеристики: ");
-            System.out.println(firstElementNoteInfo);*/
+            System.out.println(firstElementNoteInfo);
+
             List<WebElement> elements = new ArrayList<>(elementInfoAboutNote.findElements(By.className("n-snippet-card2__title")));
             for (WebElement element:elements) {
-                //elements.sort(new WebElementComparator());
-                System.out.println(element.getText());
+
+                   // elements.sort(new WebElementComparator());
+
+
+                //System.out.println(element.getText());
             }
 
 
