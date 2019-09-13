@@ -12,18 +12,30 @@ public abstract class WebDriverSetting {
 
     public ChromeDriver driver;
 
-
-
-
     @BeforeMethod
-    public void setUp() {
+    public void setUp(String browser) {
+
         System.setProperty("webdriver.chrome.driver", "./src/test/drivers/chromedriver76.exe");
         //System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
         driver = new ChromeDriver();
+
         driver.manage().window().maximize();
         //driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         System.out.println("Start driver...");
     }
+
+
+/*    @BeforeMethod
+    public void setUp(String browser) {
+
+        System.setProperty("webdriver.chrome.driver", "./src/test/drivers/chromedriver76.exe");
+        //System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+        driver = new ChromeDriver();
+
+        driver.manage().window().maximize();
+        //driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        System.out.println("Start driver...");
+    }*/
 
     @AfterMethod
     public void close() {
