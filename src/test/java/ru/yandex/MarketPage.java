@@ -54,7 +54,7 @@ public class MarketPage extends WebDriverSetting {
             WebElement inputRegion = driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[1]/form/div/div/div/div[1]/span/input"));
             inputRegion.sendKeys(newRegion);
             try {
-                Thread.sleep(2000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -332,13 +332,13 @@ public class MarketPage extends WebDriverSetting {
             System.out.println("Название: " + firstElementNoteNameMax);
             System.out.println("Цена: " + firstElementByPriceMax+" р.");
         }
-        Integer differencePrice = firstElementByPriceMax - firstElementByPriceMin;
+        int differencePrice = firstElementByPriceMax - firstElementByPriceMin;
         System.out.println("Разница в цене составляет "+differencePrice+" р.");
 
     }
 
 
-    public void outputInfoAllNotebook(){
+    void outputInfoAllNotebook(){
         List<WebElement> elementsAboutInfoNote = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
         for (WebElement elementInfoAboutNote:elementsAboutInfoNote) {
             List<WebElement> elements = new ArrayList<>(elementInfoAboutNote.findElements(By.className("n-snippet-card2__title")));
