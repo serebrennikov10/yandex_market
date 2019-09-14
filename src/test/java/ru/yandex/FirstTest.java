@@ -16,20 +16,22 @@ public class FirstTest extends WebDriverSetting {
        // Actions MoveToElement = new Actions(driver);
         marketPage.openPage();
         marketPage.getTitle();
-        marketPage.selectNewRegionOnPage();
+        //marketPage.selectNewRegionOnPage();
         marketPage.openAllCategories();
         marketPage.openCompCategory();
         marketPage.openNotebookCategory();
 
-        marketPage.selectFilterByCost("0", "30000");
-        marketPage.selectFilterByBrand("HP");
-        marketPage.selectFilterByBrand("Lenovo");
-        marketPage.selectFilterByColor("черный");
-        marketPage.selectFilterByColor("белый");
+        //marketPage.selectFilterByCost("0", "30000");
+        //marketPage.selectFilterByBrand("HP");
+        //marketPage.selectFilterByBrand("Lenovo");
+        //marketPage.selectFilterByColor("черный");
+        //marketPage.selectFilterByColor("белый");
 
         marketPage.sortByPrice();
-        marketPage.sravnenie();
-        marketPage.outputInfoAllNotebook();
+        //marketPage.sravnenie();
+        //marketPage.outputInfoAllNotebook();
+        //marketPage.outputInfoInMap();
+        marketPage.outputInfoInMap_new();
         //marketPage.sortByPrice();
         //marketPage.sortPriceByDesc();  //по убыванию
         //marketPage.sortPriceByAsc(); //по возрастанию

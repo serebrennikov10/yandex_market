@@ -243,7 +243,7 @@ public class MarketPage extends WebDriverSetting {
         for (WebElement elementInfoAboutNote:elementsAboutInfoNote) {
             //System.out.println(elementInfoAboutNote.getText());
             String firstElementNoteName = elementInfoAboutNote.findElement(By.className("n-snippet-card2__title")).getText();
-            String firstElementNotePrice = elementInfoAboutNote.findElement(By.className("n-snippet-card2__price")).getText();
+            String firstElementNotePrice = elementInfoAboutNote.findElement(By.className("n-snippet-card2__main-price")).getText();
             String firstElementNoteInfo = elementInfoAboutNote.findElement(By.className("n-snippet-card2__content")).getText();
             System.out.println("Информация о ноутбуке:");
             System.out.println("Название: ");
@@ -275,7 +275,7 @@ public class MarketPage extends WebDriverSetting {
 
             //System.out.println(elementInfoAboutNote.getText());    //вывод всего текста по всем элементам
             String firstElementNoteName = elementInfoAboutNote.findElement(By.className("n-snippet-card2__title")).getText();
-            String firstElementNotePrice = elementInfoAboutNote.findElement(By.className("n-snippet-card2__price")).getText();
+            String firstElementNotePrice = elementInfoAboutNote.findElement(By.className("n-snippet-card2__main-price")).getText();
             String firstElementNoteInfo = elementInfoAboutNote.findElement(By.className("n-snippet-card2__content")).getText();
             firstElementNotePrice = firstElementNotePrice.replaceAll("\\D+","");
             //System.out.println(elementInfoAboutNote.findElement(By.className("n-snippet-card2__title")).getText());   //называние первого элемента
@@ -309,7 +309,7 @@ public class MarketPage extends WebDriverSetting {
         for (WebElement elementInfoAboutNoteMin : elementsAboutInfoNoteMin) {
             //System.out.println(elementInfoAboutNoteMin.getText());    //вывод всего текста по всем элементам
             String firstElementNoteNameMin = elementInfoAboutNoteMin.findElement(By.className("n-snippet-card2__title")).getText();
-            String firstElementNotePriceMin = elementInfoAboutNoteMin.findElement(By.className("n-snippet-card2__price")).getText();
+            String firstElementNotePriceMin = elementInfoAboutNoteMin.findElement(By.className("n-snippet-card2__main-price")).getText();
             //String firstElementNoteInfo = elementInfoAboutNoteMin.findElement(By.className("n-snippet-card2__content")).getText();
             //String firstElementByPriceMin = firstElementNotePriceMin.replaceAll("\\D+", "");
             firstElementByPriceMin = Integer.parseInt(firstElementNotePriceMin.replaceAll("\\D+", ""));
@@ -323,7 +323,7 @@ public class MarketPage extends WebDriverSetting {
         for (WebElement elementInfoAboutNoteMax : elementsAboutInfoNoteMax) {
             //System.out.println(elementInfoAboutNoteMax.getText());    //вывод всего текста по всем элементам
             String firstElementNoteNameMax = elementInfoAboutNoteMax.findElement(By.className("n-snippet-card2__title")).getText();
-            String firstElementNotePriceMax = elementInfoAboutNoteMax.findElement(By.className("n-snippet-card2__price")).getText();
+            String firstElementNotePriceMax = elementInfoAboutNoteMax.findElement(By.className("n-snippet-card2__main-price")).getText();
             //String firstElementNoteInfo = elementInfoAboutNoteMax.findElement(By.className("n-snippet-card2__content")).getText();
             //String firstElementByPriceMax = firstElementNotePriceMax.replaceAll("\\D+", "");
             firstElementByPriceMax = Integer.parseInt(firstElementNotePriceMax.replaceAll("\\D+", ""));
@@ -349,6 +349,63 @@ public class MarketPage extends WebDriverSetting {
         }
     }
 
+    void outputInfoInMap(){
+        List<WebElement> elementsAboutInfoNote = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
+        for (WebElement elementInfoAboutNote:elementsAboutInfoNote) {
+            List<WebElement> elementsName = new ArrayList<>(elementInfoAboutNote.findElements(By.className("n-snippet-card2__title")));
+            //elementsName.sort(new WebElementComparator());
+            for (WebElement elementName:elementsName) {
+                System.out.println(elementName.getText());
+            }
+            List<WebElement> elementsPrice = new ArrayList<>(elementInfoAboutNote.findElements(By.className("n-snippet-card2__main-price")));
+            for (WebElement elementPrice:elementsPrice) {
+
+                System.out.println(elementPrice.getText());
+            }
+            Map<String , String> map = new HashMap<>();
+            //map.put(elementsName.get(elemen));
+
+        }
+
+    }
+
+    void outputInfoInMap_new(){
+/*        List<WebElement> elementsAboutInfoNote = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
+        for (WebElement elementInfoAboutNote:elementsAboutInfoNote) {
+            List<WebElement> elementsName = new ArrayList<>(elementInfoAboutNote.findElements(By.className("n-snippet-card2__title")));
+            //elementsName.sort(new WebElementComparator());
+            for (WebElement elementName:elementsName) {
+                System.out.println(elementName.getText());
+            }
+            List<WebElement> elementsPrice = new ArrayList<>(elementInfoAboutNote.findElements(By.className("n-snippet-card2__main-price")));
+            for (WebElement elementPrice:elementsPrice) {
+
+                System.out.println(elementPrice.getText());
+            }*/
+
+
+            //List<WebElement> elementsAboutInfoNote = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
+            List<WebElement> elementsName = driver.findElements(By.className("n-snippet-card2__title"));
+            List<WebElement> elementsPrice = driver.findElements(By.className("n-snippet-card2__main-price"));
+
+            Map<String , String> map = new LinkedHashMap<>();
+
+            int i, y;
+            for(i=0;i<elementsName.size();i++)
+                //for(y=0;y<elementsPrice.size();y++)
+                map.put(elementsName.get(i).getText(), " Ntdcnssdb" );
+
+        System.out.println("Размер набора данных : " +
+                map.size());
+        Map<String, String> reversedMap = new TreeMap<String, String>(map);
+
+//then you just access the reversedMap however you like...
+        for (Map.Entry entry : reversedMap.entrySet()) {
+            System.out.println(entry.getKey() + ", " + entry.getValue());
+        }
+
+
+    }
 
 
 
