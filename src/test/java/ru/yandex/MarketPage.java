@@ -1,5 +1,6 @@
 package ru.yandex;
 
+import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -20,7 +21,7 @@ public class MarketPage extends WebDriverSetting {
     private Integer firstElementByPriceMin;
 
     public MarketPage(WebDriver driver) {
-        this.driver = driver;
+            this.driver = driver;
         this.waitDriver = new WebDriverWait(driver, 15);
         this.MoveToElement = new Actions(driver);
     }
@@ -137,6 +138,7 @@ public class MarketPage extends WebDriverSetting {
         MoveToElement.moveToElement(allCategory).perform();
         allCategory.click();
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("n-w-tabs__tabs-column")));
+        captureScreen();
     }
 
     public void openCompCategory() {
@@ -145,6 +147,7 @@ public class MarketPage extends WebDriverSetting {
         MoveToElement.moveToElement(compCategory).perform();
         compCategory.click();
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div[2]/div[7]/div/div/div[1]/div/div/div/div/div/div")));
+        captureScreen();
     }
 
     public void openNotebookCategory() {
@@ -152,6 +155,7 @@ public class MarketPage extends WebDriverSetting {
         MoveToElement.moveToElement(notebookCategory).perform();
         notebookCategory.click();
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("headline__header")));
+        captureScreen();
     }
 
     public void sortByPrice() {
@@ -242,6 +246,7 @@ public class MarketPage extends WebDriverSetting {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        captureScreen();
 
     }
 
@@ -254,7 +259,7 @@ public class MarketPage extends WebDriverSetting {
             //brandsList.findElement(By.xpath(".//*[text()='HP']/..")).click();   -- по тексту, рабочий вариант
             //brandsList.findElement(By.partialLinkText("HP")).click();
             //brandsList.findElement(By.tagName("span")).findElement(By.linkText("HP")).click();
-
+            captureScreen();
         }
 
         //WebElement selectBrand = driver.findElement(By.name("Производитель "+brandName));
@@ -278,6 +283,7 @@ public class MarketPage extends WebDriverSetting {
             //System.out.println(colorList.getText());
             colorList.findElement(By.xpath(".//*[text()='Цвет "+color+"']/..")).click();
             System.out.println("Выбран цвет: "+color);
+            captureScreen();
         }
 
         try {
@@ -364,6 +370,7 @@ public class MarketPage extends WebDriverSetting {
             System.out.println("Дешевый Ноутбук:");
             System.out.println("Название: "+firstElementNoteNameMin);
             System.out.println("Цена: "+firstElementByPriceMin+" р.");
+            captureScreen();
         }
         sortPriceByDesc();
         List<WebElement> elementsAboutInfoNoteMax = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
@@ -378,6 +385,7 @@ public class MarketPage extends WebDriverSetting {
             System.out.println("Дорогой Ноутбук:");
             System.out.println("Название: " + firstElementNoteNameMax);
             System.out.println("Цена: " + firstElementByPriceMax+" р.");
+            captureScreen();
         }
         int differencePrice = firstElementByPriceMax - firstElementByPriceMin;
         System.out.println("Разница в цене составляет "+differencePrice+" р.");
@@ -422,7 +430,7 @@ public class MarketPage extends WebDriverSetting {
             FileUtils.copyFile(screenshot, new File(path));
         }
         catch(IOException e) {
-            path = "Failed to capture screenshot: " + e.getMessage();
+            e.getMessage();
         }
         //return path;
     }

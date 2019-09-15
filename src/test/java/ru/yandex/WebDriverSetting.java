@@ -24,8 +24,10 @@ public abstract class WebDriverSetting {
     //public InternetExplorerDriver driver;
     public WebDriver driver;
 
+
+
     @BeforeTest
-    public void deleteScreenshots(){
+    void deleteScreenshots(){
         try {
             FileUtils.deleteDirectory(new File("./target/screenshots/"));
             System.out.println("Screenshots removed.");
@@ -73,24 +75,12 @@ public abstract class WebDriverSetting {
     }
 
 
-/*    @BeforeMethod
-    public void setUp(String browser) {
-
-        System.setProperty("webdriver.chrome.driver", "./src/test/drivers/chromedriver76.exe");
-        //System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
-        driver = new ChromeDriver();
-
-        driver.manage().window().maximize();
-        //driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        System.out.println("Start driver...");
-    }*/
-
     @AfterClass
     public void close() {
         System.out.println("Close driver...");
         //driver.getSessionStorage().clear();
         //driver.getLocalStorage().clear();
-        driver.close();
+        //driver.close();
     }
 
 }
