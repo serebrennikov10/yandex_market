@@ -41,7 +41,7 @@ public class FirstTest extends WebDriverSetting {
     public void twoTest() {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage();
-        marketPage.getTitle();
+        //marketPage.getTitle();
         marketPage.openAllCategories();
         marketPage.openCompCategory();
         marketPage.openNotebookCategory();

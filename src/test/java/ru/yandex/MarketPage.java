@@ -27,7 +27,7 @@ public class MarketPage extends WebDriverSetting {
     public void openPage() {
 
         driver.get("https://market.yandex.ru/");
-        waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("n-adaptive-layout")));
+        //waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("n-adaptive-layout")));
 
     }
 
