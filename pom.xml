@@ -12,6 +12,9 @@
         <!-- <maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>-->
         <aspectj.version>1.8.10</aspectj.version>
         <allure-testng.version>2.6.0</allure-testng.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- problema kodirovki-->
     </properties>
     <dependencies>
         <dependency>
@@ -141,6 +144,18 @@
                     <release>11</release>
                 </configuration>
             </plugin>
+
+          <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
+            </plugin>
+<!--            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>-->
+
         </plugins>
     </build>
 </project>

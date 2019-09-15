@@ -42,7 +42,7 @@ public abstract class WebDriverSetting {
         System.out.println("Close driver...");
         driver.getSessionStorage().clear();
         driver.getLocalStorage().clear();
-        //driver.close();
+        driver.close();
     }
 
 }

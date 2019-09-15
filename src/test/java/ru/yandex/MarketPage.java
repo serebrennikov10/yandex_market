@@ -132,7 +132,7 @@ public class MarketPage extends WebDriverSetting {
         String asc = "n-filter-sorter i-bem n-filter-sorter_js_inited n-filter-sorter_sort_asc n-filter-sorter_state_select";
         //System.out.println("Сейчас: " + classNameSortPrice);
         if (classNameSortPrice.equals(asc)) {
-            System.out.println("Сейчас стоит сортировка по ВОЗРАСТАНИЮ!" + classNameSortPrice);
+            //System.out.println("Сейчас стоит сортировка по ВОЗРАСТАНИЮ!" + classNameSortPrice);
         }
         else {
             System.out.println("Сортировка установлена по убыванию. Делаю по возрастанию...");
@@ -159,14 +159,14 @@ public class MarketPage extends WebDriverSetting {
         String desc = "n-filter-sorter i-bem n-filter-sorter_js_inited n-filter-sorter_sort_desc n-filter-sorter_state_select";
         //System.out.println("Сейчас: " + classNameSortPrice);
         if (classNameSortPrice.equals(desc)) {
-            System.out.println("Сейчас стоит сортировка по УБЫВАНИЮ!" + classNameSortPrice);
+            //System.out.println("Сейчас стоит сортировка по УБЫВАНИЮ!" + classNameSortPrice);
         }
         else {
             System.out.println("Сортировка установлена по возрастанию. Делаю по убыванию...");
             WebElement sortPrice = driver.findElement(By.linkText("по цене"));
             sortPrice.click();
             //waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("/html/body/div[1]/div[5]/div[2]/div[1]")));
-            System.out.println("Установлена сортировка по УБЫВАНИЮ");
+            //System.out.println("Установлена сортировка по УБЫВАНИЮ");
 
             try {
                 Thread.sleep(10000);
@@ -245,7 +245,7 @@ public class MarketPage extends WebDriverSetting {
             String firstElementNoteName = elementInfoAboutNote.findElement(By.className("n-snippet-card2__title")).getText();
             String firstElementNotePrice = elementInfoAboutNote.findElement(By.className("n-snippet-card2__main-price")).getText();
             String firstElementNoteInfo = elementInfoAboutNote.findElement(By.className("n-snippet-card2__content")).getText();
-            System.out.println("Информация о ноутбуке:");
+            System.out.println("Информация о ноутбуке");
             System.out.println("Название: ");
             System.out.println(firstElementNoteName);
             System.out.println("Цена: ");
@@ -279,7 +279,7 @@ public class MarketPage extends WebDriverSetting {
             String firstElementNoteInfo = elementInfoAboutNote.findElement(By.className("n-snippet-card2__content")).getText();
             firstElementNotePrice = firstElementNotePrice.replaceAll("\\D+","");
             //System.out.println(elementInfoAboutNote.findElement(By.className("n-snippet-card2__title")).getText());   //называние первого элемента
-            System.out.println("Информация о ноутбуке:");
+            System.out.println("Информация о ноутбуке");
             System.out.println("Название: ");
             System.out.println(firstElementNoteName);
             System.out.println("Цена: ");
