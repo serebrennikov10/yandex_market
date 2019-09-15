@@ -349,57 +349,16 @@ public class MarketPage extends WebDriverSetting {
         }
     }
 
+
     void outputInfoInMap(){
-        List<WebElement> elementsAboutInfoNote = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
-        for (WebElement elementInfoAboutNote:elementsAboutInfoNote) {
-            List<WebElement> elementsName = new ArrayList<>(elementInfoAboutNote.findElements(By.className("n-snippet-card2__title")));
-            //elementsName.sort(new WebElementComparator());
-            for (WebElement elementName:elementsName) {
-                System.out.println(elementName.getText());
-            }
-            List<WebElement> elementsPrice = new ArrayList<>(elementInfoAboutNote.findElements(By.className("n-snippet-card2__main-price")));
-            for (WebElement elementPrice:elementsPrice) {
+        Map<String , String> map = new HashMap<>();
+        List<WebElement> elementsName = driver.findElements(By.className("n-snippet-card2__title"));
+        List<WebElement> elementsPrice = driver.findElements(By.className("n-snippet-card2__main-price"));
+        for(int i=0;i<elementsName.size();i++)
+            map.put(elementsName.get(i).getText(), elementsPrice.get(i).getText());
+        System.out.println("Размер набора данных : " +map.size());
 
-                System.out.println(elementPrice.getText());
-            }
-            Map<String , String> map = new HashMap<>();
-            //map.put(elementsName.get(elemen));
-
-        }
-
-    }
-
-    void outputInfoInMap_new(){
-/*        List<WebElement> elementsAboutInfoNote = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
-        for (WebElement elementInfoAboutNote:elementsAboutInfoNote) {
-            List<WebElement> elementsName = new ArrayList<>(elementInfoAboutNote.findElements(By.className("n-snippet-card2__title")));
-            //elementsName.sort(new WebElementComparator());
-            for (WebElement elementName:elementsName) {
-                System.out.println(elementName.getText());
-            }
-            List<WebElement> elementsPrice = new ArrayList<>(elementInfoAboutNote.findElements(By.className("n-snippet-card2__main-price")));
-            for (WebElement elementPrice:elementsPrice) {
-
-                System.out.println(elementPrice.getText());
-            }*/
-
-
-            //List<WebElement> elementsAboutInfoNote = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
-            List<WebElement> elementsName = driver.findElements(By.className("n-snippet-card2__title"));
-            List<WebElement> elementsPrice = driver.findElements(By.className("n-snippet-card2__main-price"));
-
-            Map<String , String> map = new LinkedHashMap<>();
-
-            int i, y;
-            for(i=0;i<elementsName.size();i++)
-                //for(y=0;y<elementsPrice.size();y++)
-                map.put(elementsName.get(i).getText(), " Ntdcnssdb" );
-
-        System.out.println("Размер набора данных : " +
-                map.size());
         Map<String, String> reversedMap = new TreeMap<String, String>(map);
-
-//then you just access the reversedMap however you like...
         for (Map.Entry entry : reversedMap.entrySet()) {
             System.out.println(entry.getKey() + ", " + entry.getValue());
         }
