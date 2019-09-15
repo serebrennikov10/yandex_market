@@ -2,6 +2,7 @@ package ru.yandex;
 
 
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -9,6 +10,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.*;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -22,7 +24,17 @@ public abstract class WebDriverSetting {
     //public InternetExplorerDriver driver;
     public WebDriver driver;
 
-    @BeforeMethod
+    @BeforeTest
+    public void deleteScreenshots(){
+        try {
+            FileUtils.deleteDirectory(new File("./target/screenshots/"));
+            System.out.println("Screenshots removed.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @BeforeClass
     public void setUp() {
         FileInputStream file;
         Properties property = new Properties();
@@ -30,7 +42,6 @@ public abstract class WebDriverSetting {
             file = new FileInputStream("src/main/resources/config.properties");
             property.load(file);
             String browser = property.getProperty("browser");
-
             if ((browser.equalsIgnoreCase("firefox")) || (browser.equalsIgnoreCase("ff"))) {
                 System.out.println("Browser: " + browser);
                 System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
@@ -46,41 +57,19 @@ public abstract class WebDriverSetting {
                 driver = new InternetExplorerDriver();
             } else {
                 System.out.println("incorrect browser: " + browser);
-                            }
-            try {
-
+                try {
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-    }
+        }
         catch (IOException e) {
-        System.err.println("ERROR: File not found!");
-    }
-
-        //IE
-        //System.setProperty("webdriver.ie.driver", "C:\\IEDriverServer.exe");
-        //driver = new InternetExplorerDriver();
-
-
-        //ff
-        //System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
-        //DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-        //capabilities.setCapability("marionette", true);
-        //driver = new FirefoxDriver();
-
-
-        //chrome
-        //System.setProperty("webdriver.chrome.driver", "./src/test/drivers/chromedriver76.exe");
-        //System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
-        //driver = new ChromeDriver();
-
+            System.err.println("ERROR: File not found!");
+        }
 
 
         driver.manage().window().maximize();
         System.out.println("Start driver...");
-
-
     }
 
 
@@ -96,7 +85,7 @@ public abstract class WebDriverSetting {
         System.out.println("Start driver...");
     }*/
 
-    @AfterMethod
+    @AfterClass
     public void close() {
         System.out.println("Close driver...");
         //driver.getSessionStorage().clear();

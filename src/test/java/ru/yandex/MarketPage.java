@@ -1,14 +1,15 @@
 package ru.yandex;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class MarketPage extends WebDriverSetting {
@@ -20,14 +21,15 @@ public class MarketPage extends WebDriverSetting {
 
     public MarketPage(WebDriver driver) {
         this.driver = driver;
-        this.waitDriver = new WebDriverWait(driver, 10);
+        this.waitDriver = new WebDriverWait(driver, 15);
         this.MoveToElement = new Actions(driver);
     }
 
     public void openPage() {
 
         driver.get("https://market.yandex.ru/");
-        //waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("n-adaptive-layout")));
+        waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("n-adaptive-layout")));
+        captureScreen();
 
     }
 
@@ -39,7 +41,57 @@ public class MarketPage extends WebDriverSetting {
         //System.out.println("О да, яндекс-маркет открылся");
     }
 
+/*    public class RegionOnPage {
+        public static RegionOnPage instance = new RegionOnPage();
+        private RegionOnPage(){}
+        public static RegionOnPage getInstance(){
+            return  instance;
+        }
+        }*/
+
     public void selectNewRegionOnPage(){
+        WebElement changeRegion = driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/noindex/div/div/div[2]/div/div[2]/div[1]/span"));
+        String nowRegion = changeRegion.getText();
+        String newRegion = "Воронеж";
+        if (nowRegion.equals(newRegion)) {
+            System.out.println("Текущий регион: "+nowRegion+". Смена региона не происходит.");
+        }
+        else {
+            System.out.println("Текущий регион: "+nowRegion+". Запускаю смену региона..");
+            changeRegion.click();
+            waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("header2-region-popup")));
+            //WebElement frameInputRegion = driver.findElement(By.className("header2-region-popup"));
+            WebElement inputRegion = driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[1]/form/div/div/div/div[1]/span/input"));
+            inputRegion.sendKeys(newRegion);
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            inputRegion.sendKeys(Keys.ENTER);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            WebElement buttonSelectRegion = driver.findElement(By.cssSelector("button[class*='button region-select-form']"));
+            MoveToElement.moveToElement(buttonSelectRegion).perform();
+            buttonSelectRegion.click();
+            System.out.println("Установлен новый регион "+newRegion);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        captureScreen();
+
+
+
+    }
+
+
+/*    public void selectNewRegionOnPage(){
         WebElement changeRegion = driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/noindex/div/div/div[2]/div/div[2]/div[1]/span"));
         String nowRegion = changeRegion.getText();
         String newRegion = "Воронеж";
@@ -77,7 +129,7 @@ public class MarketPage extends WebDriverSetting {
 
 
 
-    }
+    }*/
 
     public void openAllCategories() {
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class*='n-w-tab__control-hamburger']")));
@@ -297,13 +349,8 @@ public class MarketPage extends WebDriverSetting {
         }
     }
 
-    public void findNoteElements(){
 
-    }
-
-
-
-    public void sravnenie(){
+    public void differenceLaptops(){
         sortPriceByAsc();
         List<WebElement> elementsAboutInfoNoteMin = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
         for (WebElement elementInfoAboutNoteMin : elementsAboutInfoNoteMin) {
@@ -365,7 +412,20 @@ public class MarketPage extends WebDriverSetting {
 
 
     }
+    public void captureScreen() {
+        String path;
+        try {
 
+            //WebDriver augmentedDriver = new Augmenter().augment(driver);
+            File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            path = "./target/screenshots/" + screenshot.getName();
+            FileUtils.copyFile(screenshot, new File(path));
+        }
+        catch(IOException e) {
+            path = "Failed to capture screenshot: " + e.getMessage();
+        }
+        //return path;
+    }
 
 
 

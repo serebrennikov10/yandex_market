@@ -26,7 +26,7 @@ public class FirstTest extends WebDriverSetting {
         marketPage.selectFilterByColor("черный");
         marketPage.selectFilterByColor("белый");
         marketPage.sortByPrice();
-        marketPage.sravnenie();
+        marketPage.differenceLaptops();
         marketPage.outputInfoAllNotebook();
         marketPage.outputInfoInMap();
         //marketPage.sortByPrice();
@@ -37,16 +37,17 @@ public class FirstTest extends WebDriverSetting {
 
     }
 
-    @Test(description = "мой тест - два")
+/*    @Test(description = "мой тест - два")
     public void twoTest() {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage();
-        //marketPage.getTitle();
+        marketPage.getTitle();
+        marketPage.selectNewRegionOnPage();
         marketPage.openAllCategories();
         marketPage.openCompCategory();
         marketPage.openNotebookCategory();
 
-    }
+    }*/
 
 
 
