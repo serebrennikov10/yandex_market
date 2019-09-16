@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -25,6 +26,19 @@ public class MarketPage extends WebDriverSetting {
         this.waitDriver = new WebDriverWait(driver, 15);
         this.MoveToElement = new Actions(driver);
     }
+
+
+    @FindBy(css = "button[class*='button region-select-form']")
+    private WebElement buttonSelectRegion;
+    @FindBy(xpath="/html/body/div[6]/div/div/div[1]/div[1]/form/div/div/div/div[1]/span/input")
+    private WebElement inputRegion;
+
+
+    private By frameInputRegion = By.className("header2-region-popup");
+
+
+
+
 
     public void openPage() {
 
@@ -59,9 +73,9 @@ public class MarketPage extends WebDriverSetting {
         else {
             System.out.println("Текущий регион: "+nowRegion+". Запускаю смену региона..");
             changeRegion.click();
-            waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("header2-region-popup")));
+            waitDriver.until(ExpectedConditions.visibilityOfElementLocated(frameInputRegion));
             //WebElement frameInputRegion = driver.findElement(By.className("header2-region-popup"));
-            WebElement inputRegion = driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[1]/form/div/div/div/div[1]/span/input"));
+            //WebElement inputRegion = driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[1]/form/div/div/div/div[1]/span/input"));
             inputRegion.sendKeys(newRegion);
             try {
                 Thread.sleep(5000);
@@ -74,7 +88,7 @@ public class MarketPage extends WebDriverSetting {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            WebElement buttonSelectRegion = driver.findElement(By.cssSelector("button[class*='button region-select-form']"));
+            //WebElement buttonSelectRegion = driver.findElement(By.cssSelector("button[class*='button region-select-form']"));
             MoveToElement.moveToElement(buttonSelectRegion).perform();
             buttonSelectRegion.click();
             System.out.println("Установлен новый регион "+newRegion);
@@ -90,31 +104,38 @@ public class MarketPage extends WebDriverSetting {
 
     }
 
-
-    public void openAllCategories() {
+    @Step("Проверка открытия категорий")
+    public static void checkOpenCategory(){}
+    public MarketPage openAllCategories() {
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class*='n-w-tab__control-hamburger']")));
         WebElement allCategory = driver.findElement(By.xpath("/html/body/div[1]/div/span/div[2]/noindex/div[2]/div/div/div/div[1]"));
         MoveToElement.moveToElement(allCategory).perform();
         allCategory.click();
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("n-w-tabs__tabs-column")));
         captureScreen();
+        return  new MarketPage(driver);
     }
 
-    public void openCompCategory() {
+    @Step("Проверка открытия категори: Компьютеры")
+    public static void checkOpenComp(){}
+    public MarketPage openCompCategory() {
 
         WebElement compCategory = driver.findElement(By.xpath("/html/body/div[1]/div/span/div[2]/noindex/div[1]/div/div/div/div/div/div/div[1]/div/div[3]/a"));
         MoveToElement.moveToElement(compCategory).perform();
         compCategory.click();
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div[2]/div[7]/div/div/div[1]/div/div/div/div/div/div")));
         captureScreen();
+        return  new MarketPage(driver);
     }
-
-    public void openNotebookCategory() {
+    @Step("Проверка открытия категори: Ноутбуки")
+    public static void checkOpenNote(){}
+    public MarketPage openNotebookCategory() {
         WebElement notebookCategory = driver.findElement(By.xpath("/html/body/div[1]/div[2]/div[7]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[2]/ul/li[2]/div/a"));
         MoveToElement.moveToElement(notebookCategory).perform();
         notebookCategory.click();
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("headline__header")));
         captureScreen();
+        return  new MarketPage(driver);
     }
 
     public void sortByPrice() {

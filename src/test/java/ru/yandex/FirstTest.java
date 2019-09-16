@@ -27,9 +27,9 @@ public class FirstTest extends WebDriverSetting {
     @Description(value = "Тест проверяет выбор категории 'Компьютеры' -> 'Ноутбуки'")
     public void selectNotebook(){
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
-        marketPage.openAllCategories();
-        marketPage.openCompCategory();
-        marketPage.openNotebookCategory();
+        marketPage.openAllCategories()
+                .openCompCategory()
+                .openNotebookCategory();
     }
     @Test(priority = 4,description = "Задаю параметры поиска: до 30000 р.")
     @Description(value = "Тест проверяет установку параметра стоимости до 30000 р.")
@@ -73,9 +73,9 @@ public class FirstTest extends WebDriverSetting {
         marketPage.outputInfoInMap();
     }
 
-    void fistTestEnd(){
+/*    void fistTestEnd(){
         System.out.println("First Test completed!");
-    }
+    }*/
 
 
 }
