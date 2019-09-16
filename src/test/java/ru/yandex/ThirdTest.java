@@ -34,12 +34,12 @@ public class ThirdTest extends WebDriverSetting {
     }*/
 
     @Step("Поиск товаров из файла")
-    public static void readFile() throws IOException {
+    //public static void readFile() throws IOException {
         //getBytesAnnotationWithArgs("src/main/resources/ListNote.xlsx");
         //getBytesAnnotationWithArgs("screenshot0.png");
         //getBytesAnnotationWithArgs("screenshot1.png");
         //getBytesAnnotationWithArgs("screenshot2.png");
-    }
+    //}
     @Test(description = "Поиск товаров из файла Excel")
     @Description(value = "Парсинг и поиск товаров из файла Excel")
     public void readFromExcel() throws IOException {

@@ -105,7 +105,7 @@ public class MarketPage extends WebDriverSetting {
     }
 
     @Step("Проверка открытия категорий")
-    public static void checkOpenCategory(){}
+    //public static void checkOpenCategory(){}
     public MarketPage openAllCategories() {
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class*='n-w-tab__control-hamburger']")));
         WebElement allCategory = driver.findElement(By.xpath("/html/body/div[1]/div/span/div[2]/noindex/div[2]/div/div/div/div[1]"));
@@ -117,7 +117,7 @@ public class MarketPage extends WebDriverSetting {
     }
 
     @Step("Проверка открытия категори: Компьютеры")
-    public static void checkOpenComp(){}
+    //public static void checkOpenComp(){}
     public MarketPage openCompCategory() {
 
         WebElement compCategory = driver.findElement(By.xpath("/html/body/div[1]/div/span/div[2]/noindex/div[1]/div/div/div/div/div/div/div[1]/div/div[3]/a"));
@@ -128,7 +128,7 @@ public class MarketPage extends WebDriverSetting {
         return  new MarketPage(driver);
     }
     @Step("Проверка открытия категори: Ноутбуки")
-    public static void checkOpenNote(){}
+    //public static void checkOpenNote(){}
     public MarketPage openNotebookCategory() {
         WebElement notebookCategory = driver.findElement(By.xpath("/html/body/div[1]/div[2]/div[7]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[2]/ul/li[2]/div/a"));
         MoveToElement.moveToElement(notebookCategory).perform();
