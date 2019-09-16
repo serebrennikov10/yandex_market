@@ -147,7 +147,7 @@ public class MarketPage extends WebDriverSetting {
         //String classNameSortPrice = divNameSortPrice.getAttribute("class");
         //System.out.println(classNameSortPrice);
         try {
-            Thread.sleep(10000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -171,7 +171,7 @@ public class MarketPage extends WebDriverSetting {
             //System.out.println("Сейчас стоит сортировка по ВОЗРАСТАНИЮ!" + classNameSortPrice);
         }
         else {
-            System.out.println("Сортировка установлена по убыванию. Делаю по возрастанию...");
+            //System.out.println("Сортировка установлена по убыванию. Делаю по возрастанию...");
             WebElement sortPrice = driver.findElement(By.linkText("по цене"));
             sortPrice.click();
             //waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("/html/body/div[1]/div[5]/div[2]/div[1]")));
@@ -180,7 +180,7 @@ public class MarketPage extends WebDriverSetting {
 
 
         try {
-            Thread.sleep(10000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -198,14 +198,14 @@ public class MarketPage extends WebDriverSetting {
             //System.out.println("Сейчас стоит сортировка по УБЫВАНИЮ!" + classNameSortPrice);
         }
         else {
-            System.out.println("Сортировка установлена по возрастанию. Делаю по убыванию...");
+            //System.out.println("Сортировка установлена по возрастанию. Делаю по убыванию...");
             WebElement sortPrice = driver.findElement(By.linkText("по цене"));
             sortPrice.click();
             //waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("/html/body/div[1]/div[5]/div[2]/div[1]")));
-            //System.out.println("Установлена сортировка по УБЫВАНИЮ");
+            System.out.println("Установлена сортировка по УБЫВАНИЮ");
 
             try {
-                Thread.sleep(10000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -377,11 +377,16 @@ public class MarketPage extends WebDriverSetting {
         List<WebElement> elementsAboutInfoNote = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
         for (WebElement elementInfoAboutNote:elementsAboutInfoNote) {
             List<WebElement> elements = new ArrayList<>(elementInfoAboutNote.findElements(By.className("n-snippet-card2__title")));
-            elements.sort(new WebElementComparator());
+            elements.sort(new WebElementComparator()); //сортировка
+            //Collections.sort(elements, Collections.reverseOrder());
+            System.out.println("Вывожу отсортированные элементы списка:");
             for (WebElement element:elements) {
+
                 System.out.println(element.getText());
+
             }
         }
+        System.out.println("Вывод элементов списка закончен.");
     }
 
 
@@ -391,15 +396,16 @@ public class MarketPage extends WebDriverSetting {
         List<WebElement> elementsPrice = driver.findElements(By.className("n-snippet-card2__main-price"));
         for(int i=0;i<elementsName.size();i++)
             map.put(elementsName.get(i).getText(), elementsPrice.get(i).getText());
-        System.out.println("Размер набора данных : " +map.size());
+        System.out.println("Размер набора данных : " +map.size()+". Вывожу данные из map:");
 
         Map<String, String> reversedMap = new TreeMap<String, String>(map);
         for (Map.Entry entry : reversedMap.entrySet()) {
             System.out.println(entry.getKey() + ", " + entry.getValue());
         }
-
+        System.out.println("Вывод данных из map завершен.");
 
     }
+
     public void captureScreen() {
         String path;
         try {
