@@ -1,6 +1,8 @@
 package ru.yandex;
 
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -10,37 +12,38 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class ThirdTest extends WebDriverSetting {
-/*    private WebDriver driver;
-        public ThirdTest(WebDriver driver) {
-        this.driver = driver;
+
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public byte[] saveScreenshotPNG (WebDriver driver) throws IOException {
+        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+    }
+/*    @Attachment(value = "Вложение", type = "image/png", fileExtension = ".png")
+    static byte[] getBytesAnnotationWithArgs(String resourceName) throws IOException {
+        return Files.readAllBytes(Paths.get("target/screenshots", resourceName));
     }*/
 
-    @Test(priority = 1, description = "Открытие страницы")
-    @Description(value = "Тест проверяет открытие страницы")
-    public void openYandex(){
+    @Step("Поиск товаров из файла")
+    public static void readFile() throws IOException {
+        //getBytesAnnotationWithArgs("src/main/resources/ListNote.xlsx");
+        //getBytesAnnotationWithArgs("screenshot0.png");
+        //getBytesAnnotationWithArgs("screenshot1.png");
+        //getBytesAnnotationWithArgs("screenshot2.png");
+    }
+    @Test(description = "Поиск товаров из файла Excel")
+    @Description(value = "Парсинг и поиск товаров из файла Excel")
+    public void readFromExcel() throws IOException {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage();
-    }
-
-/*    @Test(priority = 2, description = "Поиск товара")
-    @Description(value = "Тест проверяет поиск через поисковую строку")
-    public void findElementsInYandex(){
-
-
-            WebElement searchInputLine = driver.findElement(By.id("header-search"));
-            searchInputLine.sendKeys("Ноутбук HP 17-ca0125ur");
-            searchInputLine.sendKeys(Keys.ENTER);
-    }*/
-
-    @Test(priority = 2, description = "Поиск товара")
-    public void readFromExcel() throws IOException {
         XSSFWorkbook myExcelBook = new XSSFWorkbook(new FileInputStream("src/main/resources/ListNote.xlsx"));
         XSSFSheet myExcelSheet = myExcelBook.getSheet("book1");
         for(int i=0;i<3;i++) {
@@ -56,31 +59,25 @@ public class ThirdTest extends WebDriverSetting {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            captureScreen();
+            saveScreenshotPNG(driver);
+            captureScreen(i);
 
         }
     }
 
-    public void captureScreen() {
+    public void captureScreen(Integer i) {
         String path;
         try {
             //WebDriver augmentedDriver = new Augmenter().augment(driver);
             File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-            path = "./target/screenshots/" + screenshot.getName();
+            path = "./src/main/resources/screenshots/" + "screenshot" + i + ".png";
             FileUtils.copyFile(screenshot, new File(path));
         }
         catch(IOException e) {
             e.getMessage();
         }
-        //return path;
+
     }
-
-
-
-
-
-
-
 
 
 }

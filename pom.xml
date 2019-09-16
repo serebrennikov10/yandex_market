@@ -10,7 +10,8 @@
     <properties>
        <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
         <!-- <maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>-->
-        <aspectj.version>1.8.10</aspectj.version>
+        <aspectj.version>1.9.4</aspectj.version>
+        <!--<aspectj.version>1.9.4</aspectj.version>-->
         <allure-testng.version>2.6.0</allure-testng.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -94,6 +95,12 @@
             <version>3.141.59</version>
             <scope>test</scope>
         </dependency>
+        <!--<dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>aspectj-maven-plugin</artifactId>
+            <version>1.10</version>
+            popitka fix aspectj
+        </dependency>-->
     </dependencies>
     <build>
         <plugins>
@@ -115,7 +122,17 @@
                         <groupId>org.aspectj</groupId>
                         <artifactId>aspectjweaver</artifactId>
                         <version>${aspectj.version}</version>
+                        <!--<version>1.8.10</version>-->
                     </dependency>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjrt</artifactId>
+                        <version>1.8.10</version>
+                        <!--<version>${aspectj.version}</version>-->
+                        <!--<version>1.8.10</version>-->
+                        <!--popitka fix aspectj-->
+                    </dependency>
+
                 </dependencies>
             </plugin>
             <plugin>

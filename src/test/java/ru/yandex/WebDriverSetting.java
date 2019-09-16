@@ -30,6 +30,7 @@ public abstract class WebDriverSetting {
     void deleteScreenshots(){
         try {
             FileUtils.deleteDirectory(new File("./target/screenshots/"));
+            FileUtils.deleteDirectory(new File("./src/main/resources/screenshots/"));
             System.out.println("Screenshots removed.");
         } catch (IOException e) {
             e.printStackTrace();
@@ -50,7 +51,7 @@ public abstract class WebDriverSetting {
                 driver = new FirefoxDriver();
             } else if (browser.equalsIgnoreCase("chrome")) {
                 System.out.println("Browser: " + browser);
-                System.setProperty("webdriver.chrome.driver", "./src/test/drivers/chromedriver76.exe");
+                System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver76.exe");
                 driver = new ChromeDriver();
             } else if ((browser.equalsIgnoreCase("ie")) || (browser.equalsIgnoreCase("internetexplorer"))
                     || (browser.equalsIgnoreCase("internet explorer"))) {
@@ -80,7 +81,7 @@ public abstract class WebDriverSetting {
         System.out.println("Close driver...");
         //driver.getSessionStorage().clear();
         //driver.getLocalStorage().clear();
-        //driver.close();
+        driver.close();
     }
 
 }

@@ -6,14 +6,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 public class FirstTest extends WebDriverSetting {
-
-/*    private MarketPage marketPage;
-
-    public FirstTest() {
-        this.marketPage = PageFactory.initElements(driver, MarketPage.class);
-    }*/
-
-
     @Test(priority = 1, description = "Открытие страницы")
     @Description(value = "Тест проверяет открытие страницы")
     public void openPage() {
@@ -46,13 +38,13 @@ public class FirstTest extends WebDriverSetting {
         marketPage.selectFilterByCost("0", "30000");
     }
 
-     @Test(priority = 5,description = "Задаю параметры поиска: бренд HP и Lenovo")
-      @Description(value = "Тест проверяет установку бренда HP и Lenovo")
-             public void selectBrand() {
-         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
-         marketPage.selectFilterByBrand("HP");
-         marketPage.selectFilterByBrand("Lenovo");
-     }
+    @Test(priority = 5,description = "Задаю параметры поиска: бренд HP и Lenovo")
+    @Description(value = "Тест проверяет установку бренда HP и Lenovo")
+    public void selectBrand() {
+        MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
+        marketPage.selectFilterByBrand("HP");
+        marketPage.selectFilterByBrand("Lenovo");
+    }
 
     @Test(priority = 6,description = "Задаю параметры поиска: цвет Черный и Белый")
     @Description(value = "Тест проверяет установку цвета Черный и Белый")
@@ -80,28 +72,10 @@ public class FirstTest extends WebDriverSetting {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.outputInfoInMap();
     }
-    //marketPage.sortByPrice();
-    //marketPage.sortPriceByDesc();  //по убыванию
-    //marketPage.sortPriceByAsc(); //по возрастанию
-    //marketPage.outInfo();
-    public void fistTestEnd(){
-        System.out.println("Test completed!");
+
+    void fistTestEnd(){
+        System.out.println("First Test completed!");
     }
 
-    }
 
-/*    @Test(description = "мой тест - два")
-    public void twoTest() {
-        MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
-        marketPage.openPage();
-        marketPage.getTitle();
-        marketPage.selectNewRegionOnPage();
-        marketPage.openAllCategories();
-        marketPage.openCompCategory();
-        marketPage.openNotebookCategory();
-
-    }*/
-
-
-
-
+}

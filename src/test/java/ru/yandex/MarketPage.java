@@ -21,7 +21,7 @@ public class MarketPage extends WebDriverSetting {
     private Integer firstElementByPriceMin;
 
     public MarketPage(WebDriver driver) {
-            this.driver = driver;
+        this.driver = driver;
         this.waitDriver = new WebDriverWait(driver, 15);
         this.MoveToElement = new Actions(driver);
     }
@@ -30,7 +30,6 @@ public class MarketPage extends WebDriverSetting {
 
         driver.get("https://market.yandex.ru/");
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("n-adaptive-layout")));
-        captureScreen();
 
     }
 
@@ -39,7 +38,7 @@ public class MarketPage extends WebDriverSetting {
         String title = driver.getTitle();
         Assert.assertEquals("Яндекс.Маркет — выбор и покупка товаров из проверенных интернет-магазинов", title);
         System.out.println("Title: "+title);
-        //System.out.println("О да, яндекс-маркет открылся");
+
     }
 
 /*    public class RegionOnPage {
@@ -91,46 +90,6 @@ public class MarketPage extends WebDriverSetting {
 
     }
 
-
-/*    public void selectNewRegionOnPage(){
-        WebElement changeRegion = driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/noindex/div/div/div[2]/div/div[2]/div[1]/span"));
-        String nowRegion = changeRegion.getText();
-        String newRegion = "Воронеж";
-        if (nowRegion.equals(newRegion)) {
-            System.out.println("Текущий регион: "+nowRegion+". Смена региона не происходит.");
-        }
-        else {
-            System.out.println("Текущий регион: "+nowRegion+". Запускаю смену региона..");
-            changeRegion.click();
-            waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("header2-region-popup")));
-            //WebElement frameInputRegion = driver.findElement(By.className("header2-region-popup"));
-            WebElement inputRegion = driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[1]/form/div/div/div/div[1]/span/input"));
-            inputRegion.sendKeys(newRegion);
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            inputRegion.sendKeys(Keys.ENTER);
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            WebElement buttonSelectRegion = driver.findElement(By.cssSelector("button[class*='button region-select-form']"));
-            MoveToElement.moveToElement(buttonSelectRegion).perform();
-            buttonSelectRegion.click();
-            System.out.println("Установлен новый регион "+newRegion);
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-
-    }*/
 
     public void openAllCategories() {
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class*='n-w-tab__control-hamburger']")));
@@ -347,8 +306,8 @@ public class MarketPage extends WebDriverSetting {
 
             //List<WebElement> elements = new ArrayList<>(elementInfoAboutNote.findElements(By.className("n-snippet-card2__title")));
             //for (WebElement element:elements) {
-                   // elements.sort(new WebElementComparator());
-                //System.out.println(element.getText());
+            // elements.sort(new WebElementComparator());
+            //System.out.println(element.getText());
             //}
 
 
