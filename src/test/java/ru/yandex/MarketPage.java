@@ -32,11 +32,7 @@ public class MarketPage extends WebDriverSetting {
     private WebElement buttonSelectRegion;
     @FindBy(xpath="/html/body/div[6]/div/div/div[1]/div[1]/form/div/div/div/div[1]/span/input")
     private WebElement inputRegion;
-
-
     private By frameInputRegion = By.className("header2-region-popup");
-
-
 
 
 
@@ -136,6 +132,27 @@ public class MarketPage extends WebDriverSetting {
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("headline__header")));
         captureScreen();
         return  new MarketPage(driver);
+    }
+
+    public void twoTestOpenNote(){
+        openPage();
+        selectNewRegionOnPage();
+        openAllCategories();
+        openCompCategory();
+        openNotebookCategory();
+    }
+
+    public  void selectFirstNote(){
+        WebElement firstNote = driver.findElement(By.className("n-snippet-card2__title"));
+        firstNote.click();
+        waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("n-product-tabs__list")));
+
+
+    }
+    public void openNoteSpec(){
+        WebElement pageNoteSpec = driver.findElement(By.xpath("/html/body/div[1]/div[5]/div[3]/div/div/div/ul/li[@data-name='spec']"));
+        pageNoteSpec.click();
+        //waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("/html/body/div[1]/div[6]/div[1]")));
     }
 
     public void sortByPrice() {
