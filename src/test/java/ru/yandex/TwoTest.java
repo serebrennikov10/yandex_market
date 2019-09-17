@@ -34,11 +34,16 @@ public class TwoTest extends WebDriverSetting {
                 marketPage.selectFirstNote();
                 marketPage.openNoteSpec();
 
+
+
+        WebElement webTimeWork = driver.findElement(By.xpath("/html/body/div[1]/div[6]/div[1]/div[12]/dl[1]"));
+        System.out.println(webTimeWork.getText());
+
+
+
                 TwoTest note1 = new TwoTest();
 
-                WebElement webTimeWork = driver.findElement(By.className("n-snippet-card2__title"));
-                /html/body/div[1]/div[6]/div[1]/div[12]/dl[1]
-                webTimeWork.getText();
+
 
         note1.timeWork = "1";
         note1.valuebattery = "1";
