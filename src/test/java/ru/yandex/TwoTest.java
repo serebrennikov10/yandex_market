@@ -1,11 +1,15 @@
 package ru.yandex;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 
 //@Test
 public class TwoTest extends WebDriverSetting {
+
+
 
     String timeWork;
     String valuebattery;
@@ -15,7 +19,7 @@ public class TwoTest extends WebDriverSetting {
 
 
     public boolean equals(TwoTest note) {
-        return this.timeWork     = note.timeWork;
+        return this.timeWork     == note.timeWork;
         /*return this.valuebattery == note.valuebattery;
         return this.valuePower   == note.valuePower;
         return this.cells        == note.cells;
@@ -27,12 +31,14 @@ public class TwoTest extends WebDriverSetting {
     public void main(){
                 MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
                 marketPage.twoTestOpenNote();
-
                 marketPage.selectFirstNote();
                 marketPage.openNoteSpec();
 
                 TwoTest note1 = new TwoTest();
 
+                WebElement webTimeWork = driver.findElement(By.className("n-snippet-card2__title"));
+                /html/body/div[1]/div[6]/div[1]/div[12]/dl[1]
+                webTimeWork.getText();
 
         note1.timeWork = "1";
         note1.valuebattery = "1";
@@ -48,7 +54,7 @@ public class TwoTest extends WebDriverSetting {
         note2.cells = "1";
         note2.typeBattery = "1";
 
-
+        System.out.println(note1.timeWork.equalsIgnoreCase(note2.timeWork));
             }
 
 
