@@ -136,7 +136,7 @@ public class MarketPage extends WebDriverSetting {
 
     public void twoTestOpenNote(){
         openPage();
-        selectNewRegionOnPage();
+        //selectNewRegionOnPage();
         openAllCategories();
         openCompCategory();
         openNotebookCategory();
