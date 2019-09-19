@@ -140,6 +140,7 @@ public class MarketPage extends WebDriverSetting {
         openAllCategories();
         openCompCategory();
         openNotebookCategory();
+        sortByPrice();
     }
 
     public  void selectFirstNote(){
