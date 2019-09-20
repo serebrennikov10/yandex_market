@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.Test;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class TwoTest extends WebDriverSetting {
     }*/
 
     //@Test
-    public String main(String timeWork, String valuebattery, String valuePower, String cells, String typeBattery) {
+    public void main(String timeWork, String valuebattery, String valuePower, String cells, String typeBattery) {
 
         //String path = "/html/body/div[1]/div[6]/div[1]/div[12]";
         String path = "/html/body/div[1]/div[6]/div[1]/div[11]";
@@ -87,13 +86,14 @@ public class TwoTest extends WebDriverSetting {
                 System.out.println(typeBattery);
             }
 
-            return timeWork;
-            return valuebattery;
-            return valuePower;
-            return cells;
-            return typeBattery;
 
 
+
+/*       return timeWork;
+        return valuebattery;
+        return valuePower;
+        return cells;
+        return typeBattery;*/
 
 /*            try {
 
