@@ -11,15 +11,15 @@ import java.util.List;
 //@Test
 public class TwoTest extends WebDriverSetting {
 /*    String timeWork;
-    String valuebattery;
-    String valuePower;
+    String valueBattery;
+    String valueBatteryPower;
     String cells;
     String typeBattery;*/
 
     /*public boolean equals(TwoTest note) {
         return this.timeWork     == note.timeWork;
-        return this.valuebattery == note.valuebattery;
-        return this.valuePower   == note.valuePower;
+        return this.valueBattery == note.valueBattery;
+        return this.valueBatteryPower   == note.valueBatteryPower;
         return this.cells        == note.cells;
         return this.typeBattery  == note.typeBattery;
     }*/
@@ -79,7 +79,7 @@ public class TwoTest extends WebDriverSetting {
                 System.out.println(cells);
             }
             try {
-                typeBattery = blockPowerElements.findElement(By.xpath(".//*[contains(text(),'Емкость аккумулятора')]/../..")).getText();
+                typeBattery = blockPowerElements.findElement(By.xpath(".//*[contains(text(),'Тип аккумулятора')]/../..")).getText();
                 System.out.println(typeBattery);
             } catch(NoSuchElementException ignored) {
                 typeBattery = "Нет значения";
@@ -90,8 +90,8 @@ public class TwoTest extends WebDriverSetting {
 
 
 /*       return timeWork;
-        return valuebattery;
-        return valuePower;
+        return valueBattery;
+        return valueBatteryPower;
         return cells;
         return typeBattery;*/
 
@@ -105,10 +105,10 @@ public class TwoTest extends WebDriverSetting {
         }
 
             /*
-        WebElement valuebattery = driver.findElement(By.xpath(path+".//*[contains(text(),'Емкость аккумулятора')]/.."));
-        System.out.println(valuebattery.getText());
-        WebElement valuePower = driver.findElement(By.xpath(path+".//*[contains(text(),'Емкость аккумулятора (Вт*ч)')]/.."));
-        System.out.println(valuePower.getText());
+        WebElement valueBattery = driver.findElement(By.xpath(path+".//*[contains(text(),'Емкость аккумулятора')]/.."));
+        System.out.println(valueBattery.getText());
+        WebElement valueBatteryPower = driver.findElement(By.xpath(path+".//*[contains(text(),'Емкость аккумулятора (Вт*ч)')]/.."));
+        System.out.println(valueBatteryPower.getText());
         WebElement cells = driver.findElement(By.xpath(path+".//*[contains(text(),'Количество ячеек батареи')]/.."));
         System.out.println(cells.getText());
         WebElement typeBattery = driver.findElement(By.xpath(path+".//*[contains(text(),'Тип аккумулятора')]/.."));
@@ -118,10 +118,10 @@ public class TwoTest extends WebDriverSetting {
 
 /*       WebElement timeWork = driver.findElement(By.xpath(path+"/dl[1]"));
         System.out.println(timeWork.getText());
-        WebElement valuebattery = driver.findElement(By.xpath(path+"/dl[2]"));
-        System.out.println(valuebattery.getText());
-        WebElement valuePower = driver.findElement(By.xpath(path+"/dl[3]"));
-        System.out.println(valuePower.getText());
+        WebElement valueBattery = driver.findElement(By.xpath(path+"/dl[2]"));
+        System.out.println(valueBattery.getText());
+        WebElement valueBatteryPower = driver.findElement(By.xpath(path+"/dl[3]"));
+        System.out.println(valueBatteryPower.getText());
         WebElement cells = driver.findElement(By.xpath(path+"/dl[4]"));
         System.out.println(cells.getText());
         WebElement typeBattery = driver.findElement(By.xpath(path+"/dl[5]"));
@@ -130,22 +130,22 @@ public class TwoTest extends WebDriverSetting {
 
  /*       TwoTest note1 = new TwoTest();
         note1.timeWork = "1";
-        note1.valuebattery = "1";
-        note1.valuePower = "1";
+        note1.valueBattery = "1";
+        note1.valueBatteryPower = "1";
         note1.cells = "1";
         note1.typeBattery = "1";
 
 
         TwoTest note2 = new TwoTest();
         note2.timeWork = "1";
-        note2.valuebattery = "1";
-        note2.valuePower = "1";
+        note2.valueBattery = "1";
+        note2.valueBatteryPower = "1";
         note2.cells = "1";
         note2.typeBattery = "1";*/
 
        /* System.out.println(note1.timeWork.equalsIgnoreCase(note2.timeWork));
-        System.out.println(note1.valuebattery.equalsIgnoreCase(note2.valuebattery));
-        System.out.println(note1.valuePower.equalsIgnoreCase(note2.valuePower));
+        System.out.println(note1.valueBattery.equalsIgnoreCase(note2.valueBattery));
+        System.out.println(note1.valueBatteryPower.equalsIgnoreCase(note2.valueBatteryPower));
         System.out.println(note1.cells.equalsIgnoreCase(note2.cells));
         System.out.println(note1.typeBattery.equalsIgnoreCase(note2.typeBattery));*/
 
@@ -174,7 +174,7 @@ public class TwoTest extends WebDriverSetting {
 
         String timeWork;
         String valuebattery;
-        //String main(timeWork, valuebattery, valuePower, cells, typeBattery);
+        //String main(timeWork, valueBattery, valueBatteryPower, cells, typeBattery);
 
         Atributes note1 = new Atributes();
         note1.timeWork = "1";

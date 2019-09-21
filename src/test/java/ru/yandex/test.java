@@ -12,7 +12,7 @@ import java.util.List;
 public class test extends WebDriverSetting {
 
     public class Note {
-        String timeWork;
+        String timeWork, valueBattery, valueBatteryPower, cells, typeBattery;
     }
 
     @Test
@@ -29,13 +29,13 @@ public class test extends WebDriverSetting {
         marketPage.openNoteSpec();
 
         Note note1 = new Note();
-        note1.timeWork = "note1";
+        //note1.timeWork = "note1";
 
-        System.out.println("note1 до изменения: "+note1.timeWork);
+        System.out.println("note1 до изменения: "+note1);
         setAttributes(note1);
-        System.out.println("note1 после: "+note1.timeWork);
+        System.out.println("note1 после: "+note1);
 
-        marketPage.openPage();
+/*        marketPage.openPage();
         marketPage.openAllCategories();
         marketPage.openCompCategory();
         marketPage.openNotebookCategory();
@@ -51,29 +51,68 @@ public class test extends WebDriverSetting {
         System.out.println("note2 после: "+note2.timeWork);
 
         System.out.println("Итого note1 после: "+note1.timeWork);
-        System.out.println("Итого note2 после: "+note2.timeWork);
+        System.out.println("Итого note2 после: "+note2.timeWork);*/
     }
 
     public Note setAttributes(Note note){
 
         String timeWork = null;
+        String valueBattery = null;
+        String valueBatteryPower = null;
+        String cells = null;
+        String typeBattery = null;
         //String path = "/html/body/div[1]/div[6]/div[1]/div[11]";
         String path = "/html/body/div[1]/div[6]/div[1]/.//*[contains(text(),'Питание')]/..";
         System.out.println("Тянем из поиска по тексту:");
 
-        List<WebElement> blockPower2 = driver.findElements(By.xpath(path));
-        System.out.println("Выводим все элементы листа 2:");
-        for (WebElement blockPowerElements:blockPower2) {
+        List<WebElement> blockPowerList = driver.findElements(By.xpath(path));
+        System.out.println("Выводим все элементы листа:");
+        for (WebElement blockPowerElements:blockPowerList) {
 
             try {
-                timeWork = blockPowerElements.findElement(By.xpath(".//*[contains(text(),'Емкость аккумулятора')]/../..")).getText();
+                timeWork = blockPowerElements.findElement(By.xpath(".//*[contains(text(),'Время работы')]/../..")).getText();
                 System.out.println("text element: "+timeWork);
             } catch(NoSuchElementException ignored) {
-                timeWork = "Нет значения";
+                timeWork = "Время работы: Нет значения";
                 System.out.println(timeWork);
             }
+            try {
+                valueBattery = blockPowerElements.findElement(By.xpath(".//*[contains(text(),'Емкость аккумулятора')]/../..")).getText();
+                System.out.println(valueBattery);
+            } catch(NoSuchElementException ignored) {
+                valueBattery = "Емкость аккумулятора: Нет значения";
+                System.out.println(valueBattery);
+            }
+            try {
+                valueBatteryPower = blockPowerElements.findElement(By.xpath(".//*[contains(text(),'Емкость аккумулятора (Вт*ч)')]/../..")).getText();
+                System.out.println(valueBatteryPower);
+            } catch(NoSuchElementException ignored) {
+                valueBatteryPower = "Емкость аккумулятора (Вт*ч): Нет значения";
+                System.out.println(valueBatteryPower);
+            }
+            try {
+                cells = blockPowerElements.findElement(By.xpath(".//*[contains(text(),'Количество ячеек батареи')]/../..")).getText();
+                System.out.println(cells);
+            } catch(NoSuchElementException ignored) {
+                cells = "Количество ячеек батареи: Нет значения";
+                System.out.println(cells);
+            }
+            try {
+                typeBattery = blockPowerElements.findElement(By.xpath(".//*[contains(text(),'Тип аккумулятора')]/../..")).getText();
+                System.out.println(typeBattery);
+            } catch(NoSuchElementException ignored) {
+                typeBattery = "Тип аккумулятора: Нет значения";
+                System.out.println(typeBattery);
+            }
         }
+
+
         note.timeWork = timeWork;
+        note.valueBattery = valueBattery;
+        note.valueBatteryPower = valueBatteryPower;
+        note.cells = cells;
+        note.typeBattery = typeBattery;
+
         return note;
     }
 
