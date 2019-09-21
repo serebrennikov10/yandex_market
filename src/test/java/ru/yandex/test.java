@@ -11,6 +11,9 @@ import java.util.List;
 
 public class test extends WebDriverSetting {
 
+
+
+
     public class Note {
         String timeWork, valueBattery, valueBatteryPower, cells, typeBattery;
     }
@@ -25,33 +28,50 @@ public class test extends WebDriverSetting {
         marketPage.openCompCategory();
         marketPage.openNotebookCategory();
         marketPage.sortByPrice();
-        marketPage.selectFirstNote();
+        marketPage.selectNote(0);
         marketPage.openNoteSpec();
 
         Note note1 = new Note();
         //note1.timeWork = "note1";
 
-        System.out.println("note1 до изменения: "+note1);
+        //System.out.println("note1 до изменения: "+note1);
         setAttributes(note1);
-        System.out.println("note1 после: "+note1);
+        System.out.println("note1 после: ");
+        System.out.println(note1.timeWork);
+        System.out.println(note1.valueBattery);
+        System.out.println(note1.valueBatteryPower);
+        System.out.println(note1.cells);
+        System.out.println(note1.typeBattery);
 
-/*        marketPage.openPage();
+        marketPage.openPage();
         marketPage.openAllCategories();
         marketPage.openCompCategory();
         marketPage.openNotebookCategory();
         marketPage.sortByPrice();
         marketPage.sortPriceByDesc();
-        marketPage.selectFirstNote();
+        marketPage.selectNote(1);
         marketPage.openNoteSpec();
 
         Note note2 = new Note();
-        note2.timeWork = "note2";
-        System.out.println("note2 до изменения: "+note2.timeWork);
+        //note2.timeWork = "note2";
+        //System.out.println("note2 до изменения: "+note2.timeWork);
         setAttributes(note2);
-        System.out.println("note2 после: "+note2.timeWork);
+        System.out.println("note2 после: ");
+        System.out.println(note2.timeWork);
+        System.out.println(note2.valueBattery);
+        System.out.println(note2.valueBatteryPower);
+        System.out.println(note2.cells);
+        System.out.println(note2.typeBattery);
+
 
         System.out.println("Итого note1 после: "+note1.timeWork);
-        System.out.println("Итого note2 после: "+note2.timeWork);*/
+        System.out.println("Итого note2 после: "+note2.timeWork);
+        System.out.println("Сравниваю характеристики блока 'Питание': ");
+        System.out.println("Время работы: "+note1.timeWork.equalsIgnoreCase(note2.timeWork));
+        System.out.println("Емкость аккумулятора: "+note1.valueBattery.equalsIgnoreCase(note2.valueBattery));
+        System.out.println("Емкость аккумулятора (Вт*ч): "+note1.valueBatteryPower.equalsIgnoreCase(note2.valueBatteryPower));
+        System.out.println("Количество ячеек батареи: "+note1.cells.equalsIgnoreCase(note2.cells));
+        System.out.println("Тип аккумулятора: "+note1.typeBattery.equalsIgnoreCase(note2.typeBattery));
     }
 
     public Note setAttributes(Note note){
@@ -68,7 +88,8 @@ public class test extends WebDriverSetting {
         List<WebElement> blockPowerList = driver.findElements(By.xpath(path));
         System.out.println("Выводим все элементы листа:");
         for (WebElement blockPowerElements:blockPowerList) {
-
+            //By.xpath(".//*[text()='HP']/..")
+            //By.xpath(".//*[contains(text(),'Время работы')]/../..")
             try {
                 timeWork = blockPowerElements.findElement(By.xpath(".//*[contains(text(),'Время работы')]/../..")).getText();
                 System.out.println("text element: "+timeWork);

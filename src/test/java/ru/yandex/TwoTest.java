@@ -169,7 +169,7 @@ public class TwoTest extends WebDriverSetting {
         marketPage.openCompCategory();
         marketPage.openNotebookCategory();
         marketPage.sortByPrice();
-        marketPage.selectFirstNote();
+        marketPage.selectNote(1);
         marketPage.openNoteSpec();
 
         String timeWork;

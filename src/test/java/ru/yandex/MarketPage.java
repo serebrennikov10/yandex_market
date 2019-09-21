@@ -143,13 +143,7 @@ public class MarketPage extends WebDriverSetting {
         sortByPrice();
     }
 
-    public  void selectFirstNote(){
-        WebElement firstNote = driver.findElement(By.className("n-snippet-card2__title"));
-        firstNote.click();
-        waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("n-product-tabs__list")));
 
-
-    }
     public void openNoteSpec(){
         WebElement pageNoteSpec = driver.findElement(By.xpath("/html/body/div[1]/div[5]/div[3]/div/div/div/ul/li[@data-name='spec']"));
         pageNoteSpec.click();
@@ -423,6 +417,20 @@ public class MarketPage extends WebDriverSetting {
         System.out.println("Вывод данных из map завершен.");
 
     }
+
+    public void selectNote(int number) {
+        List<WebElement> elementsName = driver.findElements(By.className("n-snippet-card2__title"));
+        System.out.println("Ноутбук: "+elementsName.get(number).getText());
+        MoveToElement.moveToElement(elementsName.get(number)).perform();
+        elementsName.get(number).click();
+        waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("n-product-tabs__list")));
+    }
+
+/*    public  void selectFirstNote(){
+        WebElement firstNote = driver.findElement(By.className("n-snippet-card2__title"));
+        firstNote.click();
+        waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("n-product-tabs__list")));
+    }*/
 
     public void captureScreen() {
         String path;
