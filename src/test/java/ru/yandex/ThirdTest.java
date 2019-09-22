@@ -3,6 +3,7 @@ package ru.yandex;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
+import io.qameta.allure.TmsLink;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -25,7 +26,7 @@ import java.nio.file.Paths;
 public class ThirdTest extends WebDriverSetting {
 
     @Attachment(value = "Page screenshot", type = "image/png")
-    public byte[] saveScreenshotPNG (WebDriver driver) throws IOException {
+    private byte[] saveScreenshotPNG (WebDriver driver) throws IOException {
         return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
     }
 /*    @Attachment(value = "Вложение", type = "image/png", fileExtension = ".png")
@@ -34,14 +35,16 @@ public class ThirdTest extends WebDriverSetting {
     }*/
 
     @Step("Поиск товаров из файла")
+    private void noteInFile(String note){}
     //public static void readFile() throws IOException {
-        //getBytesAnnotationWithArgs("src/main/resources/ListNote.xlsx");
-        //getBytesAnnotationWithArgs("screenshot0.png");
-        //getBytesAnnotationWithArgs("screenshot1.png");
-        //getBytesAnnotationWithArgs("screenshot2.png");
+    //getBytesAnnotationWithArgs("src/main/resources/ListNote.xlsx");
+    //getBytesAnnotationWithArgs("screenshot0.png");
+    //getBytesAnnotationWithArgs("screenshot1.png");
+    //getBytesAnnotationWithArgs("screenshot2.png");
     //}
     @Test(description = "Поиск товаров из файла Excel")
     @Description(value = "Парсинг и поиск товаров из файла Excel")
+    @TmsLink(value = "Third test")
     public void readFromExcel() throws IOException {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage();
@@ -60,13 +63,14 @@ public class ThirdTest extends WebDriverSetting {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            marketPage.setListStyleVisability();
+            noteInFile(noteName);
             saveScreenshotPNG(driver);
             captureScreen(i);
-
         }
     }
 
-    public void captureScreen(Integer i) {
+    private void captureScreen(Integer i) {
         String path;
         try {
             //WebDriver augmentedDriver = new Augmenter().augment(driver);
@@ -77,8 +81,5 @@ public class ThirdTest extends WebDriverSetting {
         catch(IOException e) {
             e.getMessage();
         }
-
     }
-
-
 }

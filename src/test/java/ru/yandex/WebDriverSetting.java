@@ -2,6 +2,7 @@ package ru.yandex;
 
 
 
+import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -25,7 +26,7 @@ public abstract class WebDriverSetting {
     public WebDriver driver;
 
 
-
+    @Step("Удаление старых сриншотов")
     @BeforeTest
     void deleteScreenshots(){
         try {
@@ -37,6 +38,8 @@ public abstract class WebDriverSetting {
         }
     }
 
+    @Step("Инициализация настроек драйвера")
+    public void browserDriver(String browser){}
     @BeforeClass
     public void setUp() {
         FileInputStream file;
@@ -47,16 +50,16 @@ public abstract class WebDriverSetting {
             String browser = property.getProperty("browser");
             if ((browser.equalsIgnoreCase("firefox")) || (browser.equalsIgnoreCase("ff"))) {
                 System.out.println("Browser: " + browser);
-                System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
+                System.setProperty("webdriver.gecko.driver", "./src/main/resources/drivers/geckodriver.exe");
                 driver = new FirefoxDriver();
             } else if (browser.equalsIgnoreCase("chrome")) {
                 System.out.println("Browser: " + browser);
-                System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver76.exe");
+                System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver76.exe");
                 driver = new ChromeDriver();
             } else if ((browser.equalsIgnoreCase("ie")) || (browser.equalsIgnoreCase("internetexplorer"))
                     || (browser.equalsIgnoreCase("internet explorer"))) {
                 System.out.println("Browser: " + browser);
-                System.setProperty("webdriver.ie.driver", "C:\\IEDriverServer.exe");
+                System.setProperty("webdriver.ie.driver", "./src/main/resources/drivers/IEDriverServer.exe");
                 driver = new InternetExplorerDriver();
             } else {
                 System.out.println("incorrect browser: " + browser);
@@ -65,6 +68,8 @@ public abstract class WebDriverSetting {
                     e.printStackTrace();
                 }
             }
+
+            browserDriver(browser);
         }
         catch (IOException e) {
             System.err.println("ERROR: File not found!");
@@ -75,7 +80,7 @@ public abstract class WebDriverSetting {
         System.out.println("Start driver...");
     }
 
-
+    @Step("Закрытие драйвера")
     @AfterClass
     public void close() {
         System.out.println("Close driver...");
