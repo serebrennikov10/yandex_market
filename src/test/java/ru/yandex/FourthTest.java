@@ -35,7 +35,7 @@ public class FourthTest {
         System.out.println("-----------------------------------------");
         RestAssured.baseURI =  "http://restapi.demoqa.com/utilities/weather/city";
         RequestSpecification httpRequest = RestAssured.given();
-        Response response = httpRequest.request(Method.GET,  "/Belgorod");
+        Response response = httpRequest.request(Method.GET,  "/Moscow");
         String responseBody =  response.getBody().asString();
         System.out.println("Response:" +  responseBody);
         getResponse(responseBody);

@@ -18,15 +18,15 @@ public class FirstTest extends WebDriverSetting {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage();
         marketPage.selectNewRegionOnPage();
-        marketPage.openNoteCategoryNow();
-        marketPage.selectFilterByCost("0", "30000");
-        marketPage.selectFilterByBrand("HP");
-        marketPage.selectFilterByBrand("Lenovo");
-        marketPage.selectFilterByColor("черный");
-        marketPage.selectFilterByColor("белый");
-        marketPage.sortByPrice();
-        marketPage.differenceLaptops();
-        marketPage.outputInfoAllNotebook();
-        marketPage.outputInfoInMap();
+        marketPage.openNoteCategoryNow()
+                .selectFilterByCost("0", "30000")
+                .selectFilterByBrand("HP")
+                .selectFilterByBrand("Lenovo")
+                .selectFilterByColor("черный")
+                .selectFilterByColor("белый")
+                .sortByPrice()
+                .differenceLaptops()
+                .outputInfoAllNotebook()
+                .outputInfoInMap();
     }
 }
