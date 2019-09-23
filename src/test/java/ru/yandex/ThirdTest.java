@@ -42,7 +42,7 @@ public class ThirdTest extends WebDriverSetting {
     //getBytesAnnotationWithArgs("screenshot1.png");
     //getBytesAnnotationWithArgs("screenshot2.png");
     //}
-    @Test(priority = 3, description = "Поиск товаров из файла Excel")
+    @Test(description = "Поиск товаров из файла Excel")
     @Description(value = "Парсинг и поиск товаров из файла Excel")
     @TmsLink(value = "Third test")
     public void readFromExcel() throws IOException {

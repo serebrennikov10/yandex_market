@@ -81,7 +81,7 @@ public class TwoTestConst extends WebDriverSetting {
         return;
     }
 
-    @Test(priority = 2, description = "Второй тест")
+    @Test(description = "Второй тест")
     @Description(value = "Второй тест")
     @TmsLink(value = "Two test")
     public void mainTest(){

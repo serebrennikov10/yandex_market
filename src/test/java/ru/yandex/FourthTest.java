@@ -26,7 +26,7 @@ public class FourthTest {
     @Step("Вывожу response:")
     public static void getResponse(String response) throws IOException {
     }
-    @Test(priority = 4, description = "Четвертый тест. Отправка запроса.")
+    @Test(description = "Четвертый тест. Отправка запроса.")
     @Description(value = "метод GET")
     @TmsLink(value = "Fourth test")
     public void GetWeather() throws IOException {

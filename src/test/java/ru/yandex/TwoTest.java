@@ -141,34 +141,61 @@ public class TwoTest extends WebDriverSetting {
 
 
 
-    //@Test
+    @Test
     public void out(){
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage();
         marketPage.openAllCategories();
         marketPage.openCompCategory();
         marketPage.openNotebookCategory();
+        marketPage.setListStyleVisability();
         marketPage.sortByPrice();
         marketPage.sortPriceByAsc();
-        marketPage.selectNote(0);
+        marketPage.selectNote(1);
         marketPage.openNoteSpec();
 
         System.out.println("Ищу поле с подсказкой");
         //WebElement help = driver.findElement(By.className("link link_pseudo_yes n-hint-button__handle i-bem link_js_inited _popup-destructor _popup-destructor_js_inited"));
+
+
+        String parentHandle = driver.getWindowHandle();
+
         WebElement help = driver.findElement(By.xpath("/html/body/div[1]/div[6]/div[1]/.//*[text()='?']/.."));
         //MoveToElement.moveToElement(help).perform();
-        System.out.println("кликаю");
+        //System.out.println("кликаю");
         help.click();
 
-        System.out.println("Ищу текст");
+        //System.out.println("Ищу текст");
         //WebElement hintText = driver.findElement(By.className("n-hint-button__inner"));
-        //WebElement hintText = driver.findElement(By.xpath("//div[@class='popup__content']"));
-        WebElement hintText = driver.findElement(By.xpath("/html/body/div[3]/div/div/div"));
+        //WebElement hintText = driver.findElement(By.xpath("//div[@class='n-hint-button__article']"));
+
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        for(String childHandle : driver.getWindowHandles()){
+            if (!childHandle.equals(parentHandle)){
+                driver.switchTo().window(childHandle);
+            }
+        }
+
+        WebElement hintText = driver.findElement(By.xpath("//div[@class='popup__content']"));
+        System.out.println("Вывожу информацию:");
+        System.out.println(hintText.getSize());
+        System.out.println(hintText.getText());
+
+        //driver.switchTo().window(parentHandle);
+
+
+
+        //WebElement hintText = driver.findElement(By.xpath("/html/body/div[3]/div/div/div"));
 
     /*List <WebElement> hintText = driver.findElements(By.xpath("/html/body/div[3]/div/div/div"));
     hintText.size();*/
-        System.out.println("Вывожу информацию:");
-        System.out.println(hintText.getText());
+/*        System.out.println("Вывожу информацию:");
+        System.out.println(hintText.getText());*/
         //System.out.println(hintText.getText());
 
 

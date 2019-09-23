@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class FirstTest extends WebDriverSetting {
 
-    @Test(priority = 1, description = "Первый тест")
+    @Test(description = "Первый тест")
     @Description(value = "Первый тест")
     @TmsLink(value = "First test")
     public void test (){
