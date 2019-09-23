@@ -73,6 +73,13 @@ public class FirstTest extends WebDriverSetting {
         marketPage.outputInfoInMap();
     }
 
+
+    @Test
+    public void test(){
+        MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
+        marketPage.openPage();
+        marketPage.selectNewRegionOnPage();
+    }
 /*    void fistTestEnd(){
         System.out.println("First Test completed!");
     }*/

@@ -13,7 +13,6 @@ import org.testng.Assert;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-
 public class MarketPage extends WebDriverSetting {
     private WebDriver driver;
     private WebDriverWait waitDriver;
@@ -51,16 +50,39 @@ public class MarketPage extends WebDriverSetting {
 
     }
 
-/*    class RegionOnPage {
+/*    public class RegionOnPage {
         private static RegionOnPage instance = new RegionOnPage();
         private RegionOnPage() {
         }
         public static RegionOnPage getInstance() {
+
             return instance;
         }
     }*/
 
+    public static class RegionOnPage {
+        private static volatile RegionOnPage instance;
+        private RegionOnPage() {
+            //System.out.println("Singleton created!");
+        }
+        public static RegionOnPage getInstance() {
+            if (instance == null) {
+                synchronized (RegionOnPage.class) {
+                    if (instance == null) {
+                        instance = new RegionOnPage();
+                    }
+                }
+            }
+            return instance;
+        }
+    }
+
+
     public void selectNewRegionOnPage(){
+            RegionOnPage region1 = RegionOnPage.getInstance();
+            //System.out.println(region1.getClass());
+            //RegionOnPage region2 = RegionOnPage.getInstance();
+            //System.out.println(region2.getClass());
         WebElement changeRegion = driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/noindex/div/div/div[2]/div/div[2]/div[1]/span"));
         String nowRegion = changeRegion.getText();
         String newRegion = "Воронеж";
@@ -99,7 +121,9 @@ public class MarketPage extends WebDriverSetting {
     }
 
 
-    @Step("Проверка открытия категорий")
+
+
+    @Step("Открытие категорий")
     //public static void checkOpenCategory(){}
     public MarketPage openAllCategories() {
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class*='n-w-tab__control-hamburger']")));
@@ -111,7 +135,7 @@ public class MarketPage extends WebDriverSetting {
         return  new MarketPage(driver);
     }
 
-    @Step("Проверка открытия категори: Компьютеры")
+    @Step("Открытие категори: Компьютеры")
     //public static void checkOpenComp(){}
     public MarketPage openCompCategory() {
 
@@ -122,7 +146,7 @@ public class MarketPage extends WebDriverSetting {
         captureScreen();
         return  new MarketPage(driver);
     }
-    @Step("Проверка открытия категори: Ноутбуки")
+    @Step("Открытие категори: Ноутбуки")
     //public static void checkOpenNote(){}
     public MarketPage openNotebookCategory() {
         WebElement notebookCategory = driver.findElement(By.xpath("/html/body/div[1]/div[2]/div[7]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[2]/ul/li[2]/div/a"));
