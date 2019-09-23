@@ -7,7 +7,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 
 public class TwoTest extends WebDriverSetting {
@@ -141,7 +143,7 @@ public class TwoTest extends WebDriverSetting {
 
 
 
-    @Test
+    //@Test
     public void out(){
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage();
@@ -202,4 +204,128 @@ public class TwoTest extends WebDriverSetting {
     }
 
 
+@Test
+    public void out2(){
+        MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
+    marketPage.openPage()
+            .openNoteCategoryNow()
+            .sortByPrice()
+            .selectNote(0)
+            .openNoteSpec();
+
+        System.out.println("Ищу поле с подсказкой");
+        //WebElement help = driver.findElement(By.className("link link_pseudo_yes n-hint-button__handle i-bem link_js_inited _popup-destructor _popup-destructor_js_inited"));
+
+
+        //String parentHandle = driver.getWindowHandle();
+        String parentWindowHandler = driver.getWindowHandle(); // Store your parent window
+
+        WebElement help = driver.findElement(By.xpath("/html/body/div[1]/div[6]/div[1]/.//*[text()='?']/.."));
+        help.click();
+
+        //System.out.println("Ищу текст");
+        //WebElement hintText = driver.findElement(By.className("n-hint-button__inner"));
+        //WebElement hintText = driver.findElement(By.xpath("//div[@class='n-hint-button__article']"));
+
+
+
+        String subWindowHandler = null;
+
+        Set handles = driver.getWindowHandles(); // get all window handles
+        Iterator iterator = handles.iterator();
+        while (iterator.hasNext()){
+            subWindowHandler = (String) iterator.next();
+        }
+        driver.switchTo().window(subWindowHandler); // switch to popup window
+
+// Now you are in the popup window, perform necessary actions here
+        WebElement hintText = driver.findElement(By.xpath("//div[@class='popup__content']"));
+        String text = hintText.getText();
+        System.out.println("Вывожу информацию:");
+        System.out.println(hintText.getSize());
+        System.out.println(text);
+
+
+        driver.switchTo().window(parentWindowHandler);  // switch back to parent window
+
+
+
+        //driver.switchTo().window(parentHandle);
+
+
+
+        //WebElement hintText = driver.findElement(By.xpath("/html/body/div[3]/div/div/div"));
+
+    /*List <WebElement> hintText = driver.findElements(By.xpath("/html/body/div[3]/div/div/div"));
+    hintText.size();*/
+/*        System.out.println("Вывожу информацию:");
+        System.out.println(hintText.getText());*/
+        //System.out.println(hintText.getText());
+
+
+    }
+
+
+
+    @Test
+    public void out3(){
+        MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
+        marketPage.openPage()
+                .openNoteCategoryNow()
+                .sortByPrice()
+                .selectNote(1)
+                .openNoteSpec();
+
+        System.out.println("Ищу поле с подсказкой");
+        //WebElement help = driver.findElement(By.className("link link_pseudo_yes n-hint-button__handle i-bem link_js_inited _popup-destructor _popup-destructor_js_inited"));
+        WebElement help = driver.findElement(By.xpath("/html/body/div[1]/div[6]/div[1]/.//*[text()='?']/.."));
+        help.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+        //System.out.println("Ищу текст");
+        //WebElement hintText = driver.findElement(By.className("n-hint-button__inner"));
+        int sizeFrame = driver.findElements(By.xpath("//iframe[@class='popup__under']")).size();
+        System.out.println("Всего фреймов "+sizeFrame);
+        WebElement iframe = driver.findElement(By.xpath("//iframe[@class='popup__under']"));
+        driver.switchTo().frame(iframe);
+
+        System.out.println("переключение прошло");
+        System.out.println("текст из фрейма:");
+        System.out.println(iframe.getText());
+
+
+        int sizeHint = driver.findElements(By.xpath("//div[@class='n-hint-button__article']")).size();
+        System.out.println("Всего хинтов "+sizeHint);
+        WebElement hintText = driver.findElement(By.xpath("//iframe[@class='popup__under']"));
+        //WebElement hintText = driver.findElement(By.xpath("//div[@class='n-hint-button__article']"));
+        //WebElement hintText = driver.findElement(By.xpath("/html/body/div[4]/div/div/div"));
+
+        String text = hintText.getText();
+        System.out.println("Вывожу информацию:");
+        System.out.println(hintText.getSize());
+        System.out.println(text);
+
+        driver.switchTo().defaultContent(); //вернуться к основной странице
+
+        //driver.switchTo().window(parentHandle);
+
+
+
+        //WebElement hintText = driver.findElement(By.xpath("/html/body/div[3]/div/div/div"));
+
+    /*List <WebElement> hintText = driver.findElements(By.xpath("/html/body/div[3]/div/div/div"));
+    hintText.sizeHint();*/
+/*        System.out.println("Вывожу информацию:");
+        System.out.println(hintText.getText());*/
+        //System.out.println(hintText.getText());
+
+
+    }
 }
