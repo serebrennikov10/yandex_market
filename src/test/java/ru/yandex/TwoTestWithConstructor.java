@@ -16,7 +16,7 @@ public class TwoTestWithConstructor extends WebDriverSetting {
     public class Note {
         String timeWork, valueBattery, valueBatteryPower, cells, typeBattery;
 
-        public Note(String timeWork, String valueBattery){
+        private Note(String timeWork, String valueBattery){
             this.timeWork = timeWork;
             this.valueBattery = valueBattery;
 /*            this.valueBatteryPower = valueBatteryPower;
@@ -24,7 +24,7 @@ public class TwoTestWithConstructor extends WebDriverSetting {
             this.typeBattery = typeBattery;*/
         }
 
-        public Note(String timeWork, String valueBattery, String valueBatteryPower){
+        private Note(String timeWork, String valueBattery, String valueBatteryPower){
             this.timeWork = timeWork;
             this.valueBattery = valueBattery;
             this.valueBatteryPower = valueBatteryPower;
@@ -33,7 +33,63 @@ public class TwoTestWithConstructor extends WebDriverSetting {
         }
     }
 
-    public void setAttributes(Note note){
+
+    @Test(priority = 2, description = "Второй тест")
+    @Description(value = "Второй тест")
+    @TmsLink(value = "Two test")
+    public void mainTest(){
+        System.out.println("-----------------------------------------");
+        System.out.println("-------------Start Two test--------------");
+        System.out.println("-----------------------------------------");
+        MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
+        marketPage.openPage();
+        marketPage.openNoteCategoryNow();
+        //marketPage.sortByPrice();
+        marketPage.selectNote(0);
+        marketPage.openNoteSpec();
+
+        String timeWork = "Пока еще нет значения";
+        String valueBattery = "Пока еще нет значения";
+        String valueBatteryPower = "Пока еще нет значения";
+        String cells = "Пока еще нет значения";
+        String typeBattery = "Пока еще нет значения";
+
+
+        Note note1 = new Note(timeWork, valueBattery);
+        setAttributes(note1);
+        System.out.println("-------------параметры первого ноутбука-----------------");
+        System.out.println(note1.timeWork);
+        System.out.println(note1.valueBattery);
+        System.out.println(note1.valueBatteryPower);
+        System.out.println(note1.cells);
+        System.out.println(note1.typeBattery);
+
+        marketPage.openPage();
+        marketPage.openNoteCategoryNow();
+        //marketPage.sortByPrice();
+        marketPage.selectNote(1);
+        marketPage.openNoteSpec();
+        Note note2 = new Note(timeWork, valueBattery, valueBatteryPower);
+        setAttributes(note2);
+        System.out.println("-------------параметры второго ноутбука-----------------");
+        System.out.println(note2.timeWork);
+        System.out.println(note2.valueBattery);
+        System.out.println(note2.valueBatteryPower);
+        System.out.println(note2.cells);
+        System.out.println(note2.typeBattery);
+
+
+        System.out.println("---------сравнение характеристик по отдельности----------");
+        System.out.println("Время работы: "+note1.timeWork.equalsIgnoreCase(note2.timeWork));
+        System.out.println("Емкость аккумулятора: "+note1.valueBattery.equalsIgnoreCase(note2.valueBattery));
+        System.out.println("Емкость аккумулятора (Вт*ч): "+note1.valueBatteryPower.equalsIgnoreCase(note2.valueBatteryPower));
+        System.out.println("Количество ячеек батареи: "+note1.cells.equalsIgnoreCase(note2.cells));
+        System.out.println("Тип аккумулятора: "+note1.typeBattery.equalsIgnoreCase(note2.typeBattery));
+        System.out.println("----------------сравнение объектов----------------------");
+        System.out.println(note1.equals(note2));
+    }
+
+    private void setAttributes(Note note){
         String timeWork = null;
         String valueBattery = null;
         String valueBatteryPower = null;
@@ -76,62 +132,5 @@ public class TwoTestWithConstructor extends WebDriverSetting {
         note.cells = cells;
         note.typeBattery = typeBattery;
         return;
-    }
-
-    @Step("Поиск товаров из файла")
-    private void attribyte(String note){}
-    @Test(priority = 2, description = "Второй тест")
-    @Description(value = "Второй тест")
-    @TmsLink(value = "Two test")
-    public void main(){
-        System.out.println("-----------------------------------------");
-        System.out.println("-------------Start Two test--------------");
-        System.out.println("-----------------------------------------");
-        MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
-        marketPage.openPage();
-        marketPage.openNoteCategoryNow();
-        //marketPage.sortByPrice();
-        marketPage.selectNote(0);
-        marketPage.openNoteSpec();
-
-        String timeWork = "Пока еще нет значения";
-        String valueBattery = "Пока еще нет значения";
-        String valueBatteryPower = "Пока еще нет значения";
-        String cells = "Пока еще нет значения";
-        String typeBattery = "Пока еще нет значения";
-
-
-        Note note1 = new Note(timeWork, valueBattery);
-        setAttributes(note1);
-        System.out.println("-------------параметры первого ноутбука-----------------");
-        System.out.println(note1.timeWork);
-        System.out.println(note1.valueBattery);
-        System.out.println(note1.valueBatteryPower);
-        System.out.println(note1.cells);
-        System.out.println(note1.typeBattery);
-
-
-        marketPage.openNoteCategoryNow();
-        //marketPage.sortByPrice();
-        marketPage.selectNote(1);
-        marketPage.openNoteSpec();
-        Note note2 = new Note(timeWork, valueBattery, valueBatteryPower);
-        setAttributes(note2);
-        System.out.println("-------------параметры второго ноутбука-----------------");
-        System.out.println(note2.timeWork);
-        System.out.println(note2.valueBattery);
-        System.out.println(note2.valueBatteryPower);
-        System.out.println(note2.cells);
-        System.out.println(note2.typeBattery);
-
-
-        System.out.println("---------сравнение характеристик по отдельности----------");
-        System.out.println("Время работы: "+note1.timeWork.equalsIgnoreCase(note2.timeWork));
-        System.out.println("Емкость аккумулятора: "+note1.valueBattery.equalsIgnoreCase(note2.valueBattery));
-        System.out.println("Емкость аккумулятора (Вт*ч): "+note1.valueBatteryPower.equalsIgnoreCase(note2.valueBatteryPower));
-        System.out.println("Количество ячеек батареи: "+note1.cells.equalsIgnoreCase(note2.cells));
-        System.out.println("Тип аккумулятора: "+note1.typeBattery.equalsIgnoreCase(note2.typeBattery));
-        System.out.println("----------------сравнение объектов----------------------");
-        System.out.println(note1.equals(note2));
     }
 }

@@ -21,7 +21,7 @@ public class FourthTest {
 
     /*    @Attachment(value = "Вложение", type = "application/json", fileExtension = ".txt")
         public static byte[] getBytes(String resourceName) throws IOException {
-            return Files.readAllBytes(Paths.get(".src/main/resources", resourceName));
+            return Files.readAllBytes(Paths.get(".src/mainTest/resources", resourceName));
         }*/
     @Step("Вывожу response:")
     public static void getResponse(String response) throws IOException {
