@@ -1,5 +1,8 @@
 package ru.yandex;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
+import io.qameta.allure.TmsLink;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -75,9 +78,17 @@ public class TwoTestWithConstructor extends WebDriverSetting {
         return;
     }
 
-    @Test
+    @Step("Поиск товаров из файла")
+    private void attribyte(String note){}
+    @Test(priority = 2, description = "Второй тест")
+    @Description(value = "Второй тест")
+    @TmsLink(value = "Two test")
     public void main(){
+        System.out.println("-----------------------------------------");
+        System.out.println("-------------Start Two test--------------");
+        System.out.println("-----------------------------------------");
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
+        marketPage.openPage();
         marketPage.openNoteCategoryNow();
         //marketPage.sortByPrice();
         marketPage.selectNote(0);

@@ -34,7 +34,7 @@ public class MarketPage extends WebDriverSetting {
     private By frameInputRegion = By.className("header2-region-popup");
 
 
-
+    @Step("Открытие страницы")
     public void openPage() {
 
         driver.get("https://market.yandex.ru/");
@@ -77,7 +77,7 @@ public class MarketPage extends WebDriverSetting {
         }
     }
 
-
+    @Step("Смена региона")
     public void selectNewRegionOnPage(){
             RegionOnPage region1 = RegionOnPage.getInstance();
             //System.out.println(region1.getClass());
@@ -167,8 +167,8 @@ public class MarketPage extends WebDriverSetting {
         }
     }
 
+    @Step("Выбор категории 'Компьютеры' -> 'Ноутбуки'")
     public void openNoteCategoryNow(){
-        openPage();
         openAllCategories();
         openCompCategory();
         openNotebookCategory();
@@ -254,6 +254,7 @@ public class MarketPage extends WebDriverSetting {
         }
     }
 
+    @Step("Задаю параметры поиска по стоимости")
     public void selectFilterByCost(String From, String To) {
         WebElement selectCostFrom = driver.findElement(By.xpath("//*[@id=\"glpricefrom\"]"));
         selectCostFrom.click();
@@ -269,6 +270,7 @@ public class MarketPage extends WebDriverSetting {
         captureScreen();
     }
 
+    @Step("Задаю параметры поиска по бренду")
     public void selectFilterByBrand(String brand){
         List<WebElement> brandsNames = driver.findElements(By.xpath("//*[@id=\"search-prepack\"]/div/div/div[3]/div/div/div[2]/div[4]/div/div/fieldset"));
         for  (WebElement brandsList:brandsNames) {
@@ -295,7 +297,7 @@ public class MarketPage extends WebDriverSetting {
 
     }
 
-
+    @Step("Задаю параметры поиска по цвету")
     public void selectFilterByColor(String color){
         List<WebElement> colorsNames = driver.findElements(By.xpath("//*[@id=\"search-prepack\"]/div/div/div[3]/div/div/div[2]/div[22]/div/div/fieldset"));
         for (WebElement colorList:colorsNames){
@@ -346,7 +348,7 @@ public class MarketPage extends WebDriverSetting {
         }
     }
 
-
+    @Step("Выводим разницу между дорогим и дешевым ноутбуком")
     public void differenceLaptops(){
         sortPriceByAsc();
         List<WebElement> elementsAboutInfoNoteMin = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
@@ -383,7 +385,7 @@ public class MarketPage extends WebDriverSetting {
 
     }
 
-
+    @Step("Выводим список ноутбуков")
     void outputInfoAllNotebook(){
         List<WebElement> elementsAboutInfoNote = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
         for (WebElement elementInfoAboutNote:elementsAboutInfoNote) {
@@ -400,7 +402,7 @@ public class MarketPage extends WebDriverSetting {
         System.out.println("Вывод элементов списка закончен.");
     }
 
-
+    @Step("Выводим список ноутбуков из Мар <name, price>")
     void outputInfoInMap(){
         Map<String , String> map = new HashMap<>();
         List<WebElement> elementsName = driver.findElements(By.className("n-snippet-card2__title"));

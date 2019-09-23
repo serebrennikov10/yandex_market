@@ -42,10 +42,13 @@ public class ThirdTest extends WebDriverSetting {
     //getBytesAnnotationWithArgs("screenshot1.png");
     //getBytesAnnotationWithArgs("screenshot2.png");
     //}
-    @Test(description = "Поиск товаров из файла Excel")
+    @Test(priority = 3, description = "Поиск товаров из файла Excel")
     @Description(value = "Парсинг и поиск товаров из файла Excel")
     @TmsLink(value = "Third test")
     public void readFromExcel() throws IOException {
+        System.out.println("-----------------------------------------");
+        System.out.println("------------Start Third test-------------");
+        System.out.println("-----------------------------------------");
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage();
         XSSFWorkbook myExcelBook = new XSSFWorkbook(new FileInputStream("src/main/resources/ListNote.xlsx"));
@@ -82,4 +85,8 @@ public class ThirdTest extends WebDriverSetting {
             e.getMessage();
         }
     }
+
 }
+
+
+

@@ -26,10 +26,13 @@ public class FourthTest {
     @Step("Вывожу response:")
     public static void getResponse(String response) throws IOException {
     }
-    @Test(description = "Отправка запроса")
+    @Test(priority = 4, description = "Четвертый тест. Отправка запроса.")
     @Description(value = "метод GET")
     @TmsLink(value = "Fourth test")
     public void GetWeather() throws IOException {
+        System.out.println("-----------------------------------------");
+        System.out.println("------------Start Fourth test------------");
+        System.out.println("-----------------------------------------");
         RestAssured.baseURI =  "http://restapi.demoqa.com/utilities/weather/city";
         RequestSpecification httpRequest = RestAssured.given();
         Response response = httpRequest.request(Method.GET,  "/Belgorod");
