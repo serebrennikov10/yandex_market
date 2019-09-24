@@ -267,8 +267,8 @@ public class TwoTest extends WebDriverSetting {
 
 
 
-    @Test
-    public void out3(){
+
+    public void outPopup(){
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage()
                 .openNoteCategoryNow()
@@ -285,7 +285,8 @@ public class TwoTest extends WebDriverSetting {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        System.out.println(driver.findElement(By.xpath("//div[@class='n-hint-button__article']")).getText());
+        //System.out.println(driver.findElement(By.xpath("//div[contains(@class, 'popup_visibility_visible')]//div[@class='n-hint-button__article']")).getText());
 
 
 
@@ -303,7 +304,7 @@ public class TwoTest extends WebDriverSetting {
 
         int sizeHint = driver.findElements(By.xpath("//div[@class='n-hint-button__article']")).size();
         System.out.println("Всего хинтов "+sizeHint);
-        WebElement hintText = driver.findElement(By.xpath("//iframe[@class='popup__under']"));
+        WebElement hintText = driver.findElement(By.xpath("//iframe[@class='popup__under']/.."));
         //WebElement hintText = driver.findElement(By.xpath("//div[@class='n-hint-button__article']"));
         //WebElement hintText = driver.findElement(By.xpath("/html/body/div[4]/div/div/div"));
 

@@ -133,4 +133,20 @@ public class TwoTestConst extends WebDriverSetting {
         System.out.println("----------------сравнение объектов----------------------");
         System.out.println(note1.equals(note2));
     }
+
+    @Test
+    public void outPopup(){     //вывод текста из подсказки
+        MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
+        marketPage.openPage()
+                .openNoteCategoryNow()
+                .sortByPrice()
+                .selectNote(1)
+                .openNoteSpec();
+
+        System.out.println("Ищу поле с подсказкой");
+        driver.findElement(By.xpath("/html/body/div[1]/div[6]/div[1]/.//*[text()='?']/..")).click();
+        System.out.println("Текст из подсказки:");
+        System.out.println(driver.findElement(By.xpath("//div[contains(@class, 'popup_visibility_visible')]//div[@class='n-hint-button__article']")).getText());
+
+    }
 }
