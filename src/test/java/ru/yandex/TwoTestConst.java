@@ -42,6 +42,7 @@ public class TwoTestConst extends WebDriverSetting {
         String valueBatteryPower = null;
         String cells = null;
         String typeBattery = null;
+
         String path = "/html/body/div[1]/div[6]/div[1]/.//*[text()='Питание']/..";
 
         List<WebElement> blockPowerList = driver.findElements(By.xpath(path));
@@ -78,7 +79,7 @@ public class TwoTestConst extends WebDriverSetting {
         note.valueBatteryPower = valueBatteryPower;
         note.cells = cells;
         note.typeBattery = typeBattery;
-        return;
+
     }
 
     @Test(description = "Второй тест")

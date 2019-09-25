@@ -204,7 +204,7 @@ public class TwoTest extends WebDriverSetting {
     }
 
 
-@Test
+//@Test
     public void out2(){
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
     marketPage.openPage()
