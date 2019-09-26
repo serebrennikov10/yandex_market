@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import ru.yandex.MarketPage;
 import ru.yandex.WebDriverSetting;
 
-public class TestRun extends WebDriverSetting {
+public class TestRun extends SetAttributes {
 
     @Test
     public void twoTest(){
@@ -18,23 +18,36 @@ public class TestRun extends WebDriverSetting {
 
 
         Note note1 = new Note();
-        note1.setTimeWork(driver.findElement(By.xpath(".//*[text()='Время работы']/../..")).getText());
+       /* note1.setTimeWork(driver.findElement(By.xpath(".//*[text()='Время работы']/../..")).getText());
         note1.setValueBattery(driver.findElement(By.xpath(".//*[text()='Емкость аккумулятора']/../..")).getText());
         note1.setValueBatteryPower(driver.findElement(By.xpath(".//*[text()='Емкость аккумулятора (Вт*ч)']/../..")).getText());
         note1.setCells(driver.findElement(By.xpath(".//*[text()='Количество ячеек батареи']/../..")).getText());
-        note1.setTypeBattery(driver.findElement(By.xpath(".//*[text()='Тип аккумулятора']/../..")).getText());
+        note1.setTypeBattery(driver.findElement(By.xpath(".//*[text()='Тип аккумулятора']/../..")).getText());*/
+        setNewAttributes(note1);
 
         System.out.println(note1.getTimeWork());
-        System.out.println(note1.getTypeBattery());
+        System.out.println(note1.getValueBattery());
         System.out.println(note1.getValueBatteryPower());
         System.out.println(note1.getCells());
         System.out.println(note1.getTypeBattery());
 
+        marketPage.openPage()
+                .openNoteCategoryNow()
+                .selectNote(1)
+                .openNoteSpec();
 
+        Note note2 = new Note();
+        setNewAttributes(note2);
+        System.out.println(note2.getTimeWork());
+        System.out.println(note2.getValueBattery());
+        System.out.println(note2.getValueBatteryPower());
+        System.out.println(note2.getCells());
+        System.out.println(note2.getTypeBattery());
 
-
+        equals(note1, note2);
 
     }
+
 
 
 }
