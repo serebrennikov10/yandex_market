@@ -80,9 +80,9 @@ public class Note  {
         return typeBattery;
     }
 
-    @Override
+/*    @Override
     private boolean equals(){
 
-    }
+    }*/
 
 }
