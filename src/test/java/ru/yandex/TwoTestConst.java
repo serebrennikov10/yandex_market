@@ -82,9 +82,9 @@ public class TwoTestConst extends WebDriverSetting {
 
     }
 
-    @Test(description = "Второй тест")
-    @Description(value = "Второй тест")
-    @TmsLink(value = "Two test")
+    //@Test(description = "Второй тест")
+    //@Description(value = "Второй тест")
+    //@TmsLink(value = "Two test")
     public void mainTest(){
         System.out.println("-----------------------------------------");
         System.out.println("-------------Start Two test--------------");
@@ -135,7 +135,9 @@ public class TwoTestConst extends WebDriverSetting {
         System.out.println(note1.equals(note2));
     }
 
-    @Test
+    @Test(description = "Второй тест")
+    @Description(value = "Второй тест")
+    @TmsLink(value = "Two test")
     public void outPopup(){     //вывод текста из подсказки
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage()

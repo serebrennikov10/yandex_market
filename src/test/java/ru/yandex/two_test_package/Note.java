@@ -29,7 +29,7 @@ public class Note  {
         if (timeWork != null) {
             this.timeWork = timeWork;
         } else {
-            this.timeWork = "Время работы "+"\n"+"Нет значения";
+            System.out.println("Ошибка! Значение timeWork не может быть пустым.");
         }
     }
     public String getTimeWork(){
@@ -40,7 +40,7 @@ public class Note  {
         if (valueBattery != null) {
             this.valueBattery = valueBattery;
         } else {
-            this.valueBattery = "Емкость аккумулятора "+"\n"+"Нет значения";
+            System.out.println("Ошибка! Значение valueBattery не может быть пустым.");
         }
     }
     public String getValueBattery(){
@@ -51,7 +51,7 @@ public class Note  {
         if (valueBatteryPower != null) {
             this.valueBatteryPower = valueBatteryPower;
         } else {
-            this.valueBatteryPower = "Емкость аккумулятора (Вт*ч) "+"\n"+"Нет значения";
+            System.out.println("Ошибка! Значение valueBatteryPower не может быть пустым.");
         }
     }
     public String getValueBatteryPower(){
@@ -62,7 +62,7 @@ public class Note  {
         if (cells != null){
             this.cells = cells;
         } else {
-            this.cells = "Количество ячеек батареи "+"\n"+"Нет значения";
+            System.out.println("Ошибка! Значение cells не может быть пустым.");
         }
     }
     public String getCells(){
@@ -73,16 +73,11 @@ public class Note  {
         if (typeBattery != null) {
             this.typeBattery = typeBattery;
         } else {
-            this.typeBattery = "Тип аккумулятора "+"\n"+"Нет значения";
+            System.out.println("Ошибка! Значение typeBattery не может быть пустым.");
         }
     }
     public String getTypeBattery(){
         return typeBattery;
     }
-
-private void set(){
-
-}
-
 
 }
