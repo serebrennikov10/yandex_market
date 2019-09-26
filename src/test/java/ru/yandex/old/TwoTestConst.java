@@ -1,4 +1,4 @@
-package ru.yandex;
+package ru.yandex.old;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
@@ -8,6 +8,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
+import ru.yandex.MarketPage;
+import ru.yandex.WebDriverSetting;
 
 import java.util.List;
 
@@ -135,21 +137,5 @@ public class TwoTestConst extends WebDriverSetting {
         System.out.println(note1.equals(note2));
     }
 
-    @Test(description = "Второй тест")
-    @Description(value = "Второй тест")
-    @TmsLink(value = "Two test")
-    public void outPopup(){     //вывод текста из подсказки
-        MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
-        marketPage.openPage()
-                .openNoteCategoryNow()
-                .sortByPrice()
-                .selectNote(1)
-                .openNoteSpec();
 
-        System.out.println("Ищу поле с подсказкой");
-        driver.findElement(By.xpath("/html/body/div[1]/div[6]/div[1]/.//*[text()='?']/..")).click();
-        System.out.println("Текст из подсказки:");
-        System.out.println(driver.findElement(By.xpath("//div[contains(@class, 'popup_visibility_visible')]//div[@class='n-hint-button__article']")).getText());
-
-    }
 }

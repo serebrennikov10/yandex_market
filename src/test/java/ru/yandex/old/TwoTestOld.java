@@ -1,4 +1,4 @@
-package ru.yandex;
+package ru.yandex.old;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -6,13 +6,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
+import ru.yandex.MarketPage;
+import ru.yandex.WebDriverSetting;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 
-public class TwoTest extends WebDriverSetting {
+public class TwoTestOld extends WebDriverSetting {
     //Actions MoveToElement = new Actions(driver);
     public class Note {
         String timeWork, valueBattery, valueBatteryPower, cells, typeBattery;
