@@ -5,23 +5,16 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import io.qameta.allure.TmsLink;
 import org.apache.commons.io.FileUtils;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class ThirdTest extends WebDriverSetting {
 
@@ -66,7 +59,7 @@ public class ThirdTest extends WebDriverSetting {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            marketPage.setListStyleVisability();
+            marketPage.setListStyleVisibility();
             noteInFile(noteName);
             saveScreenshotPNG(driver);
             captureScreen(i);

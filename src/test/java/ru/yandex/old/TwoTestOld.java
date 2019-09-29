@@ -3,9 +3,7 @@ package ru.yandex.old;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.Test;
 import ru.yandex.MarketPage;
 import ru.yandex.WebDriverSetting;
 
@@ -152,7 +150,7 @@ public class TwoTestOld extends WebDriverSetting {
         marketPage.openAllCategories();
         marketPage.openCompCategory();
         marketPage.openNotebookCategory();
-        marketPage.setListStyleVisability();
+        marketPage.setListStyleVisibility();
         marketPage.sortByPrice();
         marketPage.sortPriceByAsc();
         marketPage.selectNote(1);

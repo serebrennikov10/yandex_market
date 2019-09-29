@@ -4,7 +4,6 @@ import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -29,8 +28,10 @@ public class MarketPage extends WebDriverSetting {
 
     @FindBy(css = "button[class*='button region-select-form']")
     private WebElement buttonSelectRegion;
-    @FindBy(xpath="/html/body/div[6]/div/div/div[1]/div[1]/form/div/div/div/div[1]/span/input")
+    //@FindBy(xpath="/html/body/div[6]/div/div/div[1]/div[1]/form/div/div/div/div[1]/span/input")
+    @FindBy(xpath="//input[contains(@placeholder, 'Укажите другой регион')]")
     private WebElement inputRegion;
+
     private By frameInputRegion = By.className("header2-region-popup");
 
 
@@ -84,6 +85,7 @@ public class MarketPage extends WebDriverSetting {
         //RegionOnPage region2 = RegionOnPage.getInstance();
         //System.out.println(region2.getClass());
         WebElement changeRegion = driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/noindex/div/div/div[2]/div/div[2]/div[1]/span"));
+        //WebElement changeRegion = driver.findElement(By.xpath("//input[contains(@placeholder, 'Укажите другой регион')]"));
         String nowRegion = changeRegion.getText();
         String newRegion = "Воронеж";
         if (nowRegion.equals(newRegion)) {
@@ -158,7 +160,7 @@ public class MarketPage extends WebDriverSetting {
         return  new MarketPage(driver);
     }
 
-    public void setListStyleVisability(){
+    public void setListStyleVisibility(){
         WebElement setListStyle = driver.findElement(By.xpath("/html/body/div[1]/div[5]/div[1]/div[2]/div[2]/div/span/label[1]"));
         setListStyle.click();
         try {
@@ -173,7 +175,7 @@ public class MarketPage extends WebDriverSetting {
         openAllCategories();
         openCompCategory();
         openNotebookCategory();
-        setListStyleVisability();
+        setListStyleVisibility();
         return  new MarketPage(driver);
     }
 
@@ -188,7 +190,8 @@ public class MarketPage extends WebDriverSetting {
     public MarketPage sortByPrice() {
         WebElement sortPrice = driver.findElement(By.linkText("по цене"));
         sortPrice.click();
-        waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("headline__header")));
+        //waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("headline__header")));
+        waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'n-snippet-list')]")));
 
         //WebElement divNameSortPrice = driver.findElement(By.xpath("/html/body/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[3]"));
         //String classNameSortPrice = divNameSortPrice.getAttribute("class");
@@ -286,8 +289,8 @@ public class MarketPage extends WebDriverSetting {
             //brandsList.findElement(By.xpath(".//*[text()='HP']/..")).click();   -- по тексту, рабочий вариант
             //brandsList.findElement(By.partialLinkText("HP")).click();
             //brandsList.findElement(By.tagName("span")).findElement(By.linkText("HP")).click();
+            waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'n-snippet-list')]")));
             captureScreen();
-
         }
 
         //WebElement selectBrand = driver.findElement(By.name("Производитель "+brandName));
@@ -309,8 +312,10 @@ public class MarketPage extends WebDriverSetting {
         List<WebElement> colorsNames = driver.findElements(By.xpath("//*[@id=\"search-prepack\"]/div/div/div[3]/div/div/div[2]/div[22]/div/div/fieldset"));
         for (WebElement colorList:colorsNames){
             //System.out.println(colorList.getText());
-            colorList.findElement(By.xpath(".//*[text()='Цвет "+color+"']/..")).click();
+            //colorList.findElement(By.xpath(".//*[text()='Цвет "+color+"']/..")).click();
+            colorList.findElement(By.xpath("//span[text()='Цвет "+color+"']/..")).click();
             System.out.println("Выбран цвет: "+color);
+            waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'n-snippet-list')]")));
             captureScreen();
         }
 

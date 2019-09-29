@@ -27,7 +27,7 @@ public class TwoTest extends SetAttributes {
 
         marketPage.openPage()
                 .openNoteCategoryNow()
-                .selectNote(0)
+                .selectNote(1)
                 .openNoteSpec();
         Note note2 = new Note();
         setNewAttributes(note2);
@@ -44,11 +44,12 @@ public class TwoTest extends SetAttributes {
         System.out.println("-----------------------------------------");
         System.out.println("------------Start Two test(2)------------");
         System.out.println("-----------------------------------------");
+
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage()
                 .openNoteCategoryNow()
                 .sortByPrice()
-                .selectNote(1)
+                .selectNote(0)
                 .openNoteSpec();
         System.out.println("Ищу поле с подсказкой");
         driver.findElement(By.xpath("/html/body/div[1]/div[6]/div[1]/.//*[text()='?']/..")).click();
