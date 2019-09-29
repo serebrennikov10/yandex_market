@@ -27,13 +27,15 @@ public class TwoTest extends SetAttributes {
 
         marketPage.openPage()
                 .openNoteCategoryNow()
-                .selectNote(1)
+                .selectNote(0)
                 .openNoteSpec();
         Note note2 = new Note();
         setNewAttributes(note2);
 
         equals(note1, note2);
     }
+
+
 
     @Test(description = "Второй тест. ч2")
     @Description(value = "Второй тест. ч2")
