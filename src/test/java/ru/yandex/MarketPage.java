@@ -263,7 +263,7 @@ public class MarketPage extends WebDriverSetting {
     }
 
     @Step("Задаю параметры поиска по стоимости")
-    public MarketPage selectFilterByCost(String From, String To) {
+    public MarketPage selectFilterByCost(String From, String To) throws IOException {
         WebElement selectCostFrom = driver.findElement(By.xpath("//*[@id=\"glpricefrom\"]"));
         selectCostFrom.click();
         selectCostFrom.sendKeys(From);
@@ -276,11 +276,12 @@ public class MarketPage extends WebDriverSetting {
             e.printStackTrace();
         }
         captureScreen();
+        saveScreenshotPNG (driver);
         return  new MarketPage(driver);
     }
 
     @Step("Задаю параметры поиска по бренду")
-    public MarketPage selectFilterByBrand(String brand){
+    public MarketPage selectFilterByBrand(String brand) throws IOException {
         List<WebElement> brandsNames = driver.findElements(By.xpath("//*[@id=\"search-prepack\"]/div/div/div[3]/div/div/div[2]/div[4]/div/div/fieldset"));
         for  (WebElement brandsList:brandsNames) {
             //System.out.println(brandsList.getText());
@@ -290,7 +291,7 @@ public class MarketPage extends WebDriverSetting {
             //brandsList.findElement(By.partialLinkText("HP")).click();
             //brandsList.findElement(By.tagName("span")).findElement(By.linkText("HP")).click();
             waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'n-snippet-list')]")));
-            captureScreen();
+            saveScreenshotPNG (driver);
         }
 
         //WebElement selectBrand = driver.findElement(By.name("Производитель "+brandName));
@@ -407,9 +408,7 @@ public class MarketPage extends WebDriverSetting {
             //Collections.sort(elements, Collections.reverseOrder());
             System.out.println("Вывожу отсортированные элементы списка:");
             for (WebElement element:elements) {
-
                 System.out.println(element.getText());
-
             }
         }
         System.out.println("Вывод элементов списка закончен.");

@@ -18,10 +18,10 @@ import java.io.IOException;
 
 public class ThirdTest extends WebDriverSetting {
 
-    @Attachment(value = "Page screenshot", type = "image/png")
-    private byte[] saveScreenshotPNG (WebDriver driver) throws IOException {
-        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
-    }
+//    @Attachment(value = "Page screenshot", type = "image/png")
+//    private byte[] saveScreenshotPNG (WebDriver driver) throws IOException {
+//        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+//    }
 /*    @Attachment(value = "Вложение", type = "image/png", fileExtension = ".png")
     static byte[] getBytesAnnotationWithArgs(String resourceName) throws IOException {
         return Files.readAllBytes(Paths.get("target/screenshots", resourceName));
@@ -61,7 +61,7 @@ public class ThirdTest extends WebDriverSetting {
             }
             marketPage.setListStyleVisibility();
             noteInFile(noteName);
-            saveScreenshotPNG(driver);
+            saveScreenshotPNG (driver);
             captureScreen(i);
         }
     }

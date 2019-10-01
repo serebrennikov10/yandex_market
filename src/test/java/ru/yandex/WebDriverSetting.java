@@ -2,8 +2,11 @@ package ru.yandex;
 
 
 
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -19,7 +22,10 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class WebDriverSetting {
 
-
+    @Attachment(value = "Page screenshot", type = "image/png")
+    protected byte[] saveScreenshotPNG(WebDriver driver) throws IOException {
+        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+    }
     //public ChromeDriver driver;
     //public FirefoxDriver driver;
     //public InternetExplorerDriver driver;

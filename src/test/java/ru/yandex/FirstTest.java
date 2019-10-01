@@ -6,15 +6,14 @@ import io.qameta.allure.TmsLink;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 public class FirstTest extends WebDriverSetting {
 
     @Test(description = "Первый тест")
     @Description(value = "Первый тест")
     @TmsLink(value = "First test")
-    public void test (){
-        System.out.println("-----------------------------------------");
-        System.out.println("------------Start First test-------------");
-        System.out.println("-----------------------------------------");
+    public void test () throws IOException {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage();
         marketPage.selectNewRegionOnPage();
