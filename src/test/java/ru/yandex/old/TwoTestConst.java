@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import ru.yandex.MarketPage;
 import ru.yandex.WebDriverSetting;
 
+import java.io.IOException;
 import java.util.List;
 
 public class TwoTestConst extends WebDriverSetting {
@@ -87,7 +88,7 @@ public class TwoTestConst extends WebDriverSetting {
     //@Test(description = "Второй тест")
     //@Description(value = "Второй тест")
     //@TmsLink(value = "Two test")
-    public void mainTest(){
+    public void mainTest() throws IOException {
         System.out.println("-----------------------------------------");
         System.out.println("-------------Start Two test--------------");
         System.out.println("-----------------------------------------");

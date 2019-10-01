@@ -8,12 +8,14 @@ import org.testng.annotations.Test;
 import ru.yandex.MarketPage;
 import ru.yandex.WebDriverSetting;
 
+import java.io.IOException;
+
 public class TwoTest extends SetAttributes {
 
     @Test(description = "Второй тест. ч1")
     @Description(value = "Второй тест. ч1")
     @TmsLink(value = "Two test")
-    public void twoTest(){
+    public void twoTest() throws IOException {
         System.out.println("-----------------------------------------");
         System.out.println("------------Start Two test(1)------------");
         System.out.println("-----------------------------------------");
@@ -40,7 +42,7 @@ public class TwoTest extends SetAttributes {
     @Test(description = "Второй тест. ч2")
     @Description(value = "Второй тест. ч2")
     @TmsLink(value = "Two test")
-    public void outPopup(){     //вывод текста из подсказки
+    public void outPopup() throws IOException {     //вывод текста из подсказки
         System.out.println("-----------------------------------------");
         System.out.println("------------Start Two test(2)------------");
         System.out.println("-----------------------------------------");

@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import ru.yandex.MarketPage;
 import ru.yandex.WebDriverSetting;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -86,7 +87,7 @@ public class TwoTestOld extends WebDriverSetting {
 
 
     //@Test
-    public void main(){
+    public void main() throws IOException {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openNoteCategoryNow();
         marketPage.selectNote(0);
@@ -144,7 +145,7 @@ public class TwoTestOld extends WebDriverSetting {
 
 
     //@Test
-    public void out(){
+    public void out() throws IOException {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage();
         marketPage.openAllCategories();
@@ -205,7 +206,7 @@ public class TwoTestOld extends WebDriverSetting {
 
 
 //@Test
-    public void out2(){
+    public void out2() throws IOException {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
     marketPage.openPage()
             .openNoteCategoryNow()
@@ -268,7 +269,7 @@ public class TwoTestOld extends WebDriverSetting {
 
 
 
-    public void outPopup(){
+    public void outPopup() throws IOException {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage()
                 .openNoteCategoryNow()

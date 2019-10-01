@@ -17,20 +17,25 @@ import org.testng.annotations.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public abstract class WebDriverSetting {
-    //public ChromeDriver driver;
-    //public FirefoxDriver driver;
-    //public InternetExplorerDriver driver;
     public WebDriver driver;
 
 
-    @Attachment(value = "Screenshot {nameScreen}", type = "image/png")
+    @Attachment(value = "{nameScreen}", type = "image/png")
     protected byte[] saveScreenshotPNG(WebDriver driver, String nameScreen) throws IOException {
         return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
     }
+
+        @Attachment(value = "Вложение", type = "application/json", fileExtension = ".txt")
+        public byte [] getBytesAnnotationWithArgs(String resourceName) throws IOException {
+            return Files.readAllBytes(Paths.get("src/main/resources", resourceName));
+        }
+
 
 
 
@@ -76,7 +81,6 @@ public abstract class WebDriverSetting {
                     e.printStackTrace();
                 }
             }
-
             browserDriver(browser);
         }
         catch (IOException e) {
@@ -85,6 +89,7 @@ public abstract class WebDriverSetting {
 
 
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         System.out.println("Start driver...");
     }
 
