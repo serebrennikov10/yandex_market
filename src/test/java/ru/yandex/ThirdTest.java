@@ -61,7 +61,7 @@ public class ThirdTest extends WebDriverSetting {
             }
             marketPage.setListStyleVisibility();
             noteInFile(noteName);
-            saveScreenshotPNG (driver);
+            saveScreenshotPNG (driver, noteName);
             captureScreen(i);
         }
     }

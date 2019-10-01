@@ -276,7 +276,7 @@ public class MarketPage extends WebDriverSetting {
             e.printStackTrace();
         }
         captureScreen();
-        saveScreenshotPNG (driver);
+        saveScreenshotPNG (driver, From);
         return  new MarketPage(driver);
     }
 
@@ -291,7 +291,7 @@ public class MarketPage extends WebDriverSetting {
             //brandsList.findElement(By.partialLinkText("HP")).click();
             //brandsList.findElement(By.tagName("span")).findElement(By.linkText("HP")).click();
             waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'n-snippet-list')]")));
-            saveScreenshotPNG (driver);
+            saveScreenshotPNG (driver, brand);
         }
 
         //WebElement selectBrand = driver.findElement(By.name("Производитель "+brandName));

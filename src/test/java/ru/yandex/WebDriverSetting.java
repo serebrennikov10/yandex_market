@@ -21,15 +21,17 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public abstract class WebDriverSetting {
-
-    @Attachment(value = "Page screenshot", type = "image/png")
-    protected byte[] saveScreenshotPNG(WebDriver driver) throws IOException {
-        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
-    }
     //public ChromeDriver driver;
     //public FirefoxDriver driver;
     //public InternetExplorerDriver driver;
     public WebDriver driver;
+
+
+    @Attachment(value = "Screenshot {nameScreen}", type = "image/png")
+    protected byte[] saveScreenshotPNG(WebDriver driver, String nameScreen) throws IOException {
+        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+    }
+
 
 
     @Step("Удаление старых сриншотов")

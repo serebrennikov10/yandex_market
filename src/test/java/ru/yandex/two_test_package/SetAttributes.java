@@ -65,30 +65,4 @@ public class SetAttributes extends WebDriverSetting {
         System.out.println("Сравниваю значение: "+one.equals(two));
     }
 
-
-/*    @Override
-    public boolean equals(Object obj) {
-
-            if (obj == this) {
-                return true;
-            }
-            if (obj == null || obj.getClass() != this.getClass()) {
-                return false;
-            }
-
-            Note note = (Note) obj;
-            return id == note.id
-                    && (firstName == guest.firstName
-                    || (firstName != null &&firstName.equals(guest.getFirstName())))        && (lastName == guest.lastName
-                    || (lastName != null && lastName .equals(guest.getLastName())
-            ));
-
-        //return super.equals(obj);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return super.hashCode();
-    }*/
 }
