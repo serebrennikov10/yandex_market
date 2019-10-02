@@ -31,10 +31,10 @@ public abstract class WebDriverSetting {
         return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
     }
 
-        @Attachment(value = "Вложение", type = "application/json", fileExtension = ".txt")
-        public byte [] getBytesAnnotationWithArgs(String resourceName) throws IOException {
-            return Files.readAllBytes(Paths.get("src/main/resources", resourceName));
-        }
+    @Attachment(value = "Вложение", type = "application/json", fileExtension = ".txt")
+    public byte [] getBytesAnnotationWithArgs(String resourceName) throws IOException {
+        return Files.readAllBytes(Paths.get("src/main/resources", resourceName));
+    }
 
 
 

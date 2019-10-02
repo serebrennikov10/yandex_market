@@ -6,14 +6,19 @@ import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
@@ -493,6 +498,35 @@ public class MarketPage extends WebDriverSetting {
         return new MarketPage(driver);
     }
 
+    @Step("Поиск товаров из файла {FileName}")
+    public MarketPage readFromExcel(String FileName) throws IOException {
+        XSSFWorkbook myExcelBook = new XSSFWorkbook(new FileInputStream("src/main/resources/"+FileName));
+        XSSFSheet myExcelSheet = myExcelBook.getSheet("book1");
+        for(int i=0;i<myExcelSheet.getLastRowNum();i++) {
+            XSSFRow row = myExcelSheet.getRow(i);
+            String noteName = row.getCell(0).getStringCellValue();
+            searchNote(noteName);
+        }
+        return new MarketPage(driver);
+    }
+
+    @Step("Ищу: {noteName}")
+    public MarketPage searchNote(String noteName) throws IOException {
+        System.out.println("Ищу: "+noteName);
+        WebElement searchInputLine = driver.findElement(By.id("header-search"));
+        searchInputLine.clear();
+        searchInputLine.sendKeys(noteName);
+        searchInputLine.sendKeys(Keys.ENTER);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        setListStyleVisibility();
+        saveScreenshotPNG (driver, noteName);
+        captureScreen();
+        return new MarketPage(driver);
+    }
 
 
 
@@ -510,8 +544,18 @@ public class MarketPage extends WebDriverSetting {
         return  new MarketPage(driver);
     }
 
-
-
+    /*    private void captureScreen(Integer i) {
+        String path;
+        try {
+            //WebDriver augmentedDriver = new Augmenter().augment(driver);
+            File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            path = "./src/main/resources/screenshots/" + "screenshot" + i + ".png";
+            FileUtils.copyFile(screenshot, new File(path));
+        }
+        catch(IOException e) {
+            e.getMessage();
+        }
+    }*/
 
     //By.xpath(".//*[text()='HP']/..")
     //By.xpath(".//*[contains(text(),'Время работы')]/../..")
