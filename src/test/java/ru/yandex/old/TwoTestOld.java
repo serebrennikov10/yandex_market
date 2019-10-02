@@ -90,8 +90,7 @@ public class TwoTestOld extends WebDriverSetting {
     public void main() throws IOException {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openNoteCategoryNow();
-        marketPage.selectNote(0);
-        marketPage.openNoteSpec();
+        marketPage.openNoteSpec(0);
 
         Note note1 = new Note();
         //note1.timeWork = "note1";
@@ -111,8 +110,7 @@ public class TwoTestOld extends WebDriverSetting {
         marketPage.openNotebookCategory();
         marketPage.sortByPrice();
         marketPage.sortPriceByDesc();
-        marketPage.selectNote(1);
-        marketPage.openNoteSpec();
+        marketPage.openNoteSpec(1);
 
         Note note2 = new Note();
         //note2.timeWork = "note2";
@@ -154,8 +152,7 @@ public class TwoTestOld extends WebDriverSetting {
         marketPage.setListStyleVisibility();
         marketPage.sortByPrice();
         marketPage.sortPriceByAsc();
-        marketPage.selectNote(1);
-        marketPage.openNoteSpec();
+        marketPage.openNoteSpec(1);
 
         System.out.println("Ищу поле с подсказкой");
         //WebElement help = driver.findElement(By.className("link link_pseudo_yes n-hint-button__handle i-bem link_js_inited _popup-destructor _popup-destructor_js_inited"));
@@ -211,8 +208,7 @@ public class TwoTestOld extends WebDriverSetting {
     marketPage.openPage()
             .openNoteCategoryNow()
             .sortByPrice()
-            .selectNote(0)
-            .openNoteSpec();
+            .openNoteSpec(0);
 
         System.out.println("Ищу поле с подсказкой");
         //WebElement help = driver.findElement(By.className("link link_pseudo_yes n-hint-button__handle i-bem link_js_inited _popup-destructor _popup-destructor_js_inited"));
@@ -274,8 +270,8 @@ public class TwoTestOld extends WebDriverSetting {
         marketPage.openPage()
                 .openNoteCategoryNow()
                 .sortByPrice()
-                .selectNote(1)
-                .openNoteSpec();
+                .openNoteSpec(1);
+
 
         System.out.println("Ищу поле с подсказкой");
         //WebElement help = driver.findElement(By.className("link link_pseudo_yes n-hint-button__handle i-bem link_js_inited _popup-destructor _popup-destructor_js_inited"));

@@ -1,7 +1,6 @@
 package ru.yandex;
 
 import io.qameta.allure.Description;
-import io.qameta.allure.Step;
 import io.qameta.allure.TmsLink;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
@@ -25,7 +24,7 @@ public class FirstTest extends WebDriverSetting {
                 .selectFilterByColor("белый")
                 .sortByPrice()
                 .differenceLaptops()
-                .outputInfoAllNotebook()
+                .outputInfoInList()
                 .outputInfoInMap();
     }
 }

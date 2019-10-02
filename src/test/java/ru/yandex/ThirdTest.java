@@ -1,19 +1,10 @@
 package ru.yandex;
 
-import io.qameta.allure.Attachment;
 import io.qameta.allure.Description;
-import io.qameta.allure.Step;
 import io.qameta.allure.TmsLink;
-import org.apache.commons.io.FileUtils;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 public class ThirdTest extends WebDriverSetting {
@@ -27,7 +18,7 @@ public class ThirdTest extends WebDriverSetting {
         System.out.println("-----------------------------------------");
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage()
-                .readFromExcel("ListNote.xlsx");
+                .readAndSearchFromExcel("ListNote.xlsx");
     }
 }
 

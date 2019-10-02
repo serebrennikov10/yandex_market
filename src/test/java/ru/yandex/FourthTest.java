@@ -20,10 +20,7 @@ import java.nio.file.Paths;
 
 public class FourthTest extends WebDriverSetting{
 
-    /*    @Attachment(value = "Вложение", type = "application/json", fileExtension = ".txt")
-        public static byte[] getBytes(String resourceName) throws IOException {
-            return Files.readAllBytes(Paths.get(".src/mainTest/resources", resourceName));
-        }*/
+
     /*@Step("Вывожу response:")
     public static void getResponse(String response) throws IOException {
     }*/
@@ -36,21 +33,6 @@ public class FourthTest extends WebDriverSetting{
         System.out.println("-----------------------------------------");
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.sendRequestGET("Belgorod");
-/*        RestAssured.baseURI =  "http://restapi.demoqa.com/utilities/weather/city";
-        RequestSpecification httpRequest = RestAssured.given();
-        Response response = httpRequest.request(Method.GET,  "/Moscow");
-        String responseBody =  response.getBody().asString();
-        System.out.println("Response:" +  responseBody);
-        //getResponse(responseBody);
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream("./src/main/resources/FourthTest.html");
-            fileOutputStream.write(responseBody.getBytes());
-            fileOutputStream.close();
-        } catch(IOException e){
-            System.out.println(e.getMessage());
-        }*/
-
-
     }
 
 }

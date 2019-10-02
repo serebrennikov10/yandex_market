@@ -67,7 +67,7 @@ public abstract class WebDriverSetting {
                 driver = new FirefoxDriver();
             } else if (browser.equalsIgnoreCase("chrome")) {
                 System.out.println("Browser: " + browser);
-                System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver76.exe");
+                System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
                 driver = new ChromeDriver();
             } else if ((browser.equalsIgnoreCase("ie")) || (browser.equalsIgnoreCase("internetexplorer"))
                     || (browser.equalsIgnoreCase("internet explorer"))) {

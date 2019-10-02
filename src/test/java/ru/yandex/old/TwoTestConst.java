@@ -1,13 +1,9 @@
 package ru.yandex.old;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Step;
-import io.qameta.allure.TmsLink;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.Test;
 import ru.yandex.MarketPage;
 import ru.yandex.WebDriverSetting;
 
@@ -95,8 +91,7 @@ public class TwoTestConst extends WebDriverSetting {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage()
                 .openNoteCategoryNow()
-                .selectNote(0)
-                .openNoteSpec();
+                .openNoteSpec(0);
 
         String timeWork = "Пока еще нет значения";
         String valueBattery = "Пока еще нет значения";
@@ -116,8 +111,7 @@ public class TwoTestConst extends WebDriverSetting {
 
         marketPage.openPage()
                 .openNoteCategoryNow()
-                .selectNote(1)
-                .openNoteSpec();
+                .openNoteSpec(1);
         Note note2 = new Note(timeWork, valueBattery, valueBatteryPower);
         setAttributes(note2);
         System.out.println("-------------параметры второго ноутбука-----------------");
