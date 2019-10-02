@@ -22,6 +22,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
+
 public class MarketPage extends WebDriverSetting {
     private WebDriver driver;
     private WebDriverWait waitDriver;
@@ -429,11 +431,11 @@ public class MarketPage extends WebDriverSetting {
             //Collections.sort(elements, Collections.reverseOrder());
             System.out.println("Вывожу отсортированные элементы списка:");
             for (WebElement element:elements) {
-                String list = element.getText();
-                //element.toString();
-                stepOutputInfoInList(list);
-                System.out.println(list);
+                System.out.println(element.getText());
             }
+            String text = elements.stream().map(WebElement::getText).collect(Collectors.joining("\n"));
+            stepOutputInfoInList(text);
+            System.out.println("Text with \\n " + text);
         }
         saveScreenshotPNG(driver, "Ноутбуки");
         System.out.println("Вывод элементов списка закончен.");
