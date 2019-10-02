@@ -17,13 +17,13 @@ public class FirstTest extends WebDriverSetting {
         marketPage.openPage();
         marketPage.selectNewRegionOnPage();
         marketPage.openNoteCategoryNow()
-/*                .selectFilterByCost("0", "30000")
+                .selectFilterByCost("0", "30000")
                 .selectFilterByBrand("HP")
                 .selectFilterByBrand("Lenovo")
                 .selectFilterByColor("черный")
                 .selectFilterByColor("белый")
                 .sortByPrice()
-                .differenceLaptops()*/
+                .findNotePriceMinAndMax()
                 .outputInfoInList()
                 .outputInfoInMap();
     }

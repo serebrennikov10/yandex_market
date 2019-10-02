@@ -12,7 +12,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -28,8 +27,8 @@ public class MarketPage extends WebDriverSetting {
     private WebDriver driver;
     private WebDriverWait waitDriver;
     private Actions MoveToElement;
-    private Integer firstElementByPriceMax;
-    private Integer firstElementByPriceMin;
+    private Integer firstElementByMaxPrice;
+    private Integer firstElementByMinPrice;
 
     public MarketPage(WebDriver driver) {
         this.driver = driver;
@@ -134,7 +133,6 @@ public class MarketPage extends WebDriverSetting {
         }
         String nameScreen = "Установлен регион "+newRegion;
         saveScreenshotPNG (driver, nameScreen);
-        captureScreen();
     }
 
 
@@ -148,7 +146,6 @@ public class MarketPage extends WebDriverSetting {
         MoveToElement.moveToElement(allCategory).perform();
         allCategory.click();
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("n-w-tabs__tabs-column")));
-        captureScreen();
         String nameScreen = "Все категории";
         saveScreenshotPNG (driver, nameScreen);
         return  new MarketPage(driver);
@@ -161,7 +158,6 @@ public class MarketPage extends WebDriverSetting {
         MoveToElement.moveToElement(compCategory).perform();
         compCategory.click();
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div[2]/div[7]/div/div/div[1]/div/div/div/div/div/div")));
-        captureScreen();
         String nameScreen = "Компьютерная техника";
         saveScreenshotPNG (driver, nameScreen);
         return  new MarketPage(driver);
@@ -174,7 +170,6 @@ public class MarketPage extends WebDriverSetting {
         MoveToElement.moveToElement(notebookCategory).perform();
         notebookCategory.click();
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("headline__header")));
-        captureScreen();
         String nameScreen = "Ноутбуки";
         saveScreenshotPNG (driver, nameScreen);
         return  new MarketPage(driver);
@@ -226,10 +221,8 @@ public class MarketPage extends WebDriverSetting {
         String classNameSortPrice = divNameSortPrice.getAttribute("class");
         String desc = "n-filter-sorter i-bem n-filter-sorter_js_inited n-filter-sorter_sort_desc n-filter-sorter_state_select";
     }
-
-    public MarketPage sortPriceByAsc() {
-        //по возрастанию
-
+    @Step("Сортировка по возрастанию")
+    public MarketPage sortPriceByAsc() throws IOException {
         WebElement divNameSortPrice = driver.findElement(By.xpath("/html/body/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[3]"));
         String classNameSortPrice = divNameSortPrice.getAttribute("class");
         String asc = "n-filter-sorter i-bem n-filter-sorter_js_inited n-filter-sorter_sort_asc n-filter-sorter_state_select";
@@ -249,12 +242,11 @@ public class MarketPage extends WebDriverSetting {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        saveScreenshotPNG(driver, "Сортировка по возрастанию (дешевый)");
         return  new MarketPage(driver);
     }
-
-    public MarketPage sortPriceByDesc() {
-        //по убыванию
+    @Step("Сортировка по убыванию")
+    public MarketPage sortPriceByDesc() throws IOException {
         WebElement divNameSortPrice = driver.findElement(By.xpath("/html/body/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[3]"));
         String classNameSortPrice = divNameSortPrice.getAttribute("class");
         String desc = "n-filter-sorter i-bem n-filter-sorter_js_inited n-filter-sorter_sort_desc n-filter-sorter_state_select";
@@ -275,6 +267,7 @@ public class MarketPage extends WebDriverSetting {
                 e.printStackTrace();
             }
         }
+        saveScreenshotPNG(driver, "Сортировка по убыванию (дорогой)");
         return  new MarketPage(driver);
     }
 
@@ -291,7 +284,6 @@ public class MarketPage extends WebDriverSetting {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        captureScreen();
         String nameScreen = "Устанавливаю фильтр стоимости";
         saveScreenshotPNG(driver, nameScreen);
         return  new MarketPage(driver);
@@ -337,7 +329,6 @@ public class MarketPage extends WebDriverSetting {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        captureScreen();
         String nameScreen = "Цвет "+color;
         saveScreenshotPNG(driver, nameScreen);
         return  new MarketPage(driver);
@@ -377,52 +368,63 @@ public class MarketPage extends WebDriverSetting {
         }
     }
 
-    @Step("Выводим разницу между дорогим и дешевым ноутбуком")
-    public MarketPage differenceLaptops() throws IOException {
+    @Step("Считаем разницу между дорогим и дешевым ноутбуком")
+        public MarketPage findNotePriceMinAndMax() throws IOException {
         sortPriceByAsc();
-        String asc = "Сортировка по возрастанию (дешевый)";
-        saveScreenshotPNG(driver, asc);
         List<WebElement> elementsAboutInfoNoteMin = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
         for (WebElement elementInfoAboutNoteMin : elementsAboutInfoNoteMin) {
             //System.out.println(elementInfoAboutNoteMin.getText());    //вывод всего текста по всем элементам
             String firstElementNoteNameMin = elementInfoAboutNoteMin.findElement(By.className("n-snippet-card2__title")).getText();
             String firstElementNotePriceMin = elementInfoAboutNoteMin.findElement(By.className("n-snippet-card2__main-price")).getText();
             //String firstElementNoteInfo = elementInfoAboutNoteMin.findElement(By.className("n-snippet-card2__content")).getText();
-            //String firstElementByPriceMin = firstElementNotePriceMin.replaceAll("\\D+", "");
-            firstElementByPriceMin = Integer.parseInt(firstElementNotePriceMin.replaceAll("\\D+", ""));
+            //String firstElementByMinPrice = firstElementNotePriceMin.replaceAll("\\D+", "");
+            firstElementByMinPrice = Integer.parseInt(firstElementNotePriceMin.replaceAll("\\D+", ""));
             //System.out.println(elementInfoAboutNoteMin.findElement(By.className("n-snippet-card2__title")).getText());   //называние первого элемента
             System.out.println("Дешевый Ноутбук:");
             System.out.println("Название: "+firstElementNoteNameMin);
-            System.out.println("Цена: "+firstElementByPriceMin+" р.");
-
+            System.out.println("Цена: "+ firstElementByMinPrice +" р.");
+            stepFindNoteMinPrice(firstElementNoteNameMin, firstElementByMinPrice);
         }
         sortPriceByDesc();
-        String desc = "Сортировка по убыванию (дорогой)";
-        saveScreenshotPNG(driver, desc);
         List<WebElement> elementsAboutInfoNoteMax = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
         for (WebElement elementInfoAboutNoteMax : elementsAboutInfoNoteMax) {
             //System.out.println(elementInfoAboutNoteMax.getText());    //вывод всего текста по всем элементам
             String firstElementNoteNameMax = elementInfoAboutNoteMax.findElement(By.className("n-snippet-card2__title")).getText();
             String firstElementNotePriceMax = elementInfoAboutNoteMax.findElement(By.className("n-snippet-card2__main-price")).getText();
             //String firstElementNoteInfo = elementInfoAboutNoteMax.findElement(By.className("n-snippet-card2__content")).getText();
-            //String firstElementByPriceMax = firstElementNotePriceMax.replaceAll("\\D+", "");
-            firstElementByPriceMax = Integer.parseInt(firstElementNotePriceMax.replaceAll("\\D+", ""));
+            //String firstElementByMaxPrice = firstElementNotePriceMax.replaceAll("\\D+", "");
+            firstElementByMaxPrice = Integer.parseInt(firstElementNotePriceMax.replaceAll("\\D+", ""));
             //System.out.println(elementInfoAboutNoteMax.findElement(By.className("n-snippet-card2__title")).getText());   //называние первого элемента
             System.out.println("Дорогой Ноутбук:");
             System.out.println("Название: " + firstElementNoteNameMax);
-            System.out.println("Цена: " + firstElementByPriceMax+" р.");
-            captureScreen();
+            System.out.println("Цена: " + firstElementByMaxPrice +" р.");
+            stepFindNoteMaxPrice(firstElementNoteNameMax, firstElementByMaxPrice);
         }
-        int differencePrice = firstElementByPriceMax - firstElementByPriceMin;
-        System.out.println("Разница в цене составляет "+differencePrice+" р.");
+        differencePrice(firstElementByMinPrice, firstElementByMaxPrice);
         return new MarketPage(driver);
     }
 
-    @Step("Вывожу список ноутбуков")
-    public void stepOutputInfoInList(String list){
+    @Step("Дешевый ноутбук")
+    private void stepFindNoteMinPrice(String noteName, int price){    }
 
+    @Step("Дорогой ноутбук")
+    private void stepFindNoteMaxPrice(String noteName, int price){    }
+
+    @Step("Разница между дорогим и дешевым ноутбуком")
+    private void differenceLaptops(int minPrice, int maxPrice, int differencePrice) {
     }
-    @Step("Формирую список ноутбуков")
+
+    private void differencePrice(int min, int max) throws IOException {
+        int differencePrice = max - min;
+        differenceLaptops(min, max, differencePrice);
+        System.out.println("Разница в цене составляет "+differencePrice+" р.");
+    }
+
+
+
+    @Step("Список ноутбуков")
+    public void stepOutputInfoInList(String list){    }
+    @Step("Вывожу список ноутбуков")
     public MarketPage outputInfoInList() throws IOException {
         List<WebElement> elementsAboutInfoNote = driver.findElements(By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]"));
         for (WebElement elementInfoAboutNote:elementsAboutInfoNote) {
@@ -435,14 +437,15 @@ public class MarketPage extends WebDriverSetting {
             }
             String text = elements.stream().map(WebElement::getText).collect(Collectors.joining("\n"));
             stepOutputInfoInList(text);
-            System.out.println("Text with \\n " + text);
         }
         saveScreenshotPNG(driver, "Ноутбуки");
         System.out.println("Вывод элементов списка закончен.");
         return new MarketPage(driver);
     }
 
-    @Step("Выводим список ноутбуков из Мар <name, price>")
+    @Step("Список ноутбуков")
+    public void stepOutputInfoInMap(String list){    }
+    @Step("Вывожу список ноутбуков из Мар <name, price>")
     public MarketPage outputInfoInMap() throws IOException {
         Map<String , String> map = new HashMap<>();
         List<WebElement> elementsName = driver.findElements(By.className("n-snippet-card2__title"));
@@ -453,10 +456,15 @@ public class MarketPage extends WebDriverSetting {
 
         Map<String, String> reversedMap = new TreeMap<String, String>(map);
         for (Map.Entry entry : reversedMap.entrySet()) {
-            System.out.println(entry.getKey() + ", " + entry.getValue());
+            System.out.println(entry.getKey() + " - " + entry.getValue());
         }
-        String nameScreen = "Элементы map";
-        saveScreenshotPNG(driver, nameScreen);
+
+        String text = map.entrySet().stream()
+                .map(entry -> { return (entry.getKey() + " - " + entry.getValue()); })
+                .collect(Collectors.joining("\n"));
+        stepOutputInfoInMap(text);
+
+        saveScreenshotPNG(driver, "Элементы map");
         System.out.println("Вывод данных из map завершен.");
         return new MarketPage(driver);
     }
@@ -494,7 +502,9 @@ public class MarketPage extends WebDriverSetting {
         System.out.println("Ищу поле с подсказкой");
         driver.findElement(By.xpath("/html/body/div[1]/div[6]/div[1]/.//*[text()='?']/..")).click();
         System.out.println("Текст из подсказки:");
-        System.out.println(driver.findElement(By.xpath("//div[contains(@class, 'popup_visibility_visible')]//div[@class='n-hint-button__article']")).getText());
+        WebElement popupWindow = driver.findElement(By.xpath("//div[contains(@class, 'popup_visibility_visible')]//div[@class='n-hint-button__article']"));
+        popupWindow.click();
+        System.out.println(popupWindow.getText());
         saveScreenshotPNG (driver, "Характеристики");
         return new MarketPage(driver);
     }
@@ -548,39 +558,23 @@ public class MarketPage extends WebDriverSetting {
             e.printStackTrace();
         }
         setListStyleVisibility();
+        captureScreen(noteName);
         saveScreenshotPNG (driver, noteName);
-        captureScreen();
         return new MarketPage(driver);
     }
 
 
-
-
-    public MarketPage captureScreen() {
+        private void captureScreen(String noteName) {
         String path;
         try {
             File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-            path = "./target/screenshots/" + screenshot.getName();
+            path = "./src/main/resources/screenshots/" + noteName + ".png";
             FileUtils.copyFile(screenshot, new File(path));
         }
         catch(IOException e) {
             e.getMessage();
         }
-        return  new MarketPage(driver);
     }
-
-    /*    private void captureScreen(Integer i) {
-        String path;
-        try {
-            //WebDriver augmentedDriver = new Augmenter().augment(driver);
-            File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-            path = "./src/main/resources/screenshots/" + "screenshot" + i + ".png";
-            FileUtils.copyFile(screenshot, new File(path));
-        }
-        catch(IOException e) {
-            e.getMessage();
-        }
-    }*/
 
     //By.xpath(".//*[text()='HP']/..")
     //By.xpath(".//*[contains(text(),'Время работы')]/../..")

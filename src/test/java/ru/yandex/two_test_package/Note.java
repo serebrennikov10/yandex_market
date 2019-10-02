@@ -25,6 +25,7 @@ public class Note {
     public Note() {
     }
 
+
     public void setTimeWork(String timeWork) {
         if (timeWork != null) {
             this.timeWork = timeWork;
