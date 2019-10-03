@@ -15,9 +15,9 @@ public class ThirdTest extends WebDriverSetting {
     @TmsLink(value = "Third test")
     private void noteInFile() throws IOException {
         LOGGER.log(Level.INFO,"------------ T H I R D  T E S T ------------");
-        System.out.println("-----------------------------------------");
-        System.out.println("------------Start Third test-------------");
-        System.out.println("-----------------------------------------");
+        //System.out.println("-----------------------------------------");
+        //System.out.println("------------Start Third test-------------");
+        //System.out.println("-----------------------------------------");
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage()
                 .readAndSearchFromExcel("ListNote.xlsx");
