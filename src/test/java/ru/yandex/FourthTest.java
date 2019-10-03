@@ -17,20 +17,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.logging.Level;
 
 public class FourthTest extends WebDriverSetting{
 
-
-    /*@Step("Вывожу response:")
-    public static void getResponse(String response) throws IOException {
-    }*/
     @Test(description = "Четвертый тест. Отправка запроса.")
     @Description(value = "метод GET")
     @TmsLink(value = "Fourth test")
     public void GetWeather() throws IOException {
-        System.out.println("-----------------------------------------");
-        System.out.println("------------Start Fourth test------------");
-        System.out.println("-----------------------------------------");
+        LOGGER.log(Level.INFO,"------------ F O U R T H  T E S T  ------------");
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.sendRequestGET("Belgorod");
     }

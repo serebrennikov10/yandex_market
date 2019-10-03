@@ -7,27 +7,29 @@ import org.testng.annotations.Test;
 import ru.yandex.MarketPage;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TwoTest extends SetAttributes {
+
+
 
     @Test(description = "Второй тест. ч1")
     @Description(value = "Второй тест. ч1")
     @TmsLink(value = "Two test")
     public void twoTest() throws IOException {
-        System.out.println("-----------------------------------------");
-        System.out.println("------------Start Two test(1)------------");
-        System.out.println("-----------------------------------------");
+        LOGGER.log(Level.INFO,"------------ T W O  T E S T (1) ------------");
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
+        Note note1 = new Note();
         marketPage.openPage()
                 .openNoteCategoryNow()
-                .openNoteSpec(0);
-        Note note1 = new Note();
+                .openNoteSpecNow(1);
         setNewAttributes(note1);
 
+        Note note2 = new Note();
         marketPage.openPage()
                 .openNoteCategoryNow()
-                .openNoteSpec(1);
-        Note note2 = new Note();
+                .openNoteSpecNow(2);
         setNewAttributes(note2);
 
         equals(note1, note2);
@@ -39,17 +41,13 @@ public class TwoTest extends SetAttributes {
     @Description(value = "Второй тест. ч2")
     @TmsLink(value = "Two test")
     public void outPopup() throws IOException {     //вывод текста из подсказки
-        System.out.println("-----------------------------------------");
-        System.out.println("------------Start Two test(2)------------");
-        System.out.println("-----------------------------------------");
-
+        LOGGER.log(Level.INFO,"------------ T W O  T E S T (2) ------------");
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage()
                 .openNoteCategoryNow()
                 .sortByPrice()
-                .openNoteSpec(0)
+                .openNoteSpecNow(1)
                 .outFirstPopup();
-
 
     }
 

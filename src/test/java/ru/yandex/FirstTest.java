@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
 public class FirstTest extends WebDriverSetting {
 
@@ -13,6 +14,7 @@ public class FirstTest extends WebDriverSetting {
     @Description(value = "Первый тест")
     @TmsLink(value = "First test")
     public void test () throws IOException {
+        LOGGER.log(Level.INFO,"------------F I R S T  T E S T------------");
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage();
         marketPage.selectNewRegionOnPage();

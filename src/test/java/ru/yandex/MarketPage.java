@@ -15,6 +15,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import ru.yandex.two_test_package.Note;
+import ru.yandex.two_test_package.SetAttributes;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -469,10 +471,19 @@ public class MarketPage extends WebDriverSetting {
         return new MarketPage(driver);
     }
 
-    @Step("Выбираю ноутбук: {noteName}")
-    public MarketPage openNoteSpec(int number) throws IOException {
+
+    @Step("Выбираю ноутбук, порядковый номер - {number}")
+    public MarketPage openNoteSpecNow(int number) throws IOException{
+        openNote(number);
+        openSpec();
+        return new MarketPage(driver);
+    }
+
+    @Step("Открываю выбранный ноут")
+    public MarketPage openNote(int number) throws IOException {
         List<WebElement> elementsName = driver.findElements(By.className("n-snippet-card2__title"));
-        WebElement note = elementsName.get(number);
+        int n = number - 1;
+        WebElement note = elementsName.get(n);
         String noteName = note.getText();
         System.out.println("Выбран: "+noteName);
         MoveToElement.moveToElement(note).perform();
@@ -484,12 +495,11 @@ public class MarketPage extends WebDriverSetting {
         note.click();
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("n-product-tabs__list")));
         saveScreenshotPNG (driver, noteName);
-        openSpec();
         return new MarketPage(driver);
     }
 
     @Step("Открываю характеристики")
-    private MarketPage openSpec() throws IOException {
+    public MarketPage openSpec() throws IOException {
         WebElement pageNoteSpec = driver.findElement(By.xpath("/html/body/div[1]/div[5]/div[3]/div/div/div/ul/li[@data-name='spec']"));
         pageNoteSpec.click();
         //waitDriver.until(ExpectedConditions.visibilityOfElementLocated(By.className("/html/body/div[1]/div[6]/div[1]")));
@@ -497,16 +507,21 @@ public class MarketPage extends WebDriverSetting {
         return new MarketPage(driver);
     }
 
-    @Step("Открываю первую подсказку")
+    @Step("Кликаю на первую подсказку")
     public MarketPage outFirstPopup() throws IOException {
         System.out.println("Ищу поле с подсказкой");
         driver.findElement(By.xpath("/html/body/div[1]/div[6]/div[1]/.//*[text()='?']/..")).click();
         System.out.println("Текст из подсказки:");
         WebElement popupWindow = driver.findElement(By.xpath("//div[contains(@class, 'popup_visibility_visible')]//div[@class='n-hint-button__article']"));
         popupWindow.click();
-        System.out.println(popupWindow.getText());
-        saveScreenshotPNG (driver, "Характеристики");
+        saveScreenshotPNG (driver, "открытие popup");
+        String popup = popupWindow.getText();
+        stepOutPopup(popup);
         return new MarketPage(driver);
+    }
+    @Step("Вывожу подсказку")
+    private void stepOutPopup(String popup){
+        System.out.println(popup);
     }
 
     @Step("Отправляю запрос методом GET")

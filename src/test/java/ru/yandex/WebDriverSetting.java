@@ -1,7 +1,4 @@
 package ru.yandex;
-
-
-
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
@@ -13,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.*;
+import ru.yandex.two_test_package.TwoTest;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,9 +19,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 public abstract class WebDriverSetting {
     public WebDriver driver;
+    public Logger LOGGER;
+    {
+        LOGGER = Logger.getLogger(TwoTest.class.getName());
+    }
 
 
     @Attachment(value = "{nameScreen}", type = "image/png")
