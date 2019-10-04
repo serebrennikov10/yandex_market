@@ -2,16 +2,17 @@ package ru.yandex.two_test_package;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 import ru.yandex.MarketPage;
+import ru.yandex.WebDriverSetting;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TwoTest extends SetAttributes {
-
+public class TwoTest extends WebDriverSetting {
 
 
     @Test(description = "Второй тест. ч1")
@@ -23,16 +24,15 @@ public class TwoTest extends SetAttributes {
         Note note1 = new Note();
         marketPage.openPage()
                 .openNoteCategoryNow()
-                .openNoteSpecNow(1);
-        setNewAttributes(note1);
+                .openNoteSpecNow(1)
+                .setNewAttributes(note1);
 
         Note note2 = new Note();
         marketPage.openPage()
                 .openNoteCategoryNow()
-                .openNoteSpecNow(2);
-        setNewAttributes(note2);
-
-        equals(note1, note2);
+                .openNoteSpecNow(2)
+                .setNewAttributes(note2);
+        marketPage.equals(note1, note2);
     }
 
 
@@ -48,7 +48,6 @@ public class TwoTest extends SetAttributes {
                 .sortByPrice()
                 .openNoteSpecNow(1)
                 .outFirstPopup();
-
     }
 
 }

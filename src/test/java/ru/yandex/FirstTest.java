@@ -4,7 +4,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
-
 import java.io.IOException;
 import java.util.logging.Level;
 
