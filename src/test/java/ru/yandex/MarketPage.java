@@ -1,10 +1,7 @@
 package ru.yandex;
 
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
-import io.restassured.RestAssured;
-import io.restassured.http.Method;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -21,8 +18,9 @@ import ru.yandex.two_test_package.Note;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -231,8 +229,8 @@ public class MarketPage extends WebDriverSetting {
     @Step("Сортирую по возрастанию")
     public MarketPage sortPriceByAsc() throws IOException {
         String classNameSortPrice = divNameSortPrice.getAttribute("class");
-       if (classNameSortPrice.equals(asc)) {
-                    }
+        if (classNameSortPrice.equals(asc)) {
+        }
         else {
             sortPrice.click();
             System.out.println("Установил сортировку по возрастанию");
@@ -249,8 +247,8 @@ public class MarketPage extends WebDriverSetting {
     @Step("Сортирую по убыванию")
     public MarketPage sortPriceByDesc() throws IOException {
         String classNameSortPrice = divNameSortPrice.getAttribute("class");
-       if (classNameSortPrice.equals(desc)) {
-           }
+        if (classNameSortPrice.equals(desc)) {
+        }
         else {
             sortPrice.click();
             System.out.println("Установлена сортировка по убыванию");
@@ -285,7 +283,7 @@ public class MarketPage extends WebDriverSetting {
         for  (WebElement brandsList:brandsNames) {
             brandsList.findElement(By.xpath("//span[text()='"+brand+"']/..")).click();
             System.out.println("Выбран бренд "+ brand);
-           waitDriver.until(ExpectedConditions.visibilityOfElementLocated(noteSnippetList));
+            waitDriver.until(ExpectedConditions.visibilityOfElementLocated(noteSnippetList));
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
@@ -293,7 +291,7 @@ public class MarketPage extends WebDriverSetting {
             }
             saveScreenshotPNG(driver, brand);
         }
-     return new MarketPage(driver);
+        return new MarketPage(driver);
     }
 
     @Step("Задаю параметры поиска по цвету: {color}")
@@ -314,7 +312,7 @@ public class MarketPage extends WebDriverSetting {
     }
 
     @Step("Считаю разницу между дорогим и дешевым ноутбуком")
-        public MarketPage findNotePriceMinAndMax() throws IOException {
+    public MarketPage findNotePriceMinAndMax() throws IOException {
         sortPriceByAsc();
         List<WebElement> elementsAboutInfoNoteMin = driver.findElements(elementsNote);
         for (WebElement elementInfoAboutNoteMin : elementsAboutInfoNoteMin) {
@@ -462,36 +460,14 @@ public class MarketPage extends WebDriverSetting {
         System.out.println(popup);
     }
 
-    @Step("Отправляю запрос методом GET")
-    public MarketPage sendRequestGET(String region) throws IOException  {
-        RestAssured.baseURI = "http://restapi.demoqa.com/utilities/weather/city/";
-        RequestSpecification httpRequest = RestAssured.given();
-        Response response = httpRequest.request(Method.GET, region);
-        String responseBody = response.getBody().asString();
-        outputResponseInFile(responseBody);
-        return new MarketPage(driver);
-    }
-
-    @Step("Вывожу response из файла")
-    public MarketPage outputResponseInFile(String responseBody) throws IOException {
-        System.out.println("Response:" + responseBody);
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream("./src/main/resources/FourthTest.html");
-            fileOutputStream.write(responseBody.getBytes());
-            fileOutputStream.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        getBytesAnnotationWithArgs("/FourthTest.html");
-        return new MarketPage(driver);
-    }
 
     @Step("Поиск товаров из файла {FileName}")
     public MarketPage readAndSearchFromExcel(String FileName) throws IOException {
-        XSSFWorkbook myExcelBook = new XSSFWorkbook(new FileInputStream("src/main/resources/"+FileName));
-        XSSFSheet myExcelSheet = myExcelBook.getSheet("book1");
-        for(int i=0;i<3;i++) {
-            XSSFRow row = myExcelSheet.getRow(i);
+        XSSFWorkbook excelFile = new XSSFWorkbook(new FileInputStream("src/main/resources/"+FileName));
+        XSSFSheet excelSheet = excelFile.getSheet("book1");
+        int rowSize = excelSheet.getLastRowNum()+1;
+        for(int i=0;i<rowSize;i++) {
+            XSSFRow row = excelSheet.getRow(i);
             String noteName = row.getCell(0).getStringCellValue();
             searchNote(noteName);
         }
@@ -585,7 +561,20 @@ public class MarketPage extends WebDriverSetting {
     }
 
 
-        private void captureScreen(String noteName) {
+
+    @Attachment(value = "{nameScreen}", type = "image/png")
+    public byte[] saveScreenshotPNG(WebDriver driver, String nameScreen) throws IOException {
+        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+    }
+
+    @Attachment(value = "Вложение", type = "application/json", fileExtension = ".txt")
+    public static byte [] getBytesAnnotationWithArgs(String resourceName) throws IOException {
+        return Files.readAllBytes(Paths.get("src/main/resources", resourceName));
+    }
+
+
+
+    private void captureScreen(String noteName) {
         String path;
         try {
             File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
@@ -599,10 +588,3 @@ public class MarketPage extends WebDriverSetting {
 
 
 }
-
-
-
-
-
-
-
