@@ -19,7 +19,7 @@ public abstract class WebDriverSetting {
     public WebDriver driver;
     public Logger LOGGER;
     {
-        LOGGER = Logger.getLogger(TwoTest.class.getName());
+        LOGGER = Logger.getLogger(WebDriverSetting.class.getName());
     }
 
     @BeforeTest
@@ -74,8 +74,6 @@ public abstract class WebDriverSetting {
     @Step("Закрытие драйвера")
     public void close() {
         System.out.println("Close driver...");
-        //driver.getSessionStorage().clear();
-        //driver.getLocalStorage().clear();
         driver.close();
     }
 }
