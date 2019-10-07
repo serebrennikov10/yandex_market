@@ -8,7 +8,6 @@ import ru.yandex.MarketPage;
 import ru.yandex.WebDriverSetting;
 
 import java.io.IOException;
-import java.util.logging.Level;
 
 public class TwoTest extends WebDriverSetting {
 
@@ -16,7 +15,7 @@ public class TwoTest extends WebDriverSetting {
     @Description(value = "Второй тест. ч1")
     @TmsLink(value = "Two test")
     public void twoTest() throws IOException {
-        LOGGER.log(Level.INFO,"------------ T W O  T E S T (1) ------------");
+        LOGGER.info("------------ T W O  T E S T (1) ------------");
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         Note note1 = new Note();
         marketPage.openPage()
@@ -38,7 +37,7 @@ public class TwoTest extends WebDriverSetting {
     @Description(value = "Второй тест. ч2")
     @TmsLink(value = "Two test")
     public void outPopup() throws IOException {
-        LOGGER.log(Level.INFO,"------------ T W O  T E S T (2) ------------");
+        LOGGER.info("------------ T W O  T E S T (2) ------------");
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage()
                 .openNoteCategoryNow()

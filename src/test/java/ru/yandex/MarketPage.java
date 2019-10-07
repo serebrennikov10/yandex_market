@@ -339,16 +339,16 @@ public class MarketPage extends WebDriverSetting {
     }*/
 
 
-    public class Price {
-        public int price;
-        public Price (int price){
+    private class Price {
+        private int price;
+        private Price (int price){
             this.price = price;
         }
-        public Price(){}
-        public void setPrice (int price){
+        private Price(){}
+        private void setPrice(int price){
             this.price = price;
         }
-        public int getPrice(){return  price;}
+        private int getPrice(){return  price;}
     }
 
     @Step("Считаю разницу между дорогим и дешевым ноутбуком")
@@ -381,25 +381,26 @@ public class MarketPage extends WebDriverSetting {
             String firstElementNoteName = element.findElement(noteNameTitle).getText();
             String firstElementNotePrice = element.findElement(noteMainPrice).getText();
             price = Integer.parseInt(firstElementNotePrice.replaceAll("\\D+", ""));
+            notePrice.setPrice(price);
+            stepOutNameAndPrice(firstElementNoteName, notePrice.getPrice());
             System.out.println("Название: "+firstElementNoteName);
-            System.out.println("Цена: "+ notePrice +" р.");
-            notePrice.price = setPrice();
-            stepOutNameAndPrice(firstElementNoteName, notePrice.price);
+            System.out.println("Цена: "+ notePrice.getPrice() +" р.");
         }
     }
 
     @Step("Название и цена")
     private void stepOutNameAndPrice(String noteName, int price){    }
 
-    @Step("Разница между дорогим и дешевым ноутбуком")
-    private void differenceLaptops(int minPrice, int maxPrice, int differencePrice) {
-    }
 
     @Step("Считаю разницу")
     private void differencePrice(int min, int max) throws IOException {
         int differencePrice = max - min;
-        differenceLaptops(min, max, differencePrice);
+        differenceLaptops(differencePrice);
         System.out.println("Разница в цене составляет "+differencePrice+" р.");
+    }
+
+    @Step("Разница между дорогим и дешевым ноутбуком")
+    private void differenceLaptops(int differencePrice) {
     }
 
 

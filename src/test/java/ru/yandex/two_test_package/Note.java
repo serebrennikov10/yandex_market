@@ -1,12 +1,5 @@
 package ru.yandex.two_test_package;
 
-import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import ru.yandex.WebDriverSetting;
-
-import java.util.List;
 
 public class Note {
     private String timeWork;
@@ -104,18 +97,6 @@ public class Note {
                 && typeBattery.equals(note.getTypeBattery());
     }
 
-/*    @Override
-    public int hashCode() {
-        // return super.hashCode();
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + timeWork.hashCode();
-        result = prime * result + valueBattery.hashCode();
-        result = prime * result + valueBatteryPower.hashCode();
-        result = prime * result + cells.hashCode();
-        result = prime * result + typeBattery.hashCode();
-        return result;
-    }*/
 }
 
 

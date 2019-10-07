@@ -6,7 +6,6 @@ import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import ru.yandex.MarketPage;
-import ru.yandex.two_test_package.TwoTest;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

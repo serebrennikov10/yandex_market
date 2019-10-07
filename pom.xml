@@ -9,13 +9,10 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
        <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
-        <!-- <maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>-->
         <aspectj.version>1.9.4</aspectj.version>
-        <!--<aspectj.version>1.9.4</aspectj.version>-->
         <allure-testng.version>2.6.0</allure-testng.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <!-- problema kodirovki-->
     </properties>
     <dependencies>
         <dependency>
@@ -100,12 +97,6 @@
             <version>3.141.59</version>
             <scope>test</scope>
         </dependency>
-        <!--<dependency>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>aspectj-maven-plugin</artifactId>
-            <version>1.10</version>
-            popitka fix aspectj
-        </dependency>-->
     </dependencies>
     <build>
         <plugins>
@@ -127,17 +118,12 @@
                         <groupId>org.aspectj</groupId>
                         <artifactId>aspectjweaver</artifactId>
                         <version>${aspectj.version}</version>
-                        <!--<version>1.8.10</version>-->
                     </dependency>
                     <dependency>
                         <groupId>org.aspectj</groupId>
                         <artifactId>aspectjrt</artifactId>
                         <version>1.8.10</version>
-                        <!--<version>${aspectj.version}</version>-->
-                        <!--<version>1.8.10</version>-->
-                        <!--popitka fix aspectj-->
                     </dependency>
-
                 </dependencies>
             </plugin>
             <plugin>
@@ -148,44 +134,6 @@
                     <reportVersion>2.6.0</reportVersion>
                 </configuration>
             </plugin>
-<!--            <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-                <version>2.9</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
-                <configuration>
-                    <testFailureIgnore>false</testFailureIgnore>
-                    <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</argLine>
-                    <properties>
-                        <property>
-                            <name>listener</name>
-                            <value>io.qameta.allure.junit4.AllureJunit4</value>
-                        </property>
-                    </properties>
-                    <systemProperties>
-                        <property>
-                            <name>allure.results.directory</name>
-                            <value>${project.build.directory}/allure-results</value>
-                        </property>
-                    </systemProperties>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjweaver</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjrt</artifactId>
-                        <version>1.8.10</version>
-                    </dependency>
-                </dependencies>
-            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -194,18 +142,11 @@
                     <release>11</release>
                 </configuration>
             </plugin>
-
           <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.7.1</version>
             </plugin>
-<!--            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.0.0</version>
-            </plugin>-->
-
         </plugins>
     </build>
 </project>

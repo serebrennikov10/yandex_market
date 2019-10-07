@@ -5,7 +5,6 @@ import io.qameta.allure.TmsLink;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.util.logging.Level;
 
 public class FourthTest extends ApplicationRest {
 
