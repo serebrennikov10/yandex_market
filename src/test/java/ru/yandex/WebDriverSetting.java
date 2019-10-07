@@ -15,7 +15,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-public class WebDriverSetting {
+public abstract class WebDriverSetting {
     public WebDriver driver;
     public Logger LOGGER;
     {
@@ -24,7 +24,7 @@ public class WebDriverSetting {
 
     @BeforeTest
     @Step("Удаление старых сриншотов")
-    void deleteScreenshots(){
+    public void deleteScreenshots(){
         try {
             FileUtils.deleteDirectory(new File("./target/screenshots/"));
             FileUtils.deleteDirectory(new File("./src/main/resources/screenshots/"));
@@ -37,7 +37,7 @@ public class WebDriverSetting {
 
     @BeforeClass
     @Step("Инициализация настроек драйвера")
-    void setUp() {
+    public void setUp() {
         try {
             Properties property = new Properties();
             FileInputStream file = new FileInputStream("src/main/resources/config.properties");
@@ -72,7 +72,7 @@ public class WebDriverSetting {
 
     @AfterClass
     @Step("Закрытие драйвера")
-    void close() {
+    public void close() {
         System.out.println("Close driver...");
         //driver.getSessionStorage().clear();
         //driver.getLocalStorage().clear();

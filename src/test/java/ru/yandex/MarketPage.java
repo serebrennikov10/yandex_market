@@ -28,8 +28,7 @@ public class MarketPage extends WebDriverSetting {
     private WebDriver driver;
     private WebDriverWait waitDriver;
     private Actions MoveToElement;
-    private Integer firstElementByMaxPrice;
-    private Integer firstElementByMinPrice;
+
 
     public MarketPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -311,7 +310,7 @@ public class MarketPage extends WebDriverSetting {
         return new MarketPage(driver);
     }
 
-    @Step("Считаю разницу между дорогим и дешевым ноутбуком")
+/*    @Step("Считаю разницу между дорогим и дешевым ноутбуком")
     public MarketPage findNotePriceMinAndMax() throws IOException {
         sortPriceByAsc();
         List<WebElement> elementsAboutInfoNoteMin = driver.findElements(elementsNote);
@@ -322,7 +321,7 @@ public class MarketPage extends WebDriverSetting {
             System.out.println("Дешевый Ноутбук:");
             System.out.println("Название: "+firstElementNoteNameMin);
             System.out.println("Цена: "+ firstElementByMinPrice +" р.");
-            stepFindNoteMinPrice(firstElementNoteNameMin, firstElementByMinPrice);
+            stepOutNameAndPrice(firstElementNoteNameMin, firstElementByMinPrice);
         }
         sortPriceByDesc();
         List<WebElement> elementsAboutInfoNoteMax = driver.findElements(elementsNote);
@@ -337,13 +336,60 @@ public class MarketPage extends WebDriverSetting {
         }
         differencePrice(firstElementByMinPrice, firstElementByMaxPrice);
         return new MarketPage(driver);
+    }*/
+
+
+    public class Price {
+        public int price;
+        public Price (int price){
+            this.price = price;
+        }
+        public Price(){}
+        public void setPrice (int price){
+            this.price = price;
+        }
+        public int getPrice(){return  price;}
     }
 
-    @Step("Дешевый ноутбук")
-    private void stepFindNoteMinPrice(String noteName, int price){    }
+    @Step("Считаю разницу между дорогим и дешевым ноутбуком")
+    public MarketPage findNotePriceMinAndMax() throws IOException {
+        Price minPrice = new Price();
+        findNoteMinPrice(minPrice);
+        Price maxPrice = new Price();
+        findNoteMaxPrice(maxPrice);
+        differencePrice(minPrice.price, maxPrice.price);
+        return new MarketPage(driver);
+    }
 
-    @Step("Дорогой ноутбук")
-    private void stepFindNoteMaxPrice(String noteName, int price){    }
+    @Step("Ищу дешевый ноутбук")
+    private void findNoteMinPrice(Price minPrice) throws IOException {
+        sortPriceByAsc();
+        System.out.println("Дешевый Ноутбук:");
+        getFirstNameAndPriceNote(minPrice);
+    }
+    @Step("Ищу дорогой ноутбук")
+    private void findNoteMaxPrice(Price maxPrice) throws IOException {
+        sortPriceByDesc();
+        System.out.println("Дорогой Ноутбук:");
+        getFirstNameAndPriceNote(maxPrice);
+    }
+
+    private void getFirstNameAndPriceNote(Price notePrice){
+        int price = 0;
+        List<WebElement> elementsInfoNote = driver.findElements(elementsNote);
+        for (WebElement element : elementsInfoNote) {
+            String firstElementNoteName = element.findElement(noteNameTitle).getText();
+            String firstElementNotePrice = element.findElement(noteMainPrice).getText();
+            price = Integer.parseInt(firstElementNotePrice.replaceAll("\\D+", ""));
+            System.out.println("Название: "+firstElementNoteName);
+            System.out.println("Цена: "+ notePrice +" р.");
+            notePrice.price = setPrice();
+            stepOutNameAndPrice(firstElementNoteName, notePrice.price);
+        }
+    }
+
+    @Step("Название и цена")
+    private void stepOutNameAndPrice(String noteName, int price){    }
 
     @Step("Разница между дорогим и дешевым ноутбуком")
     private void differenceLaptops(int minPrice, int maxPrice, int differencePrice) {
@@ -355,6 +401,9 @@ public class MarketPage extends WebDriverSetting {
         differenceLaptops(min, max, differencePrice);
         System.out.println("Разница в цене составляет "+differencePrice+" р.");
     }
+
+
+
 
 
     class WebElementComparator implements Comparator<WebElement> {
