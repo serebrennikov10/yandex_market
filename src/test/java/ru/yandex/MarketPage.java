@@ -41,27 +41,27 @@ public class MarketPage extends WebDriverSetting {
     private WebElement buttonSelectRegion;
     @FindBy(xpath = "//input[contains(@placeholder, 'Укажите другой регион')]")
     private WebElement inputRegion;
-    @FindBy(xpath = "/html/body/div[1]/div/div[1]/noindex/div/div/div[2]/div/div[2]/div[1]/span")
+    @FindBy(xpath = "//span[contains(@class, 'header2-menu__item_type_region')]")
     private WebElement changeRegion;
-    @FindBy(xpath = "/html/body/div[1]/div/span/div[2]/noindex/div[2]/div/div/div/div[1]")
+    @FindBy(xpath = "//span[text()='Все категории']/../..")
     private WebElement allCategory;
-    @FindBy(xpath = "/html/body/div[1]/div/span/div[2]/noindex/div[1]/div/div/div/div/div/div/div[1]/div/div[3]/a")
+    @FindBy(xpath = "//a[contains(@href, '/catalog--kompiuternaia-tekhnika/')]")
     private WebElement compCategory;
-    @FindBy(xpath = "/html/body/div[1]/div[2]/div[7]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[2]/ul/li[2]/div/a")
+    @FindBy(linkText = "Ноутбуки")
     private WebElement notebookCategory;
-    @FindBy(xpath = "/html/body/div[1]/div[5]/div[1]/div[2]/div[2]/div/span/label[1]")
+    @FindBy(xpath = "//span[contains(@class, 'view-switcher__item_type_list')]/..")
     private WebElement setListStyle;
     @FindBy(linkText = "по цене")
     private WebElement sortPrice;
-    @FindBy(xpath = "/html/body/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[3]")
+    @FindBy(xpath = "//a[text()='по цене']/..")
     private WebElement divNameSortPrice;
     @FindBy(xpath = "//input[@id=\"glpricefrom\"]")
     private WebElement selectCostFrom;
     @FindBy(xpath = "//*[@id=\"glpriceto\"]")
     private WebElement selectCostTo;
-    @FindBy(xpath = "/html/body/div[1]/div[5]/div[3]/div/div/div/ul/li[@data-name='spec']")
+    @FindBy(xpath = "//li[@data-name='spec']")
     private WebElement pageNoteSpec;
-    @FindBy(xpath = "/html/body/div[1]/div[6]/div[1]/.//*[text()='?']/..")
+    @FindBy(xpath = "//*[text()='?']/..")
     private WebElement firstPopup;
     @FindBy(xpath = "//div[contains(@class, 'popup_visibility_visible')]//div[@class='n-hint-button__article']")
     private WebElement popupWindow;
@@ -72,16 +72,16 @@ public class MarketPage extends WebDriverSetting {
     private By frameInputRegion = By.className("header2-region-popup");
     private By controlHamburger = By.cssSelector("div[class*='n-w-tab__control-hamburger']");
     private By categoryTabsColumn  = By.className("n-w-tabs__tabs-column");
-    private By compCategoryPage = By.xpath("/html/body/div[1]/div[2]/div[7]/div/div/div[1]/div/div/div/div/div/div");
+    private By compCategoryPage = By.xpath("//h1[text()='Компьютерная техника']");
     private By noteHeadlineHeader  = By.className("headline__header");
     private By noteSnippetList =  By.xpath("//div[contains(@class, 'n-snippet-list')]");
-    private By brandsPack = By.xpath("//*[@id=\"search-prepack\"]/div/div/div[3]/div/div/div[2]/div[4]/div/div/fieldset");
-    private By colorsPack = By.xpath("//*[@id=\"search-prepack\"]/div/div/div[3]/div/div/div[2]/div[22]/div/div/fieldset");
-    private By elementsNote  = By.xpath("/html/body/div[1]/div[5]/div[2]/div[1]/div[2]/div/div[1]");
+    private By brandsPack = By.xpath("//fieldset[@data-autotest-id='7893318']");
+    private By colorsPack = By.xpath("//fieldset[@data-autotest-id='13887626']");
+    private By elementsNote  = By.xpath("//div[contains(@class, 'n-snippet-list')]");
     private By noteNameTitle = By.className("n-snippet-card2__title");
     private By noteMainPrice = By.className("n-snippet-card2__main-price");
-    private By notePage = By.className("n-product-tabs__list");
-    private By specPowerList = By.xpath("/html/body/div[1]/div[6]/div[1]/.//*[text()='Питание']/..");
+    private By notePage = By.className("n-product-content-block");
+    private By specPowerList = By.xpath("//h2[text()='Питание']/..");
     private By timeWorkLine = By.xpath(".//*[text()='Время работы']/../..");
     private By valueBatteryLine = By.xpath(".//*[text()='Емкость аккумулятора']/../..");
     private By valueBatteryPowerLine = By.xpath(".//*[text()='Емкость аккумулятора (Вт*ч)']/../..");
@@ -339,7 +339,7 @@ public class MarketPage extends WebDriverSetting {
 
     private void getFirstNameAndPriceNote(Price notePrice){
         int price = 0;
-        List<WebElement> elementsInfoNote = driver.findElements(elementsNote);
+        List<WebElement> elementsInfoNote = driver.findElements(noteSnippetList);
         for (WebElement element : elementsInfoNote) {
             String firstElementNoteName = element.findElement(noteNameTitle).getText();
             String firstElementNotePrice = element.findElement(noteMainPrice).getText();
@@ -381,7 +381,7 @@ public class MarketPage extends WebDriverSetting {
     public void stepOutputInfoInList(String list){    }
     @Step("Вывожу список ноутбуков")
     public MarketPage outputInfoInList() throws IOException {
-        List<WebElement> elementsAboutInfoNote = driver.findElements(elementsNote);
+        List<WebElement> elementsAboutInfoNote = driver.findElements(noteSnippetList);
         for (WebElement elementInfoAboutNote:elementsAboutInfoNote) {
             List<WebElement> elements = new ArrayList<>(elementInfoAboutNote.findElements(noteNameTitle));
             elements.sort(new WebElementComparator()); //сортировка
