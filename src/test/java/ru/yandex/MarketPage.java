@@ -67,6 +67,16 @@ public class MarketPage extends WebDriverSetting {
     private WebElement popupWindow;
     @FindBy(id = "header-search")
     private WebElement searchInputHeader;
+    @FindBy(className = "n-snippet-card2__title")
+    private List<WebElement> elementsName;
+    @FindBy(className = "n-snippet-card2__main-price")
+    private List<WebElement> elementsPrice;
+    @FindBy(xpath = "//div[contains(@class, 'n-snippet-list')]")
+    private List<WebElement> elementsInfoNote;
+    @FindBy(xpath = "//fieldset[@data-autotest-id='7893318']")
+    private List<WebElement> brandsNames;
+    @FindBy(xpath = "//fieldset[@data-autotest-id='13887626']")
+    private List<WebElement> colorsNames;
 
     private By adaptiveLayout = By.className("n-adaptive-layout");
     private By frameInputRegion = By.className("header2-region-popup");
@@ -75,9 +85,6 @@ public class MarketPage extends WebDriverSetting {
     private By compCategoryPage = By.xpath("//h1[text()='Компьютерная техника']");
     private By noteHeadlineHeader  = By.className("headline__header");
     private By noteSnippetList =  By.xpath("//div[contains(@class, 'n-snippet-list')]");
-    private By brandsPack = By.xpath("//fieldset[@data-autotest-id='7893318']");
-    private By colorsPack = By.xpath("//fieldset[@data-autotest-id='13887626']");
-    private By elementsNote  = By.xpath("//div[contains(@class, 'n-snippet-list')]");
     private By noteNameTitle = By.className("n-snippet-card2__title");
     private By noteMainPrice = By.className("n-snippet-card2__main-price");
     private By notePage = By.className("n-product-content-block");
@@ -271,7 +278,6 @@ public class MarketPage extends WebDriverSetting {
 
     @Step("Задаю параметры поиска по бренду: {brand}")
     public MarketPage selectFilterByBrand(String brand) throws IOException {
-        List<WebElement> brandsNames = driver.findElements(brandsPack);
         for  (WebElement brandsList:brandsNames) {
             brandsList.findElement(By.xpath("//span[text()='"+brand+"']/..")).click();
             waitDriver.until(ExpectedConditions.visibilityOfElementLocated(noteSnippetList));
@@ -287,7 +293,6 @@ public class MarketPage extends WebDriverSetting {
 
     @Step("Задаю параметры поиска по цвету: {color}")
     public MarketPage selectFilterByColor(String color) throws IOException {
-        List<WebElement> colorsNames = driver.findElements(colorsPack);
         for (WebElement colorList:colorsNames){
             colorList.findElement(By.xpath("//span[text()='Цвет "+color+"']/..")).click();
             waitDriver.until(ExpectedConditions.visibilityOfElementLocated(noteSnippetList));
@@ -339,7 +344,6 @@ public class MarketPage extends WebDriverSetting {
 
     private void getFirstNameAndPriceNote(Price notePrice){
         int price = 0;
-        List<WebElement> elementsInfoNote = driver.findElements(noteSnippetList);
         for (WebElement element : elementsInfoNote) {
             String firstElementNoteName = element.findElement(noteNameTitle).getText();
             String firstElementNotePrice = element.findElement(noteMainPrice).getText();
@@ -381,8 +385,7 @@ public class MarketPage extends WebDriverSetting {
     public void stepOutputInfoInList(String list){    }
     @Step("Вывожу список ноутбуков")
     public MarketPage outputInfoInList() throws IOException {
-        List<WebElement> elementsAboutInfoNote = driver.findElements(noteSnippetList);
-        for (WebElement elementInfoAboutNote:elementsAboutInfoNote) {
+        for (WebElement elementInfoAboutNote:elementsInfoNote) {
             List<WebElement> elements = new ArrayList<>(elementInfoAboutNote.findElements(noteNameTitle));
             elements.sort(new WebElementComparator()); //сортировка
             System.out.println("Вывожу отсортированные элементы списка:");
@@ -401,8 +404,6 @@ public class MarketPage extends WebDriverSetting {
     @Step("Вывожу ноутбуки из Мар <name, price>")
     public MarketPage outputInfoInMap() throws IOException {
         Map<String , String> map = new HashMap<>();
-        List<WebElement> elementsName = driver.findElements(noteNameTitle);
-        List<WebElement> elementsPrice = driver.findElements(noteMainPrice);
         for(int i=0;i<elementsName.size();i++)
             map.put(elementsName.get(i).getText(), elementsPrice.get(i).getText());
         System.out.println("Вывожу данные из map: ");
@@ -427,7 +428,6 @@ public class MarketPage extends WebDriverSetting {
 
     @Step("Открываю выбранный ноут")
     public MarketPage openNote(int number) throws IOException {
-        List<WebElement> elementsName = driver.findElements(noteNameTitle);
         int n = number - 1;
         WebElement note = elementsName.get(n);
         String noteName = note.getText();
@@ -544,12 +544,7 @@ public class MarketPage extends WebDriverSetting {
         note.setTypeBattery(typeBattery);
         getAttribyte(note.getTimeWork(), note.getValueBattery(), note.getValueBatteryPower(), note.getCells(), note.getTypeBattery());
 
-        System.out.println(note.getTimeWork());
-        System.out.println(note.getValueBattery());
-        System.out.println(note.getValueBatteryPower());
-        System.out.println(note.getCells());
-        System.out.println(note.getTypeBattery());
-        System.out.println("-----------------------------------------");
+        System.out.println(note);
         return new MarketPage(driver);
     }
 
