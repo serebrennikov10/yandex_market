@@ -11,6 +11,19 @@ import java.io.IOException;
 
 public class TwoTest extends WebDriverSetting {
 
+    @Test(description = "Второй тест. ч2")
+    @Description(value = "Второй тест. ч2")
+    @TmsLink(value = "Two test")
+    public void outPopup() throws IOException {
+        LOGGER.info("------------ T W O  T E S T (2) ------------");
+        MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
+        marketPage.openPage()
+                .openNoteCategoryNow()
+                .sortByPrice()
+                .openNoteSpecNow(1)
+                .outFirstPopup();
+    }
+
     @Test(description = "Второй тест. ч1")
     @Description(value = "Второй тест. ч1")
     @TmsLink(value = "Two test")
@@ -29,21 +42,6 @@ public class TwoTest extends WebDriverSetting {
                 .openNoteSpecNow(2)
                 .setNewAttributes(note2);
         marketPage.equals(note1, note2);
-    }
-
-
-
-    @Test(description = "Второй тест. ч2")
-    @Description(value = "Второй тест. ч2")
-    @TmsLink(value = "Two test")
-    public void outPopup() throws IOException {
-        LOGGER.info("------------ T W O  T E S T (2) ------------");
-        MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
-        marketPage.openPage()
-                .openNoteCategoryNow()
-                .sortByPrice()
-                .openNoteSpecNow(1)
-                .outFirstPopup();
     }
 
 }

@@ -67,7 +67,8 @@ public class MarketPage extends WebDriverSetting {
     private WebElement popupWindow;
     @FindBy(id = "header-search")
     private WebElement searchInputHeader;
-    @FindBy(className = "n-snippet-card2__title")
+    //@FindBy(className = "n-snippet-card2__title")
+    @FindBy(xpath = ".//div[@class='n-snippet-card2__title']")
     private List<WebElement> elementsName;
     @FindBy(className = "n-snippet-card2__main-price")
     private List<WebElement> elementsPrice;
@@ -77,6 +78,8 @@ public class MarketPage extends WebDriverSetting {
     private List<WebElement> brandsNames;
     @FindBy(xpath = "//fieldset[@data-autotest-id='13887626']")
     private List<WebElement> colorsNames;
+    @FindBy(xpath = "//h2[text()='Питание']/..")
+    private List<WebElement> blockPowerList;
 
     private By adaptiveLayout = By.className("n-adaptive-layout");
     private By frameInputRegion = By.className("header2-region-popup");
@@ -88,7 +91,6 @@ public class MarketPage extends WebDriverSetting {
     private By noteNameTitle = By.className("n-snippet-card2__title");
     private By noteMainPrice = By.className("n-snippet-card2__main-price");
     private By notePage = By.className("n-product-content-block");
-    private By specPowerList = By.xpath("//h2[text()='Питание']/..");
     private By timeWorkLine = By.xpath(".//*[text()='Время работы']/../..");
     private By valueBatteryLine = By.xpath(".//*[text()='Емкость аккумулятора']/../..");
     private By valueBatteryPowerLine = By.xpath(".//*[text()='Емкость аккумулятора (Вт*ч)']/../..");
@@ -195,7 +197,7 @@ public class MarketPage extends WebDriverSetting {
         return new MarketPage(driver);
     }
 
-    private void setListStyleVisibility(){
+    public MarketPage setListStyleVisibility(){
         MoveToElement.moveToElement(setListStyle).perform();
         setListStyle.click();
         try {
@@ -203,6 +205,7 @@ public class MarketPage extends WebDriverSetting {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return new MarketPage(driver);
     }
 
     @Step("Выбираю категории 'Компьютеры' -> 'Ноутбуки'")
@@ -307,69 +310,43 @@ public class MarketPage extends WebDriverSetting {
     }
 
 
-    private class Price {
-        private int price;
-        private Price (int price){
-            this.price = price;
-        }
-        private Price(){}
-        private void setPrice(int price){
-            this.price = price;
-        }
-        private int getPrice(){return  price;}
-    }
-
     @Step("Считаю разницу между дорогим и дешевым ноутбуком")
     public MarketPage findNotePriceMinAndMax() throws IOException {
-        Price minPrice = new Price();
+        NotePrice minPrice = new NotePrice();
         findNoteMinPrice(minPrice);
-        Price maxPrice = new Price();
+        NotePrice maxPrice = new NotePrice();
         findNoteMaxPrice(maxPrice);
         differencePrice(minPrice.price, maxPrice.price);
         return new MarketPage(driver);
     }
-
     @Step("Ищу дешевый ноутбук")
-    private void findNoteMinPrice(Price minPrice) throws IOException {
+    private void findNoteMinPrice(NotePrice minPrice) throws IOException {
         sortPriceByAsc();
         System.out.println("Дешевый Ноутбук:");
         getFirstNameAndPriceNote(minPrice);
     }
     @Step("Ищу дорогой ноутбук")
-    private void findNoteMaxPrice(Price maxPrice) throws IOException {
+    private void findNoteMaxPrice(NotePrice maxPrice) throws IOException {
         sortPriceByDesc();
         System.out.println("Дорогой Ноутбук:");
         getFirstNameAndPriceNote(maxPrice);
     }
 
-    private void getFirstNameAndPriceNote(Price notePrice){
-        int price = 0;
+    private void getFirstNameAndPriceNote(NotePrice note){
         for (WebElement element : elementsInfoNote) {
-            String firstElementNoteName = element.findElement(noteNameTitle).getText();
-            String firstElementNotePrice = element.findElement(noteMainPrice).getText();
-            price = Integer.parseInt(firstElementNotePrice.replaceAll("\\D+", ""));
-            notePrice.setPrice(price);
-            stepOutNameAndPrice(firstElementNoteName, notePrice.getPrice());
-            System.out.println("Название: "+firstElementNoteName);
-            System.out.println("Цена: "+ notePrice.getPrice() +" р.");
+            note.setName(element.findElement(noteNameTitle).getText());
+            note.setPrice(Integer.parseInt((element.findElement(noteMainPrice).getText()).replaceAll("\\D+", "")));
+            System.out.println(note);
+            stepAllure("Название:  "+note.getName()+" Цена: "+note.getPrice());
         }
     }
-
-    @Step("Название и цена")
-    private void stepOutNameAndPrice(String noteName, int price){    }
-
 
     @Step("Считаю разницу")
     private void differencePrice(int min, int max) throws IOException {
         int differencePrice = max - min;
-        differenceLaptops(differencePrice);
+        stepAllure("Разница в цене: "+differencePrice+" р.");
         System.out.println("Разница в цене составляет "+differencePrice+" р.");
     }
-
-    @Step("Разница между дорогим и дешевым ноутбуком")
-    private void differenceLaptops(int differencePrice) {
-    }
-
 
 
 
@@ -459,13 +436,9 @@ public class MarketPage extends WebDriverSetting {
         saveScreenshotPNG (driver, "открытие popup");
         String allPopup = popupWindow.getText();
         String popup = allPopup.replace("Словарь терминов по категории Ноутбуки", "");
-        stepOutPopup(popup);
+        System.out.println("Текст подсказки: "+popup);
+        stepAllure("Текст подсказки: "+popup);
         return new MarketPage(driver);
-    }
-
-    @Step("Вывожу подсказку")
-    private void stepOutPopup(String popup){
-        System.out.println("Текст из подсказки: "+popup);
     }
 
 
@@ -501,14 +474,13 @@ public class MarketPage extends WebDriverSetting {
 
 
 
-    @Step("Устанавливаю атрибуты")
+    //@Step("Устанавливаю атрибуты")
     public MarketPage setNewAttributes(Note note){
         String timeWork = null;
         String valueBattery = null;
         String valueBatteryPower = null;
         String cells = null;
         String typeBattery = null;
-        List<WebElement> blockPowerList = driver.findElements(specPowerList);
         for (WebElement blockPowerElements:blockPowerList) {
             try {
                 timeWork = blockPowerElements.findElement(timeWorkLine).getText();
@@ -542,25 +514,17 @@ public class MarketPage extends WebDriverSetting {
         note.setValueBatteryPower(valueBatteryPower);
         note.setCells(cells);
         note.setTypeBattery(typeBattery);
-        getAttribyte(note.getTimeWork(), note.getValueBattery(), note.getValueBatteryPower(), note.getCells(), note.getTypeBattery());
-
-        System.out.println(note);
+        System.out.println("Значения блока Питание:\n"+note);
+        stepAllure("Значения блока Питание: "+note);
         return new MarketPage(driver);
     }
 
-    @Step("атрибуты")
-    private static void getAttribyte(String timeWork, String valueBattery, String valueBatteryPower, String cells, String typeBattery){
-    }
 
     @Step("Сравниваю два ноутбука")
     public void equals(Note one, Note two){
         boolean result = one.equals(two);
         System.out.println("Сравниваю значение: "+result);
-        stepEquals(result);
-    }
-
-    @Step("Результат")
-    public void stepEquals(Boolean result){
+        stepAllure("Результат: "+result);
     }
 
 
@@ -575,7 +539,9 @@ public class MarketPage extends WebDriverSetting {
         return Files.readAllBytes(Paths.get("src/main/resources", resourceName));
     }
 
-
+    @Step("{title}")
+    private void stepAllure(String title) {
+    }
 
     private void captureScreen(String noteName) {
         String path;

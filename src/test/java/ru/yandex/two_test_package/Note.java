@@ -16,16 +16,13 @@ public class Note {
         this.typeBattery = typeBattery;
     }
 
-
-    @Override
-    public String toString(){
-        return timeWork + "\n" + valueBattery + "\n" + valueBatteryPower + "\n" + cells + "\n" + typeBattery + "\n----------------------";
-    }
-
-
     public Note() {
     }
 
+    @Override
+    public String toString(){
+        return timeWork + "\n" + valueBattery + "\n" + valueBatteryPower + "\n" + cells + "\n" + typeBattery;
+    }
 
     public void setTimeWork(String timeWork) {
         if (timeWork != null) {
