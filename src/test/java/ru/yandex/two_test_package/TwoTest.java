@@ -20,7 +20,7 @@ public class TwoTest extends WebDriverSetting {
         marketPage.openPage()
                 .openNoteCategoryNow()
                 .sortByPrice()
-                .openNoteSpecNow(1)
+                .openNoteSpecNow(2)
                 .outFirstPopup();
     }
 

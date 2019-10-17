@@ -384,12 +384,12 @@ public class MarketPage extends WebDriverSetting {
         for(int i=0;i<elementsName.size();i++)
             map.put(elementsName.get(i).getText(), elementsPrice.get(i).getText());
         System.out.println("Вывожу данные из map: ");
-        Map<String, String> reversedMap = new TreeMap<String, String>(map);
+        Map<String, String> reversedMap = new TreeMap<>(map);
         for (Map.Entry entry : reversedMap.entrySet()) {
             System.out.println(entry.getKey() + " - " + entry.getValue());
         }
         String text = map.entrySet().stream()
-                .map(entry -> { return (entry.getKey() + " - " + entry.getValue()); })
+                .map(entry -> (entry.getKey() + " - " + entry.getValue()))
                 .collect(Collectors.joining("\n"));
         stepOutputInfoInMap(text);
         saveScreenshotPNG(driver, "Элементы map");
