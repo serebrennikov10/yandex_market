@@ -7,14 +7,14 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 public class FirstTest extends WebDriverSetting {
-
+    MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
     @Test(description = "Первый тест")
     @Description(value = "Первый тест")
     @TmsLink(value = "First test")
     public void test () throws IOException {
         LOGGER.info("------------F I R S T  T E S T------------");
-        MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
-        marketPage.openPage();
+
+        marketPage.openPage("https://market.yandex.ru/");
         marketPage.selectNewRegionOnPage();
         marketPage.openNoteCategoryNow()
                 .selectFilterByCost("0", "30000")

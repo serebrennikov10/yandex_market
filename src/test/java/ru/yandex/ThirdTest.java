@@ -14,7 +14,7 @@ public class ThirdTest extends WebDriverSetting {
     public void noteInFile() throws IOException {
         LOGGER.info("------------ T H I R D  T E S T ------------");
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
-        marketPage.openPage()
+        marketPage.openPage("https://market.yandex.ru/")
                 .readAndSearchFromExcel("ListNote.xlsx");
     }
 }

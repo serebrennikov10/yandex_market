@@ -1,5 +1,6 @@
 package ru.yandex;
 
+import cucumber.api.java.ru.Пусть;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
@@ -100,15 +101,15 @@ public class MarketPage extends WebDriverSetting {
     private String desc = "n-filter-sorter i-bem n-filter-sorter_js_inited n-filter-sorter_sort_desc n-filter-sorter_state_select";
 
 
-
     @Step("Открываю страницу")
-    public MarketPage openPage() throws IOException {
-        driver.get("https://market.yandex.ru/");
+    public MarketPage openPage(String url) throws IOException {
+        driver.get(url);
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(adaptiveLayout));
         saveScreenshotPNG (driver, "Страница ЯндексМаркет");
         getTitle(driver.getTitle());
         return new MarketPage(driver);
     }
+
 
     @Step("Проверяю title")
     public MarketPage getTitle(String title) {

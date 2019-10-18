@@ -6,11 +6,7 @@ import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(
-        features = "src/test/features",
-        glue = "src/test/java/ru.yandex",
-        tags = "@all",
-        snippets = SnippetType.CAMELCASE
+@CucumberOptions(tags = {},format = {"pretty", "json:target/cucumber.json","html:target/cucumber.html"}, features = {"src/test/features"}
 )
 public class RunnerTest {
 }

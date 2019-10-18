@@ -17,7 +17,7 @@ public class TwoTest extends WebDriverSetting {
     public void outPopup() throws IOException {
         LOGGER.info("------------ T W O  T E S T (2) ------------");
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
-        marketPage.openPage()
+        marketPage.openPage("https://market.yandex.ru/")
                 .openNoteCategoryNow()
                 .sortByPrice()
                 .openNoteSpecNow(2)
@@ -31,13 +31,13 @@ public class TwoTest extends WebDriverSetting {
         LOGGER.info("------------ T W O  T E S T (1) ------------");
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         Note note1 = new Note();
-        marketPage.openPage()
+        marketPage.openPage("https://market.yandex.ru/")
                 .openNoteCategoryNow()
                 .openNoteSpecNow(1)
                 .setNewAttributes(note1);
 
         Note note2 = new Note();
-        marketPage.openPage()
+        marketPage.openPage("https://market.yandex.ru/")
                 .openNoteCategoryNow()
                 .openNoteSpecNow(2)
                 .setNewAttributes(note2);
