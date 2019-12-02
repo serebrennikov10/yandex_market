@@ -9,21 +9,7 @@ import ru.yandex.WebDriverSetting;
 
 import java.io.IOException;
 
-public class TwoTest extends WebDriverSetting {
-
-    @Test(description = "Второй тест. ч2")
-    @Description(value = "Второй тест. ч2")
-    @TmsLink(value = "Two test")
-    public void outPopup() throws IOException {
-        LOGGER.info("------------ T W O  T E S T (2) ------------");
-        MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
-        marketPage.openPage("https://market.yandex.ru/")
-                .searchNote("Ноутбук DIGMA EVE 101 (Intel Atom x5 Z8350")
-                .openNote(1)
-                .switchToNewTabs()
-                .openSpec()
-                .outFirstPopup();
-    }
+public class TwoTestPartOne extends WebDriverSetting {
 
     @Test(description = "Второй тест. ч1")
     @Description(value = "Второй тест. ч1")
@@ -33,7 +19,6 @@ public class TwoTest extends WebDriverSetting {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         Note note1 = new Note();
         marketPage.openPage("https://market.yandex.ru/")
-                //.openNoteCategoryNow()
                 .searchNote("Ноутбук DELL Inspiron 3780")
                 .openNote(2)
                 .switchToNewTabs()
@@ -50,5 +35,4 @@ public class TwoTest extends WebDriverSetting {
                 .switchToOldTabs()
                 .equals(note1, note2);
     }
-
 }

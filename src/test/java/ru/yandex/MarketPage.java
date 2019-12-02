@@ -401,14 +401,9 @@ public class MarketPage extends WebDriverSetting {
         int n = number - 1;
         WebElement note = elementsName.get(n);
         String noteName = note.getText();
-        //MoveToElement.moveToElement(note).perform();
+        MoveToElement.moveToElement(note).perform();
         note.click();
         LOGGER.info("Click on note: "+noteName);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         saveScreenshotPNG (driver, noteName);
         return new MarketPage(driver);
     }
@@ -462,7 +457,6 @@ public class MarketPage extends WebDriverSetting {
 
     @Step("Кликаю на первую подсказку")
     public MarketPage outFirstPopup() throws IOException {
-        //MoveToElement.moveToElement(firstPopup).perform();
         firstPopup.click();
         popupWindow.click();
         saveScreenshotPNG (driver, "открытие popup");

@@ -26,7 +26,7 @@ public abstract class WebDriverSetting {
     public void deleteScreenshots(){
         try {
             FileUtils.deleteDirectory(new File("./target/screenshots/"));
-            FileUtils.deleteDirectory(new File("./src/main/resources/screenshots/"));
+            FileUtils.cleanDirectory(new File("./src/main/resources/screenshots/"));
             System.out.println("Screenshots removed.");
         } catch (IOException e) {
             e.printStackTrace();
