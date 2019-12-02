@@ -9,7 +9,7 @@ import ru.yandex.WebDriverSetting;
 
 import java.io.IOException;
 
-public class TwoTestPartOne extends WebDriverSetting {
+public class PartOneFromTwoTest extends WebDriverSetting {
 
     @Test(description = "Второй тест. ч1")
     @Description(value = "Второй тест. ч1")
