@@ -6,7 +6,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.*;
-import ru.yandex.two_test_package.TwoTest;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -74,6 +73,7 @@ public abstract class WebDriverSetting {
     @Step("Закрытие драйвера")
     public void close() {
         System.out.println("Close driver...");
-        driver.close();
+        driver.manage().deleteAllCookies();
+        driver.quit();
     }
 }

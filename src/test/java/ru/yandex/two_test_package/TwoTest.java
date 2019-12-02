@@ -18,9 +18,10 @@ public class TwoTest extends WebDriverSetting {
         LOGGER.info("------------ T W O  T E S T (2) ------------");
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         marketPage.openPage("https://market.yandex.ru/")
-                .openNoteCategoryNow()
-                .sortByPrice()
-                .openNoteSpecNow(2)
+                .searchNote("Ноутбук DIGMA EVE 101 (Intel Atom x5 Z8350")
+                .openNote(1)
+                .switchToNewTabs()
+                .openSpec()
                 .outFirstPopup();
     }
 
@@ -32,16 +33,22 @@ public class TwoTest extends WebDriverSetting {
         MarketPage marketPage = PageFactory.initElements(driver, MarketPage.class);
         Note note1 = new Note();
         marketPage.openPage("https://market.yandex.ru/")
-                .openNoteCategoryNow()
-                .openNoteSpecNow(1)
-                .setNewAttributes(note1);
+                //.openNoteCategoryNow()
+                .searchNote("Ноутбук DELL Inspiron 3780")
+                .openNote(2)
+                .switchToNewTabs()
+                .openSpec()
+                .setNewAttributes(note1)
+                .switchToOldTabs();
 
         Note note2 = new Note();
-        marketPage.openPage("https://market.yandex.ru/")
-                .openNoteCategoryNow()
-                .openNoteSpecNow(2)
-                .setNewAttributes(note2);
-        marketPage.equals(note1, note2);
+        marketPage.searchNote("Ноутбук Acer ASPIRE 3 (A315-21)")
+                .openNote(2)
+                .switchToNewTabs()
+                .openSpec()
+                .setNewAttributes(note2)
+                .switchToOldTabs()
+                .equals(note1, note2);
     }
 
 }

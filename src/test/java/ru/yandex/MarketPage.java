@@ -1,6 +1,5 @@
 package ru.yandex;
 
-import cucumber.api.java.ru.Пусть;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
@@ -29,7 +28,6 @@ public class MarketPage extends WebDriverSetting {
     private WebDriver driver;
     private WebDriverWait waitDriver;
     private Actions MoveToElement;
-
 
     public MarketPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -68,7 +66,6 @@ public class MarketPage extends WebDriverSetting {
     private WebElement popupWindow;
     @FindBy(id = "header-search")
     private WebElement searchInputHeader;
-    //@FindBy(className = "n-snippet-card2__title")
     @FindBy(xpath = ".//div[@class='n-snippet-card2__title']")
     private List<WebElement> elementsName;
     @FindBy(className = "n-snippet-card2__main-price")
@@ -110,13 +107,11 @@ public class MarketPage extends WebDriverSetting {
         return new MarketPage(driver);
     }
 
-
     @Step("Проверяю title")
     public MarketPage getTitle(String title) {
         Assert.assertEquals("Яндекс.Маркет — выбор и покупка товаров из проверенных интернет-магазинов", title);
         return new MarketPage(driver);
     }
-
 
     public static class RegionOnPage {
         private static volatile RegionOnPage instance;
@@ -137,8 +132,6 @@ public class MarketPage extends WebDriverSetting {
     @Step("Меняю регион")
     public void selectNewRegionOnPage() throws IOException {
         RegionOnPage region1 = RegionOnPage.getInstance();
-        //System.out.println(region1.getClass());
-
         String nowRegion = changeRegion.getText();
         String newRegion = "Воронеж";
         if (nowRegion.equals(newRegion)) {
@@ -168,7 +161,6 @@ public class MarketPage extends WebDriverSetting {
         }
         saveScreenshotPNG (driver, "Установлен регион "+newRegion);
     }
-
 
     @Step("Открываю категорий")
     public MarketPage openAllCategories() throws IOException {
@@ -409,29 +401,68 @@ public class MarketPage extends WebDriverSetting {
         int n = number - 1;
         WebElement note = elementsName.get(n);
         String noteName = note.getText();
-        MoveToElement.moveToElement(note).perform();
+        //MoveToElement.moveToElement(note).perform();
+        note.click();
+        LOGGER.info("Click on note: "+noteName);
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        note.click();
-        waitDriver.until(ExpectedConditions.visibilityOfElementLocated(notePage));
         saveScreenshotPNG (driver, noteName);
+        return new MarketPage(driver);
+    }
+
+    @Step("Переключаюсь на новую вкладку")
+    public MarketPage switchToNewTabs() throws IOException {
+        ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+        LOGGER.info("Switch to new tabs...");
+        driver.switchTo().window(tabs.get(1));
+        LOGGER.info("Switch is done.");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        saveScreenshotPNG (driver, "Переключаюсь на новую вкладку");
+        return new MarketPage(driver);
+    }
+
+    @Step("Переключаюсь на старую вкладку")
+    public MarketPage switchToOldTabs() throws IOException {
+        ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+        LOGGER.info("Clode tabs...");
+        driver.close();
+        LOGGER.info("Switch to old tabs...");
+        driver.switchTo().window(tabs.get(0));
+        LOGGER.info("Switch is done.");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        saveScreenshotPNG (driver, "Переключаюсь на старую вкладку");
         return new MarketPage(driver);
     }
 
     @Step("Открываю характеристики")
     public MarketPage openSpec() throws IOException {
-        MoveToElement.moveToElement(pageNoteSpec).perform();
+        LOGGER.info("Характеристики!!!");
+        //MoveToElement.moveToElement(pageNoteSpec).perform();
+        LOGGER.info("Кликаю на характеристики");
         pageNoteSpec.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         saveScreenshotPNG (driver, "Характеристики");
         return new MarketPage(driver);
     }
 
     @Step("Кликаю на первую подсказку")
     public MarketPage outFirstPopup() throws IOException {
-        MoveToElement.moveToElement(firstPopup).perform();
+        //MoveToElement.moveToElement(firstPopup).perform();
         firstPopup.click();
         popupWindow.click();
         saveScreenshotPNG (driver, "открытие popup");
@@ -441,7 +472,6 @@ public class MarketPage extends WebDriverSetting {
         stepAllure("Текст подсказки: "+popup);
         return new MarketPage(driver);
     }
-
 
     @Step("Поиск товаров из файла {FileName}")
     public MarketPage readAndSearchFromExcel(String FileName) throws IOException {
@@ -474,8 +504,6 @@ public class MarketPage extends WebDriverSetting {
     }
 
 
-
-    //@Step("Устанавливаю атрибуты")
     public MarketPage setNewAttributes(Note note){
         String timeWork = null;
         String valueBattery = null;
